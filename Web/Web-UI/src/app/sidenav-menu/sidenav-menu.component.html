@@ -1,0 +1,16 @@
+<md-toolbar color="primary">
+  <button md-button class="menu-spacer-item" style="margin-left: -15px;" (click)="sidenav.toggle()">
+    <i class="material-icons" style="font-size: 48px; margin-top: -2px;" >menu</i>
+  </button>
+  <span>Attendance Manager</span>
+  <span class="menu-spacer"></span>
+  <button md-button routerLink="/" class="menu-spacer-item"><i class="material-icons" style="margin-top: -4px;">account_box</i> Login</button>
+</md-toolbar>
+<md-sidenav-container>
+    <md-sidenav #sidenav mode="side" opened="false">
+      <div>
+        <span>Test</span>
+      </div>
+    </md-sidenav>
+    <button md-button (click)="sidenav.toggle()"></button>
+</md-sidenav-container>
