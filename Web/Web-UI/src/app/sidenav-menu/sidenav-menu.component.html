@@ -1,16 +1,20 @@
 <md-toolbar color="primary">
   <button md-button class="menu-spacer-item" style="margin-left: -15px;" (click)="sidenav.toggle()">
-    <i class="material-icons" style="font-size: 48px; margin-top: -2px;" >menu</i>
+    <i class="material-icons" style="font-size: 48px; margin-top: -2px;">menu</i>
   </button>
   <span>Attendance Manager</span>
   <span class="menu-spacer"></span>
-  <button md-button routerLink="/" class="menu-spacer-item"><i class="material-icons" style="margin-top: -4px;">account_box</i> Login</button>
+  <button md-button routerLink="login" class="menu-spacer-item"><i class="material-icons" style="margin-top: -4px;">account_box</i>
+    Login
+  </button>
 </md-toolbar>
 <md-sidenav-container>
-    <md-sidenav #sidenav mode="side" opened="false">
-      <div>
-        <span>Test</span>
-      </div>
-    </md-sidenav>
-    <button md-button (click)="sidenav.toggle()"></button>
+  <md-sidenav #sidenav mode="side" opened="false">
+    <button md-button routerLink=""><span>Home</span><i class="material-icons" style="padding-left: 20px;">backup</i></button>
+    <div style="height: 20px;"></div>
+    <button md-button><span>Account</span><i class="material-icons">backup</i></button>
+    <div style="height: 20px;"></div>
+    <button md-button><span>Account</span><i class="material-icons">autorenew</i></button>
+  </md-sidenav>
+  <router-outlet></router-outlet>
 </md-sidenav-container>

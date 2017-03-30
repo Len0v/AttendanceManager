@@ -1,0 +1,21 @@
+<div fxLayout="row">
+  <div fxFlex="40"></div>
+  <div fxFlex="20">
+    <form style="padding-top: 100px;" [formGroup]="loginForm" (ngSubmit)="loginUser()" novalidate>
+      <md-input-container hintLabel="Please enter your username.">
+        <input mdInput placeholder="Login" id="login" type="text" formControlName="login" name="login" required>
+      </md-input-container>
+      <br/><br/>
+      <md-input-container hintLabel="Please enter your password.">
+        <input mdInput placeholder="Password" type="password" formControlName="password" required>
+      </md-input-container>
+      <br/><br/><br/>
+      <div class="form-button-container">
+        <button md-raised-button color="accent" type="submit" class="sign-in-button" [disabled]="!loginForm.valid">
+          <i class="material-icons" style="margin-bottom: 5px;">security</i> Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+  <div fxFlex="40"></div>
+</div>

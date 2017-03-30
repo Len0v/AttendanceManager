@@ -1,0 +1,22 @@
+md-input-container {
+  width: 100%;
+  font-size: 24px;
+}
+
+input {
+  width: 100%;
+}
+
+.form-button-container {
+  text-align: right;
+}
+
+.sign-in-button {
+  font-size: 24px;
+  font-weight: bold;
+  width: 160px;
+  height: 60px;
+
+  color: white;
+  background-color: cornflowerblue;
+}

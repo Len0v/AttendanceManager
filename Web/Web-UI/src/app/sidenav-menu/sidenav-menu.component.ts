@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
-import { MdSidenav } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav-menu',
@@ -7,17 +7,10 @@ import { MdSidenav } from '@angular/material';
   styleUrls: ['./sidenav-menu.component.css']
 })
 export class SidenavMenuComponent implements OnInit {
-  @ViewChildren('sidenav') sidenav: MdSidenav;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  openSidenavMenu(){
-    console.log('second')
-    // this.sidenav.open();
-    console.log(this.sidenav)
   }
 
 }
