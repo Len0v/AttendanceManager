@@ -8,5 +8,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.0-preview4-final" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AttendanceManager.Core\AttendanceManager.Core.csproj" />
+  </ItemGroup>
   
 </Project>
