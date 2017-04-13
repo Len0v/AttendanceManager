@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AttendanceManager.Core.Entities;
-using AttendanceManager.Core.Interfaces;
+﻿using AttendanceManager.Core.Entities;
 using AttendanceManager.Core.Interfaces.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using AttendanceManager.Core.Interfaces.Entities;
 
 namespace AttendanceManager.DataAccessLayer.DbContext
 {

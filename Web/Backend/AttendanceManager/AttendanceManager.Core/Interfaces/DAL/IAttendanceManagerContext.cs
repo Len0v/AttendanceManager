@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AttendanceManager.Core.Entities;
+﻿using AttendanceManager.Core.Entities;
+using AttendanceManager.Core.Interfaces.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 

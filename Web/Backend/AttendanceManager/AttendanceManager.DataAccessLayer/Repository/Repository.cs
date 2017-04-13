@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using AttendanceManager.Core.Interfaces;
 using AttendanceManager.Core.Interfaces.DAL;
+using AttendanceManager.Core.Interfaces.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AttendanceManager.DataAccessLayer.Repository

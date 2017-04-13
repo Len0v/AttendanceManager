@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace AttendanceManager.Core.Interfaces
+namespace AttendanceManager.Core.Interfaces.Entities
 {
     interface IPerson
     {
