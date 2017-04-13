@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using AttendanceManager.Core.Entities;
+using AttendanceManager.Core.Interfaces;
+using AttendanceManager.Core.Interfaces.DAL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace AttendanceManager.DataAccessLayer.DbContext
 {
-    public class AttendanceManagerContext : Microsoft.EntityFrameworkCore.DbContext
+    public class AttendanceManagerContext : Microsoft.EntityFrameworkCore.DbContext, IAttendanceManagerContext
     {
         public DbSet<Attendee> Attendees { get; set; }
         public DbSet<Course> Courses { get; set; }
@@ -20,6 +23,16 @@ namespace AttendanceManager.DataAccessLayer.DbContext
 
         public AttendanceManagerContext(DbContextOptions<AttendanceManagerContext> options) : base(options)
         {
+        }
+
+        public EntityEntry<IEntity> Entry(IEntity entity)
+        {
+            return base.Entry(entity);
+        }
+
+        public void SaveChanges()
+        {
+            base.SaveChanges();
         }
     }
 }

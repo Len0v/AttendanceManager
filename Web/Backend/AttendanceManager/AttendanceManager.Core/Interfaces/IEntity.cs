@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AttendanceManager.Core.Interfaces
 {
-    interface IEntity
+    public interface IEntity
     {
         int Id { get; set; }
     }
