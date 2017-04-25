@@ -20,7 +20,7 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public IEnumerable<Event> GetAllEvents()
         {
-            throw new NotImplementedException();
+            return _attendanceUnitOfWork.EventsRepository.GetAll().ToList();
         }
 
         public IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end)
@@ -35,7 +35,7 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public Event GetEvent(int eventId)
         {
-            throw new NotImplementedException();
+            return _attendanceUnitOfWork.EventsRepository.GetById(eventId);
         }
 
         public bool AddEvent(Event newEvent)
@@ -55,12 +55,20 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public IEnumerable<Attendee> GetAllAttendees()
         {
-            throw new NotImplementedException();
+            return _attendanceUnitOfWork.AttendeesRepository.GetAll().ToList();
         }
 
         public IEnumerable<Attendee> GetAttendeesForEvent(int eventId)
         {
-            throw new NotImplementedException();
+            var entities = _attendanceUnitOfWork.EventAttendeesRepository.Query((e) => e.EventId == eventId).ToList();
+            var attendees = new List<Attendee>();
+
+            foreach (var entity in entities)
+            {
+                var attendee = _attendanceUnitOfWork.AttendeesRepository.GetById(entity.AttendeeId);
+                attendees.Add(attendee);
+            }
+            return attendees;
         }
 
         public IEnumerable<Attendee> GetAttendeesForQuery(Expression<Func<Attendee, bool>> predicate)
@@ -70,7 +78,7 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public Attendee GetAddAttendee(int attendeeId)
         {
-            throw new NotImplementedException();
+            return _attendanceUnitOfWork.AttendeesRepository.GetById(attendeeId);
         }
 
         public bool AddAttendee(Attendee attendee)
@@ -88,9 +96,12 @@ namespace AttendanceManager.BusinessLogic.Services
             throw new NotImplementedException();
         }
 
-        public bool NotifyAttendance(int eventId, int attendeeId)
+        public bool RegisterAttendance(int eventId, int attendeeId)
         {
-            throw new NotImplementedException();
+            var eventAttendee = new EventAttendee {EventId = eventId, AttendeeId = attendeeId};
+            _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
         }
     }
 }

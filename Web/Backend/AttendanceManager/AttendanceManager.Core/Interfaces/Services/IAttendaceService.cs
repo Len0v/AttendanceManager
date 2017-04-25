@@ -24,6 +24,6 @@ namespace AttendanceManager.Core.Interfaces.Services
         bool ModifyAttendee(Attendee attendee);
         bool DeleteAttendee(int attendeeId);
 
-        bool NotifyAttendance(int eventId, int attendeeId);
+        bool RegisterAttendance(int eventId, int attendeeId);
     }
 }
