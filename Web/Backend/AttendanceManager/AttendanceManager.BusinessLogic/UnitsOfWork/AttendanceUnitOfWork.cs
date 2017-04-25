@@ -9,12 +9,17 @@ namespace AttendanceManager.BusinessLogic.UnitsOfWork
     {
         private ContextScope _contextScope;
         public IRepository<Attendee> AttendeesRepository { get; set; }
+        public IRepository<EventAttendee> EventAttendeesRepository { get; set; }
+        public IRepository<Event> EventsRepository { get; set; }
 
-        //TODO Add rest of the repositories
-
-        public AttendanceUnitOfWork(IRepository<Attendee> attendeesRepository,  IAttendanceManagerContext dbContext)
+        public AttendanceUnitOfWork(IRepository<Attendee> attendeesRepository, 
+               IRepository<EventAttendee> eventAtendeesRepository,
+               IRepository<Event> eventsRepository,
+               IAttendanceManagerContext dbContext)
         {
             AttendeesRepository = attendeesRepository;
+            EventsRepository = eventsRepository;
+            EventAttendeesRepository = eventAtendeesRepository;
             _contextScope = new ContextScope(dbContext);
         }
     
