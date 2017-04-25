@@ -19,7 +19,7 @@ namespace AttendanceManager.Core.Interfaces.Services
         IEnumerable<Attendee> GetAllAttendees();
         IEnumerable<Attendee> GetAttendeesForEvent(int eventId);
         IEnumerable<Attendee> GetAttendeesForQuery(Expression<Func<Attendee, bool>> predicate);
-        Attendee GetAddAttendee(int attendeeId);
+        Attendee GetAttendee(int attendeeId);
         bool AddAttendee(Attendee attendee);
         bool ModifyAttendee(Attendee attendee);
         bool DeleteAttendee(int attendeeId);

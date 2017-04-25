@@ -24,7 +24,7 @@ namespace AttendanceManager.DataAccessLayer.Repository
             _dbContext.Set<TModel>().Remove(model);
             return model;
         }
-        public TModel GetById(long id)
+        public TModel GetById(int id)
         {
             return _dbContext.Set<TModel>().Find(id);
         }

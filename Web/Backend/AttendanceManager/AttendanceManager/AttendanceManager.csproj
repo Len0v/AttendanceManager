@@ -16,5 +16,10 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AttendanceManager.BusinessLogic\AttendanceManager.BusinessLogic.csproj" />
+    <ProjectReference Include="..\AttendanceManager.Core\AttendanceManager.Core.csproj" />
+    <ProjectReference Include="..\AttendanceManager.DataAccessLayer\AttendanceManager.DataAccessLayer.csproj" />
+  </ItemGroup>
 
 </Project>

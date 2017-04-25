@@ -76,7 +76,7 @@ namespace AttendanceManager.BusinessLogic.Services
             throw new NotImplementedException();
         }
 
-        public Attendee GetAddAttendee(int attendeeId)
+        public Attendee GetAttendee(int attendeeId)
         {
             return _attendanceUnitOfWork.AttendeesRepository.GetById(attendeeId);
         }
