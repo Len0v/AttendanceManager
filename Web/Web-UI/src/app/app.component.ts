@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  @ViewChild(SidenavMenuComponent)
+  private SidenavMenuComponent: SidenavMenuComponent
+
+  title = 'Attendance Manager';
+
+  toggleSidenav(){
+    this.SidenavMenuComponent.toggleSidenavMenu();
+  }
 }
