@@ -4,6 +4,9 @@
 */
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '../node_modules/primeng/resources/themes/bootstrap/theme.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/primeng/resources/primeng.min.css';
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,

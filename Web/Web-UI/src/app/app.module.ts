@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
-import { NoopAnimationsModule } from "@angular/platform-browser/animations"
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TreeTableModule, SharedModule } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
@@ -14,6 +14,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { routing } from './app.routes';
 import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { EventsComponent } from './events/events.component';
+import { EventsTreeviewComponent } from './events/events-treeview/events-treeview.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     SidenavMenuComponent,
     LoginPageComponent,
     MainComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserListComponent,
+    EventsComponent,
+    EventsTreeviewComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     MaterialModule.forRoot(),
     routing,
     FlexLayoutModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TreeTableModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

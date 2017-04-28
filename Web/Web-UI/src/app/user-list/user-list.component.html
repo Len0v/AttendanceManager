@@ -1,0 +1,18 @@
+<div fxLayout="row">
+  <div fxFlex="30"></div>
+  <div fxFlex="40">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <th>Name</th>
+        <th>Surname</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.name}}</td>
+        <td>{{user.surname}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div fxFlex="30"></div>
+</div>

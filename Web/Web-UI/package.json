@@ -23,8 +23,11 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.1",
+    "angular-tree-component": "^3.4.0",
     "core-js": "^2.4.1",
+    "font-awesome": "^4.7.0",
     "ng2-flex-layout": "^0.1.5",
+    "primeng": "^4.0.0-rc.5",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },
