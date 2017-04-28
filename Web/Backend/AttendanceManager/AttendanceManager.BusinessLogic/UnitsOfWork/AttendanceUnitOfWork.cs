@@ -1,7 +1,9 @@
-﻿using AttendanceManager.Core.Infrastructure;
+﻿using System.Collections.Generic;
+using AttendanceManager.Core.Infrastructure;
 using AttendanceManager.Core.Entities;
 using AttendanceManager.Core.Interfaces.DAL;
 using AttendanceManager.Core.Interfaces.UnitsOfWork;
+using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace AttendanceManager.BusinessLogic.UnitsOfWork
 {

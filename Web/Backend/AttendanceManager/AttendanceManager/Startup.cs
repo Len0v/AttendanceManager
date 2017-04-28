@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AttendanceManager.DataAccessLayer.DbContext;
+using AttendanceManager.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,6 +32,8 @@ namespace AttendanceManager
         {
             // Add framework services.
             services.AddMvc();
+            services.AddDbContext<AttendanceManagerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AttendanceManagerDatabase")));
+            CompositionRoot.ConfigureDependencyInversion(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +42,10 @@ namespace AttendanceManager
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

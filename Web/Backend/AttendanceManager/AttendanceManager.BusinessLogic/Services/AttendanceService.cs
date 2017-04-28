@@ -6,6 +6,7 @@ using System.Text;
 using AttendanceManager.Core.Entities;
 using AttendanceManager.Core.Interfaces.Services;
 using AttendanceManager.Core.Interfaces.UnitsOfWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace AttendanceManager.BusinessLogic.Services
 {
@@ -20,7 +21,16 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public IEnumerable<Event> GetAllEvents()
         {
-            return _attendanceUnitOfWork.EventsRepository.GetAll().ToList();
+            return _attendanceUnitOfWork.EventsRepository.GetAll().
+                Include(e => e.Room).
+                Include(e =>e.TimeSlot).
+                Include(e =>e.CourseUnit).
+                    ThenInclude(e => e.Lecturer).
+                Include(e => e.CourseUnit).
+                    ThenInclude(e => e.CourseType).
+                Include(e => e.CourseUnit).
+                    ThenInclude(e => e.Course).
+                ToList();
         }
 
         public IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end)
@@ -35,6 +45,7 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public Event GetEvent(int eventId)
         {
+            //TODO Implement eager loading
             return _attendanceUnitOfWork.EventsRepository.GetById(eventId);
         }
 
@@ -76,7 +87,7 @@ namespace AttendanceManager.BusinessLogic.Services
             throw new NotImplementedException();
         }
 
-        public Attendee GetAddAttendee(int attendeeId)
+        public Attendee GetAttendee(int attendeeId)
         {
             return _attendanceUnitOfWork.AttendeesRepository.GetById(attendeeId);
         }
