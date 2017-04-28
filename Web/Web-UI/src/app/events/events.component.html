@@ -1,17 +1,18 @@
 <div fxLayout="row" fxHide.sm="true" fxHide.xs="true">
-  <div fxFlex="30"></div>
-  <div fxFlex="40">
+  <div fxFlex="20"></div>
+  <div fxFlex="60">
     <md-tab-group>
+      <md-tab label="List">
+        <div class="tree-view-tab">
+          <app-events-list></app-events-list>
+        </div>
+      </md-tab>
       <md-tab label="TreeView">
         <div class="tree-view-tab">
           <app-events-treeview></app-events-treeview>
         </div>
       </md-tab>
-      <md-tab label="List">
-        <h1>Some more tab content</h1>
-        <p>...</p>
-      </md-tab>
     </md-tab-group>
   </div>
-  <div fxFlex="30"></div>
+  <div fxFlex="20"></div>
 </div>

@@ -1,0 +1,45 @@
+<div style="text-align: right; padding-bottom: 10px;">
+  <button pButton type="button" label="Reset" (click)="reset(dataTable)"></button>
+</div>
+
+<div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+  <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+  <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+</div>
+
+<p-dataTable #dataTable [value]="data" [rows]="10" [paginator]="true" [resizableColumns]="true"
+             columnResizeMode="fit" [globalFilter]="gb">
+  <p-column header="#" [style]="{'width': '50px'}">
+    <ng-template let-col let-data="rowData" let-index="rowIndex" pTemplate="body">
+      <div style="text-align: left;">
+        {{index+1}}
+      </div>
+    </ng-template>
+  </p-column>
+  <p-column field="name" header="Name" [sortable]="true"></p-column>
+  <p-column field="status" header="Status" [sortable]="true" [style]="{'overflow':'visible','width': '110px'}">
+    <ng-template let-col let-data="rowData" pTemplate="body">
+      <i *ngIf="data.status === 'Incoming'" class="status"><i class="fa fa-spinner" aria-hidden="true"></i> Incoming</i>
+      <i *ngIf="data.status === 'Active'" class="status"><i class="fa fa-bell-o" aria-hidden="true"></i> Active</i>
+      <i *ngIf="data.status === 'Expired'" class="status"><i class="fa fa-hourglass-end" aria-hidden="true"></i>
+        Expired</i>
+    </ng-template>
+    <!--<ng-template pTemplate="filter" let-col>-->
+    <!--<p-dropdown [options]="statusFilterDropdown" [style]="{'width':'100%'}"-->
+    <!--(onChange)="dataTable.filter($event.value,col.field,col.filterMatchMode)"-->
+    <!--styleClass="ui-column-filter"></p-dropdown>-->
+    <!--</ng-template>-->
+  </p-column>
+  <p-column field="repeatable" header="Cyclical" [sortable]="true" [style]="{'width': '110px'}">
+    <ng-template let-col let-data="rowData" pTemplate="body">
+      <i *ngIf="data.repeatable"><i class="fa fa-clock-o" aria-hidden="true"></i> Yes</i>
+      <i *ngIf="!data.repeatable">No</i>
+    </ng-template>
+  </p-column>
+  <p-column field="date" header="Next Date & Time" [sortable]="true" [style]="{'width': '200px'}">
+    <ng-template let-col let-data="rowData" pTemplate="body">
+      {{data.date}} {{data.timeFrom}}-{{data.timeTo}}
+    </ng-template>
+  </p-column>
+  <p-column field="standardDay" header="Day" [style]="{'width': '110px'}" [sortable]="true"></p-column>
+</p-dataTable>

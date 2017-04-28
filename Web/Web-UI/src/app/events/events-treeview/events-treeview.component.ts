@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { TreeTableModule, TreeNode, SharedModule } from 'primeng/primeng';
-import { TreeviewService } from './treeview.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {TreeNode, Tree} from 'primeng/primeng';
+import {TreeviewService} from './treeview.service';
 
 @Component({
   selector: 'app-events-treeview',
@@ -8,12 +8,45 @@ import { TreeviewService } from './treeview.service';
   styleUrls: ['./events-treeview.component.css'],
   providers: [TreeviewService]
 })
-export class EventsTreeviewComponent implements OnInit{
+export class EventsTreeviewComponent implements OnInit {
+  @ViewChild('expandingTree')
+  tree: Tree;
+
   data: TreeNode[];
 
-  constructor(private TreeviewService: TreeviewService) {}
+  constructor(private TreeviewService: TreeviewService) {
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.data = this.TreeviewService.getEvents();
+  }
+
+  nodeSelect(event) {
+    if (event.node.expanded === false) {
+      event.node.expanded = true;
+    } else {
+      event.node.expanded = false;
+    }
+  }
+
+  expandAll(){
+    this.data.forEach( node => {
+      this.expandRecursive(node, true);
+    } );
+  }
+
+  collapseAll(){
+    this.data.forEach( node => {
+      this.expandRecursive(node, false);
+    } );
+  }
+
+  private expandRecursive(node:TreeNode, isExpand:boolean){
+    node.expanded = isExpand;
+    if(node.children){
+      node.children.forEach( childNode => {
+        this.expandRecursive(childNode, isExpand);
+      } );
+    }
   }
 }

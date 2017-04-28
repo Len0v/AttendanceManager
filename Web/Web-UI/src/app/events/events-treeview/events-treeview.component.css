@@ -1,9 +1,22 @@
-tree-root {
-    font-size: 20px;
-    padding-top: 100px;
-    height: 100%;
+/deep/ .ui-tree {
+  width: 100% !important;
+  background-color:rgba(0, 0, 0, 0) !important;
+  border: none !important;
+  font-size: 18px !important;
 }
 
-tree-viewport {
-    overflow: hidden;
+.fa.fa-spinner {
+  color: red;
+}
+
+.fa.fa-bell-o {
+  color: green;
+}
+
+.fa.fa-hourglass-end {
+  color: orange;
+}
+
+.status {
+  padding-left: 10px;
 }

@@ -1,0 +1,15 @@
+.count-column {
+  width: 20px !important;
+}
+
+.fa.fa-spinner {
+  color: red;
+}
+
+.fa.fa-bell-o {
+  color: green;
+}
+
+.fa.fa-hourglass-end {
+  color: orange;
+}

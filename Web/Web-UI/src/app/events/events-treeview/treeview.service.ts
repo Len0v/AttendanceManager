@@ -1,58 +1,127 @@
-import { Injectable } from '@angular/core';
-import { TreeNode } from 'primeng/primeng';
+import {Injectable} from '@angular/core';
+import {TreeNode} from 'primeng/primeng';
 
 @Injectable()
 export class TreeviewService {
   data = [
     {
-      data: {
-        name: 'Elektryczny',
-        type: 'folder'
-      },
+      label: 'Informatyka',
+      type: 'folder',
       children: [
         {
-          data: {
-            name: 'Informatyka',
-            type: 'folder'
-          },
+          label: 'Rocznik 2014',
+          type: 'folder',
           children: [
-              {
-                data: {
-                  name: 'Podstawy teleinformatyki',
-                  type: 'event'
-                }
-              }
-            ]
-          }
+            {
+              label: 'Podstawy teleinformatyki - ćwiczenia',
+              type: 'event',
+              repeatable: true,
+              status: 'incoming',
+              date: '09/10/2017',
+              timeFrom: '17.30',
+              timeTo: '19.00'
+            },
+            {
+              label: 'Inżynieria oprogramowania',
+              type: 'event',
+              repeatable: false,
+              status: 'active',
+              date: '09/10/2017',
+              timeFrom: '17.30',
+              timeTo: '19.00'
+            }
+          ]
+        }
       ]
     },
     {
-      data: {
-        name: 'Informatyczny',
-        type: 'folder'
-      },
-        children: [
-          {
-            data: {
-              name: 'Informatyka',
-              type: 'folder'
-            },
+      label: 'Wykłady otwarte',
+      type: 'folder',
+      children: [
+        {
+          label: 'Wykłady C++',
+          type: 'Folder',
+          children: [
+            {
+              label: 'Semestr letni',
+              type: 'folder',
               children: [
                 {
-                  data: {
-                    name: 'Podstawy programowania',
-                    type: 'event'
-                  }
+                  label: 'Wykład 1',
+                  type: 'event',
+                  status: 'expired',
+                  date: '09/10/2017',
+                  timeFrom: '10.00',
+                  timeTo: '12.00'
+                },
+                {
+                  label: 'Wykład 2',
+                  type: 'event',
+                  status: 'expired',
+                  date: '14/04/2017',
+                  timeFrom: '19.30',
+                  timeTo: '20.30'
+                },
+                {
+                  label: 'Wykład 3',
+                  type: 'event',
+                  status: 'incoming',
+                  date: '09/10/2017',
+                  timeFrom: '10.00',
+                  timeTo: '12.00'
+                },
+                {
+                  label: 'Wykład 2',
+                  type: 'event',
+                  status: 'incoming',
+                  date: '09/10/2017',
+                  timeFrom: '10.00',
+                  timeTo: '12.00'
+                },
+                {
+                  label: 'Wykład 2',
+                  type: 'event',
+                  status: 'incoming',
+                  date: '09/10/2017',
+                  timeFrom: '10.00',
+                  timeTo: '12.00'
+                }
+              ]
+            },
+            {
+              label: 'Semestr zimowy',
+              type: 'folder',
+              children: [
+                {
+                  label: 'Inżynieria oprogramowania',
+                  type: 'event',
+                  repeatable: false,
+                  status: 'active',
+                  date: '09/10/2017',
+                  timeFrom: '17.30',
+                  timeTo: '19.00'
+                },
+                {
+                  label: 'Inżynieria oprogramowania',
+                  type: 'event',
+                  repeatable: false,
+                  status: 'active',
+                  date: '09/10/2017',
+                  timeFrom: '17.30',
+                  timeTo: '19.00'
                 }
               ]
             }
-        ]
-      }
+          ]
+        }
+      ]
+    }
   ];
 
-  constructor() { }
+  constructor() {
+  }
 
   getEvents() {
-    return <TreeNode[]>this.data;
+    return <TreeNode[]> this.data;
   }
 }

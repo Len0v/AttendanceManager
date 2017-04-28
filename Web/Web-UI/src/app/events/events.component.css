@@ -1,3 +1,7 @@
 .tree-view-tab {
     padding-top: 30px;
 }
+
+.mat-tab-body {
+  overflow-y: auto;
+}
