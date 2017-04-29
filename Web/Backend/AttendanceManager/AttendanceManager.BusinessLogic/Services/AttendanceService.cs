@@ -32,10 +32,11 @@ namespace AttendanceManager.BusinessLogic.Services
                     ThenInclude(e => e.Course).
                 ToList();
         }
-
+        
         public IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end)
         {
-            throw new NotImplementedException();
+            //StrictMode - only events in which entire time slot is in given period
+            return _attendanceUnitOfWork.EventsRepository.Query(e => e.TimeSlot.BeginTime >= begin && e.TimeSlot.EndTime <= end).ToList();
         }
 
         public IEnumerable<Event> GetEventsForQuery(Expression<Func<Event, bool>> predicate)
