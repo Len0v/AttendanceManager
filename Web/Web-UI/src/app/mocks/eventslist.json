@@ -1,0 +1,308 @@
+[
+  {
+    "id": 1,
+    "name": "Podstawy teleinformatyki - ćwiczenia",
+    "status": "Active",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "standardDay": null,
+    "courseName": "Test course name"
+  },
+  {
+    "id": 2,
+    "name": "Inżynieria oprogramowania",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "standardDay": null,
+    "courseName": "Test course name"
+  },
+  {
+    "id": 3,
+    "name": "Bazy danych",
+    "status": "Incoming",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "standardDay": "Wednesday",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 4,
+    "name": "Wykład 1",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "standardDay": "Monday",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 5,
+    "name": "Wykład 2",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "standardDay": null,
+    "courseName": "Test course name"
+  },
+  {
+    "id": 6,
+    "name": "Szkolenie",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "standardDay": "Friday",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 7,
+    "name": "Podstawy teleinformatyki - ćwiczenia",
+    "status": "Active",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 8,
+    "name": "Inżynieria oprogramowania",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 9,
+    "name": "Bazy danych",
+    "status": "Incoming",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 10,
+    "name": "Wykład 1",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 11,
+    "name": "Wykład 2",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Szkolenie",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Podstawy teleinformatyki - ćwiczenia",
+    "status": "Active",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Inżynieria oprogramowania",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Bazy danych",
+    "status": "Incoming",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Wykład 1",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Wykład 2",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Szkolenie",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Podstawy teleinformatyki - ćwiczenia",
+    "status": "Active",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Inżynieria oprogramowania",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Bazy danych",
+    "status": "Incoming",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Wykład 1",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Wykład 2",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Szkolenie",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Podstawy teleinformatyki - ćwiczenia",
+    "status": "Active",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Inżynieria oprogramowania",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Bazy danych",
+    "status": "Incoming",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Wykład 1",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Wykład 2",
+    "status": "Incoming",
+    "repeatable": false,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  },
+  {
+    "id": 1,
+    "name": "Szkolenie",
+    "status": "Expired",
+    "repeatable": true,
+    "date": "09/01/2017",
+    "beginTime": "15.30",
+    "endTime": "17.30",
+    "courseName": "Test course name"
+  }
+]

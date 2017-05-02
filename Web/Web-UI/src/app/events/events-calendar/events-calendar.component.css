@@ -1,0 +1,10 @@
+/deep/ .fc-day-grid-event .fc-content {
+  white-space: normal !important;
+}
+
+/deep/ .fc-today-button,
+/deep/ .fc-month-button,
+/deep/ .fc-agendaWeek-button,
+/deep/ .fc-agendaDay-button {
+  font-weight: bold;
+}

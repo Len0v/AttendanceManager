@@ -3,7 +3,7 @@
 }
 
 .fa.fa-spinner {
-  color: red;
+  color: orange;
 }
 
 .fa.fa-bell-o {
@@ -11,5 +11,11 @@
 }
 
 .fa.fa-hourglass-end {
-  color: orange;
+  color: red;
+}
+
+.ui-widget-header {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  padding-bottom: 15px !important;
 }

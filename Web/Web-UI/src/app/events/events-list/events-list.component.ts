@@ -1,290 +1,47 @@
 import {Component, OnInit} from '@angular/core';
-import {DataTable} from 'primeng/primeng';
+import {EventsService} from '.././events-service.service';
+import {EventsList} from '../events-list.enum';
 
 @Component({
   selector: 'app-events-list',
   templateUrl: './events-list.component.html',
-  styleUrls: ['./events-list.component.css']
+  styleUrls: ['./events-list.component.css'],
+  providers: [EventsService]
 })
 export class EventsListComponent implements OnInit {
-  yearFilter = null;
+  data: EventsList[];
 
-  statusFilterDropdown = [
-    {
-      label: '',
-      value: ''
-    },
-    {
-      label: 'Active',
-      value: 'Active'
-    },
-    {
-      label: 'Incoming',
-      value: 'Incoming'
-    },
-    {
-      label: 'Expired',
-      value: 'Expired'
-    }
-  ];
+  selectedRow: EventsList;
 
-  data = [
-    {
-      name: 'Podstawy teleinformatyki - ćwiczenia',
-      status: 'Active',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30',
-      standardDay: null
-    },
-    {
-      name: 'Inżynieria oprogramowania',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30',
-      standardDay: null
-    },
-    {
-      name: 'Bazy danych',
-      status: 'Incoming',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30',
-      standardDay: 'Wednesday'
-    },
-    {
-      name: 'Wykład 1',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30',
-      standardDay: 'Monday'
-    },
-    {
-      name: 'Wykład 2',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30',
-      standardDay: null
-    },
-    {
-      name: 'Szkolenie',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30',
-      standardDay: 'Friday'
-    },
-    {
-      name: 'Podstawy teleinformatyki - ćwiczenia',
-      status: 'Active',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Inżynieria oprogramowania',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Bazy danych',
-      status: 'Incoming',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Wykład 1',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Wykład 2',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Szkolenie',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Podstawy teleinformatyki - ćwiczenia',
-      status: 'Active',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Inżynieria oprogramowania',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Bazy danych',
-      status: 'Incoming',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Wykład 1',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Wykład 2',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Szkolenie',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Podstawy teleinformatyki - ćwiczenia',
-      status: 'Active',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Inżynieria oprogramowania',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Bazy danych',
-      status: 'Incoming',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Wykład 1',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Wykład 2',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Szkolenie',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Podstawy teleinformatyki - ćwiczenia',
-      status: 'Active',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Inżynieria oprogramowania',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Bazy danych',
-      status: 'Incoming',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Wykład 1',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Wykład 2',
-      status: 'Incoming',
-      repeatable: false,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    },
-    {
-      name: 'Szkolenie',
-      status: 'Expired',
-      repeatable: true,
-      date: '09/01/2017',
-      timeFrom: '15.30',
-      timeTo: '17.30'
-    }
-  ];
-
-  constructor() {
+  constructor(private EventsService: EventsService) {
   }
 
   ngOnInit() {
+    this.EventsService.getDataForList().subscribe(events => this.data = events);
+    this.selectedRow = null;
   }
 
-  reset(dataTable: DataTable) {
-    console.log('reset');
-    dataTable.reset();
+  rowSelect($event) {
+    this.selectedRow = $event.data;
+  }
+
+  rowUnselect() {
+    this.selectedRow = null;
+  }
+
+  addEnabled() {
+    if (this.selectedRow !== null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  editRemoveEnabled(){
+    if (this.selectedRow !== null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

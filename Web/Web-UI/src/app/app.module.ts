@@ -1,3 +1,8 @@
+import * as jQuery from 'jquery';
+import 'moment';
+import 'fullcalendar';
+(window as any).jQuery = (window as any).$ = jQuery;
+
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -5,7 +10,16 @@ import {HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TreeModule, SharedModule, ButtonModule, DataTableModule, DropdownModule, SliderModule, InputTextModule} from 'primeng/primeng';
+import {
+  TreeModule,
+  SharedModule,
+  ButtonModule,
+  DataTableModule,
+  DropdownModule,
+  SliderModule,
+  InputTextModule,
+  ScheduleModule
+} from 'primeng/primeng';
 
 import {AppComponent} from './app.component';
 import {SidenavMenuComponent} from './sidenav-menu/sidenav-menu.component';
@@ -16,8 +30,8 @@ import {MainComponent} from './main/main.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {EventsComponent} from './events/events.component';
-import {EventsTreeviewComponent} from './events/events-treeview/events-treeview.component';
 import {EventsListComponent} from './events/events-list/events-list.component';
+import {EventsCalendarComponent} from './events/events-calendar/events-calendar.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +42,8 @@ import {EventsListComponent} from './events/events-list/events-list.component';
     NavbarComponent,
     UserListComponent,
     EventsComponent,
-    EventsTreeviewComponent,
-    EventsListComponent
+    EventsListComponent,
+    EventsCalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +59,8 @@ import {EventsListComponent} from './events/events-list/events-list.component';
     DataTableModule,
     DropdownModule,
     SliderModule,
-    InputTextModule
+    InputTextModule,
+    ScheduleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

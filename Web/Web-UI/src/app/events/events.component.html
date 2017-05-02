@@ -1,15 +1,17 @@
-<div fxLayout="row" fxHide.sm="true" fxHide.xs="true">
+<div fxLayout="row">
   <div fxFlex="20"></div>
   <div fxFlex="60">
     <md-tab-group>
-      <md-tab label="List">
+      <md-tab>
+        <template md-tab-label><i class="fa fa-list" aria-hidden="true"></i> List</template>
         <div class="tree-view-tab">
           <app-events-list></app-events-list>
         </div>
       </md-tab>
-      <md-tab label="TreeView">
+      <md-tab>
+        <template md-tab-label><i class="fa fa-calendar" aria-hidden="true"></i> Calendar</template>
         <div class="tree-view-tab">
-          <app-events-treeview></app-events-treeview>
+          <app-events-calendar></app-events-calendar>
         </div>
       </md-tab>
     </md-tab-group>

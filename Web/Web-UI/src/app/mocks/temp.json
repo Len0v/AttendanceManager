@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Podstawy programowania",
+    "roomId": 1,
+    "room": {
+      "id": 1,
+      "name": "1",
+      "building": "A1"
+    },
+    "timeSlotId": 1,
+    "timeSlot": {
+      "id": 1,
+      "beginTime": "1900-01-01T08:00:00",
+      "endTime": "1900-01-01T09:30:00"
+    },
+    "courseUnitId": 3,
+    "courseUnit": {
+      "id": 3,
+      "lecturerId": 1,
+      "lecturer": {
+        "id": 1,
+        "name": "Jan",
+        "surname": "Kowalski",
+        "sex": 0,
+        "birthDate": "1990-03-02T00:00:00",
+        "pesel": "90030284363",
+        "employeeNumber": "121114"
+      },
+      "courseId": 1,
+      "course": {
+        "id": 1,
+        "courseName": "Podstawy Programowania",
+        "ects": 4
+      },
+      "courseTypeId": 2,
+      "courseType": {
+        "id": 2,
+        "type": 2,
+        "hoursNumber": 15
+      }
+    }
+  }
+]
