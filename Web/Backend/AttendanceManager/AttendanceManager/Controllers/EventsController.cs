@@ -27,8 +27,14 @@ namespace AttendanceManager.Controllers
             return _attendanceService.GetAllEvents();
         }
 
+        [Route("TimeSpan")]
+        public IEnumerable<Event> TimeSpan(DateTime begin, DateTime end)
+        {
+            return _attendanceService.GetEventsForTimeRange(begin, end);
+        }
+
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public Event Get(int id)
         {
             return _attendanceService.GetEvent(id);
