@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using AttendanceManager.Core.Interfaces.Entities;
 
 namespace AttendanceManager.Core.Entities
@@ -7,8 +8,12 @@ namespace AttendanceManager.Core.Entities
     {
         [Column("EventId")]
         public int Id { get; set; }
+        public Enums.Enums.EventStatus EventStatus { get; set; }
+        public bool IsCyclical { get; set; }
         public string Name { get; set; }
         public int RoomId { get; set; }
+        public string Day { get; set; }
+        public DateTime NextDate { get; set; }
         public Room Room { get; set; }
         public int TimeSlotId { get; set; }
         public TimeSlot TimeSlot { get; set; }

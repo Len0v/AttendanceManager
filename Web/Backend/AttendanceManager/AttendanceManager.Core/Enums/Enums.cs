@@ -16,5 +16,12 @@
             Project,
             Seminars
         }
+
+        public enum EventStatus
+        {
+            Incoming,
+            Active,
+            Expired
+        }
     }
 }
