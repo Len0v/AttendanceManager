@@ -15,5 +15,6 @@ namespace AttendanceManager.Core.Entities
         public string Pesel{ get; set; }
         public bool IsStudent { get; set; }
         public string StudentNumber { get; set; }
+        public string CardNumber { get; set; }
     }
 }

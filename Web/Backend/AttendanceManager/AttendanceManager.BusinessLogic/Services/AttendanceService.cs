@@ -25,7 +25,6 @@ namespace AttendanceManager.BusinessLogic.Services
                 Include(e => e.Room).
                 Include(e =>e.TimeSlot).
                 Include(e =>e.CourseUnit).
-                    ThenInclude(e => e.Lecturer).
                 Include(e => e.CourseUnit).
                     ThenInclude(e => e.CourseType).
                 Include(e => e.CourseUnit).

@@ -10,6 +10,6 @@ namespace AttendanceManager.Core.Entities
         public int Id { get; set; }
         public DateTime BeginTime { get; set; }
         public DateTime EndTime { get; set; }
-
+        public string DayOfWeek { get; set; }
     }
 }

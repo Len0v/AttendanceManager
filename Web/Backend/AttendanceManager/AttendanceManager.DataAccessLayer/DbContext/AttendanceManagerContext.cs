@@ -17,6 +17,8 @@ namespace AttendanceManager.DataAccessLayer.DbContext
         public DbSet<Lecturer> Lecturers { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<TimeSlot> TimeSlots { get; set; }
+        public DbSet<EventAuthorizedAttendee> EventAuthorizedAttendees { get; set; }
+        public DbSet<CourseAuthorizedAttendee> CourseAuthorizedAttendees { get; set; }
 
         public AttendanceManagerContext(DbContextOptions<AttendanceManagerContext> options) : base(options)
         {

@@ -16,6 +16,8 @@ namespace AttendanceManager.Core.Interfaces.DAL
         DbSet<Lecturer> Lecturers { get; set; }
         DbSet<Room> Rooms { get; set; }
         DbSet<TimeSlot> TimeSlots { get; set; }
+        DbSet<EventAuthorizedAttendee> EventAuthorizedAttendees { get; set; }
+        DbSet<CourseAuthorizedAttendee> CourseAuthorizedAttendees { get; set; }
 
         DbSet<IEntity> Set<IEntity>() where IEntity : class;
         EntityEntry<IEntity> Entry(IEntity entity);
