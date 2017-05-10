@@ -62,5 +62,12 @@ namespace AttendanceManager.Controllers
         {
             return _attendanceService.GetEvent(id);
         }
+
+        [HttpDelete("{id:int}")]
+        public void Delete(int id)
+        {
+            var eventToDelete = _attendanceService.GetEvent(id);
+            _attendanceService.DeleteEvent(eventToDelete);
+        }
     }
 }

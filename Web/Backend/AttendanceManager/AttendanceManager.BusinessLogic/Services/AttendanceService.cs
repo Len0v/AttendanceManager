@@ -54,7 +54,9 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public bool DeleteEvent(Event deletedEvent)
         {
-            throw new NotImplementedException();
+            _attendanceUnitOfWork.EventsRepository.Delete(deletedEvent);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
         }
 
         public IEnumerable<Attendee> GetAllAttendees()
