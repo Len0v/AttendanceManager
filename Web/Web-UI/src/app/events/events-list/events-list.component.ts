@@ -17,7 +17,7 @@ export class EventsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.EventsService.getDataForList().subscribe(events => this.data = events);
+    this.EventsService.getDataForList().subscribe(events => {this.data = events; console.log('ok'); console.log(events)});
     this.selectedRow = null;
   }
 

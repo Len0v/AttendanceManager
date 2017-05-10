@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class EventsService {
-  private dataForListUrl = './src/app/mocks/eventslist.json';
+  private dataForListUrl = 'http://attendancemanagerapi.azurewebsites.net/api/events';
 
   constructor(private http: Http) {
   }
