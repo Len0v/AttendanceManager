@@ -1,50 +1,45 @@
-<div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none;">
-  <div style="display:inline-block;">
-    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-    <input #gb type="text" pInputText size="50" placeholder="Global Filter">
-  </div>
-  <div style="display:inline-block;">
-    <button pButton type="button" label="Add" icon="fa fa-plus" [disabled]="addEnabled()" style="font-weight: bold;"></button>
-    <button pButton type="button" class="ui-button-success" label="Edit" icon="fa fa-pencil" [disabled]="editRemoveEnabled()" style="font-weight: bold;"></button>
-    <button pButton type="button" class="ui-button-danger" label="Remove" icon="fa fa-trash" [disabled]="editRemoveEnabled()" style="font-weight: bold;"></button>
-  </div>
-</div>
-<p-dataTable #dataTable [value]="data" [rows]="15" [paginator]="true" [resizableColumns]="true"
-             columnResizeMode="fit" [globalFilter]="gb" [rows]="10" [paginator]="true"
-             [pageLinks]="3" [responsive]="true" [stacked]="stacked" selectionMode="single"
-             (onRowSelect)="rowSelect($event)" (onRowUnselect)="rowUnselect($event)">
-  <p-column header="#" [style]="{'width': '30px'}">
-    <ng-template let-col let-data="rowData" let-index="rowIndex" pTemplate="body">
-      <div style="text-align: left;">
-        {{index+1}}
-      </div>
-    </ng-template>
-  </p-column>
-  <p-column field="name" header="Name" [style]="{'width':'150px'}" [sortable]="true"></p-column>
-  <p-column field="status" header="Status" [sortable]="true" [style]="{'overflow':'visible','width': '70px'}">
-    <ng-template let-col let-data="rowData" pTemplate="body">
-      <i *ngIf="data.status === 'Incoming'" class="status"><i class="fa fa-spinner" aria-hidden="true"></i> Incoming</i>
-      <i *ngIf="data.status === 'Active'" class="status"><i class="fa fa-bell-o" aria-hidden="true"></i> Active</i>
-      <i *ngIf="data.status === 'Expired'" class="status"><i class="fa fa-hourglass-end" aria-hidden="true"></i>
-        Expired</i>
-    </ng-template>
-  </p-column>
-  <p-column field="repeatable" header="Cyclical" [sortable]="true" [style]="{'width': '60px'}">
-    <ng-template let-col let-data="rowData" pTemplate="body">
-      <i *ngIf="data.repeatable"><i class="fa fa-clock-o" aria-hidden="true"></i> Yes</i>
-      <i *ngIf="!data.repeatable">No</i>
-    </ng-template>
-  </p-column>
-  <p-column field="standardDay" header="Day" [style]="{'width': '60px'}" [sortable]="true"></p-column>
-  <p-column field="date" header="Next Date" [sortable]="true" [style]="{'width': '70px'}">
-    <ng-template let-col let-data="rowData" pTemplate="body">
-      {{data.date}}
-    </ng-template>
-  </p-column>
-  <p-column header="Time" [style]="{'width': '70px'}">
-    <ng-template let-col let-data="rowData" pTemplate="body">
-      {{data.beginTime}}-{{data.endTime}}
-    </ng-template>
-  </p-column>
-  <p-column field="courseName" header="Course name" [style]="{'width': '110px'}" [sortable]="true"></p-column>
-</p-dataTable>
+<table class="table table-striped table-hover">
+  <thead class="thead-inverse">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Course name</th>
+    <th>Status</th>
+    <th>Cyclical</th>
+    <th>Restricted</th>
+    <th>Day</th>
+    <th>Next date</th>
+    <th>Time</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let event of events; let i = index" class="custom-table-row">
+    <th scope="row">{{i+1}}</th>
+    <th>{{event.name}}</th>
+    <th>{{event.courseUnit.course.courseName}}</th>
+    <th>
+      <i *ngIf="event.eventStatus === 0" class="status"><i class="fa fa-spinner" aria-hidden="true"></i> Incoming</i>
+      <i *ngIf="event.eventStatus === 1" class="status"><i class="fa fa-bell-o" aria-hidden="true"></i> Active</i>
+    </th>
+    <th>
+      <i *ngIf="event.isCyclical"><i class="fa fa-clock-o" aria-hidden="true"></i> Yes</i>
+      <i *ngIf="!event.isCyclical">No</i>
+    </th>
+    <th>
+      <i *ngIf="event.isRestricted">Yes</i>
+      <i *ngIf="!event.isRestricted">No</i>
+    </th>
+    <th>{{event.timeSlot.dayOfWeek}}</th>
+    <th>{{event.date | date: 'dd/MM/yyyy'}}</th>
+    <th>
+      {{event.timeSlot.beginTime | amUtc | amDateFormat: 'HH:mm'}} - {{event.timeSlot.endTime | amUtc | amDateFormat:
+      'HH:mm'}}
+    </th>
+    <th>
+      <button md-raised-button (click)="showDetails(event)" style="background-color: aquamarine;">Show details</button>
+      <button md-raised-button (click)="removeEvent(event)" style="background-color: rgb(255, 153, 153);">Remove</button>
+    </th>
+  </tr>
+  </tbody>
+</table>

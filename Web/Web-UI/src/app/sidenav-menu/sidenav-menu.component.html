@@ -2,10 +2,6 @@
   <md-sidenav #sidenav [opened]="false">
     <button md-button routerLink="" (click)="sidenav.toggle()">Home</button>
     <div style="height: 20px;"></div>
-    <button md-button routerLink="" (click)="sidenav.toggle()">Account</button>
-    <div style="height: 20px;"></div>
-    <button md-button routerLink="students" (click)="sidenav.toggle()">Students</button>
-    <div style="height: 20px;"></div>
     <button md-button routerLink="events" (click)="sidenav.toggle()">Events</button>
   </md-sidenav>
   <router-outlet></router-outlet>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {EventsService} from '.././events-service.service';
-import {EventsList} from '../events-list.enum';
+import {EventsService} from '../events-services/events.service';
+import {EventsList} from '../events.model/events-list.enum';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-events-list',
@@ -9,39 +10,31 @@ import {EventsList} from '../events-list.enum';
   providers: [EventsService]
 })
 export class EventsListComponent implements OnInit {
-  data: EventsList[];
+  events: EventsList[];
 
-  selectedRow: EventsList;
-
-  constructor(private EventsService: EventsService) {
+  constructor(private EventsService: EventsService, private Router: Router) {
+    this.EventsService.loadIncomingEvents().subscribe(events => {
+      this.events = events;
+      this.EventsService.setIncomingEvents(events);
+      this.EventsService.loadActiveEvents().subscribe(events2 => {
+        this.events = this.events.concat(events2);
+        this.EventsService.setActiveEvents(events2);
+        console.log('list contructor');
+        console.log(this.EventsService);
+      });
+    });
   }
 
   ngOnInit() {
-    this.EventsService.getDataForList().subscribe(events => {this.data = events; console.log('ok'); console.log(events)});
-    this.selectedRow = null;
   }
 
-  rowSelect($event) {
-    this.selectedRow = $event.data;
+  showDetails(event) {
+    console.log(event);
+    console.log(this.EventsService);
+    this.Router.navigate(['events/details', event.id]);
   }
 
-  rowUnselect() {
-    this.selectedRow = null;
-  }
+  removeEvent(event){
 
-  addEnabled() {
-    if (this.selectedRow !== null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  editRemoveEnabled(){
-    if (this.selectedRow !== null) {
-      return false;
-    } else {
-      return true;
-    }
   }
 }
