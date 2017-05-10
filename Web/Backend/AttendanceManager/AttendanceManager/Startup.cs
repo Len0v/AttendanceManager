@@ -34,6 +34,7 @@ namespace AttendanceManager
             services.AddMvc();
             services.AddDbContext<AttendanceManagerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AttendanceManagerDatabase")));
             CompositionRoot.ConfigureDependencyInversion(services);
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +42,9 @@ namespace AttendanceManager
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200"));
 
             app.UseMvc(routes =>
             {
