@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AttendanceManager.Core.Entities;
+using AttendanceManager.Core.Enums;
 using AttendanceManager.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,20 +21,42 @@ namespace AttendanceManager.Controllers
             _attendanceService = attendanceService;
         }
 
-        // GET: api/values
         [HttpGet]
         public IEnumerable<Event> Get()
         {
             return _attendanceService.GetAllEvents();
         }
 
-        [Route("TimeSpan")]
-        public IEnumerable<Event> TimeSpan(DateTime begin, DateTime end)
+        [Route("TimeRange")]
+        public IEnumerable<Event> TimeRange(DateTime begin, DateTime end)
         {
             return _attendanceService.GetEventsForTimeRange(begin, end);
         }
 
-        // GET api/values/5
+        [Route("Incoming")]
+        public IEnumerable<Event> Incoming()
+        {
+            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Incoming);
+        }
+
+        [Route("Active")]
+        public IEnumerable<Event> Active()
+        {
+            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Active);
+        }
+
+        [Route("Expired")]
+        public IEnumerable<Event> Expired()
+        {
+            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Expired);
+        }
+
+        [Route("Filter")]
+        public IEnumerable<Event> Filter(string filter)
+        {
+            return _attendanceService.GetEventsForQuery(e => e.Name.Contains(filter));
+        }
+
         [HttpGet("{id:int}")]
         public Event Get(int id)
         {

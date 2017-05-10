@@ -21,32 +21,25 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public IEnumerable<Event> GetAllEvents()
         {
-            return _attendanceUnitOfWork.EventsRepository.GetAll().
-                Include(e => e.Room).
-                Include(e =>e.TimeSlot).
-                Include(e =>e.CourseUnit).
-                Include(e => e.CourseUnit).
-                    ThenInclude(e => e.CourseType).
-                Include(e => e.CourseUnit).
-                    ThenInclude(e => e.Course).
-                ToList();
+            return GetEventsWithAllDependendEntities(_attendanceUnitOfWork.EventsRepository.GetAll());
         }
         
         public IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end)
         {
             //StrictMode - only events in which entire time slot is in given period
-            return _attendanceUnitOfWork.EventsRepository.Query(e => e.TimeSlot.BeginTime >= begin && e.TimeSlot.EndTime <= end).ToList();
+            return GetEventsWithAllDependendEntities(
+                _attendanceUnitOfWork.EventsRepository.Query(
+                    e => e.TimeSlot.BeginTime >= begin && e.TimeSlot.EndTime <= end));
         }
 
         public IEnumerable<Event> GetEventsForQuery(Expression<Func<Event, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return GetEventsWithAllDependendEntities(_attendanceUnitOfWork.EventsRepository.Query(predicate));
         }
 
         public Event GetEvent(int eventId)
         {
-            //TODO Implement eager loading
-            return _attendanceUnitOfWork.EventsRepository.GetById(eventId);
+            return GetEventsWithAllDependendEntities(_attendanceUnitOfWork.EventsRepository.Query(e => e.Id == eventId)).FirstOrDefault();
         }
 
         public bool AddEvent(Event newEvent)
@@ -113,6 +106,20 @@ namespace AttendanceManager.BusinessLogic.Services
             _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
             _attendanceUnitOfWork.SaveChanges();
             return true;
+        }
+
+        private IEnumerable<Event> GetEventsWithAllDependendEntities(IQueryable<Event> events)
+        {
+            return events.
+                Include(e => e.Room).
+                Include(e => e.TimeSlot).
+                Include(e => e.Lecturer).
+                Include(e => e.CourseUnit).
+                Include(e => e.CourseUnit).
+                ThenInclude(e => e.CourseType).
+                Include(e => e.CourseUnit).
+                ThenInclude(e => e.Course).
+                ToList();
         }
     }
 }
