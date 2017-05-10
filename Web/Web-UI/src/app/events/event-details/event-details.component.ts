@@ -6,8 +6,7 @@ import {EventsService} from "../events-services/events.service";
 @Component({
   selector: 'app-event-details',
   templateUrl: 'event-details.component.html',
-  styleUrls: ['event-details.component.css'],
-  providers: [EventsService]
+  styleUrls: ['event-details.component.css']
 })
 export class EventDetailsComponent implements OnInit {
   private eventId: number;
@@ -16,14 +15,12 @@ export class EventDetailsComponent implements OnInit {
   constructor(private ActivatedRoute: ActivatedRoute, private EventsService: EventsService) {
     this.ActivatedRoute.params.subscribe(param => {
       this.eventId = +param['id'];
-      console.log('constructor');
-      console.log(this.EventsService);
+      this.event = this.EventsService.findEventById(this.eventId);
+      console.log(this.event);
     });
   }
 
   ngOnInit() {
-    console.log('init');
-    console.log(this.EventsService)
   }
 
 }

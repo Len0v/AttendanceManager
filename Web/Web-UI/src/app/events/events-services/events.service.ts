@@ -40,17 +40,12 @@ export class EventsService {
     this.ActiveEvents = events;
   }
 
-  setExpiredEvents(events){
+  setExpiredEvents(events) {
     this.ExpiredEvents = events;
   }
 
-  findEventById(id) {
-    console.log(this.IncomingEvents);
-    console.log(this.ActiveEvents);
-    console.log(this.ExpiredEvents);
-    let events = this.IncomingEvents.concat(this.ActiveEvents, this.ExpiredEvents);
-    console.log(events);
-
+  findEventById(id): EventsList {
+    return this.IncomingEvents.concat(this.ActiveEvents, this.ExpiredEvents).filter(x => x['id'] === id)[0];
   }
 
   private extractData(res: Response) {
