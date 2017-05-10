@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventsCalendarComponent } from './events-calendar.component';
+import { EventsExpiredListComponent } from './events-expired-list.component';
 
-describe('EventsCalendarComponent', () => {
-  let component: EventsCalendarComponent;
-  let fixture: ComponentFixture<EventsCalendarComponent>;
+describe('EventsExpiredListComponent', () => {
+  let component: EventsExpiredListComponent;
+  let fixture: ComponentFixture<EventsExpiredListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventsCalendarComponent ]
+      declarations: [ EventsExpiredListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EventsCalendarComponent);
+    fixture = TestBed.createComponent(EventsExpiredListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,26 @@
 <div fxLayout="row">
-  <div fxFlex="20"></div>
-  <div fxFlex="60">
+  <div fxFlex="10"></div>
+  <div fxFlex="80">
     <md-tab-group>
       <md-tab>
-        <template md-tab-label><i class="fa fa-list" aria-hidden="true"></i> List</template>
+        <template md-tab-label><i class="fa fa-list" aria-hidden="true"></i> Active & Incoming</template>
         <div class="tree-view-tab">
           <app-events-list></app-events-list>
         </div>
       </md-tab>
       <md-tab>
-        <template md-tab-label><i class="fa fa-calendar" aria-hidden="true"></i> Calendar</template>
+        <template md-tab-label><i class="fa fa-archive" aria-hidden="true"></i> Expired</template>
         <div class="tree-view-tab">
-          <app-events-calendar></app-events-calendar>
+          <app-events-expired-list></app-events-expired-list>
         </div>
       </md-tab>
+      <!--<md-tab>-->
+        <!--<template md-tab-label><i class="fa fa-calendar" aria-hidden="true"></i> Calendar</template>-->
+        <!--<div class="tree-view-tab">-->
+          <!--<app-events-calendar></app-events-calendar>-->
+        <!--</div>-->
+      <!--</md-tab>-->
     </md-tab-group>
   </div>
-  <div fxFlex="20"></div>
+  <div fxFlex="10"></div>
 </div>

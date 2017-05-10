@@ -10,16 +10,9 @@ import {HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  TreeModule,
-  SharedModule,
-  ButtonModule,
-  DataTableModule,
-  DropdownModule,
-  SliderModule,
-  InputTextModule,
-  ScheduleModule
-} from 'primeng/primeng';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MomentModule} from 'angular2-moment';
 
 import {AppComponent} from './app.component';
 import {SidenavMenuComponent} from './sidenav-menu/sidenav-menu.component';
@@ -31,7 +24,10 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {EventsComponent} from './events/events.component';
 import {EventsListComponent} from './events/events-list/events-list.component';
-import {EventsCalendarComponent} from './events/events-calendar/events-calendar.component';
+import {EventsExpiredListComponent} from './events/events-expired-list/events-expired-list.component';
+import {EventDetailsComponent} from './events/event-details/event-details.component';
+
+import {EventsService} from './events/events-services/events.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +39,8 @@ import {EventsCalendarComponent} from './events/events-calendar/events-calendar.
     UserListComponent,
     EventsComponent,
     EventsListComponent,
-    EventsCalendarComponent
+    EventsExpiredListComponent,
+    EventDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,16 +50,10 @@ import {EventsCalendarComponent} from './events/events-calendar/events-calendar.
     routing,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    TreeModule,
-    SharedModule,
-    ButtonModule,
-    DataTableModule,
-    DropdownModule,
-    SliderModule,
-    InputTextModule,
-    ScheduleModule
+    NgbModule.forRoot(),
+    MomentModule
   ],
-  providers: [],
+  providers: [EventsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
