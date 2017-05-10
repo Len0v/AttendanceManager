@@ -19,10 +19,19 @@ namespace AttendanceManager.DI
         public static void ConfigureDependencyInversion(IServiceCollection services)
         {
             services.AddScoped<IAttendanceManagerContext, AttendanceManagerContext>();
+
             services.AddTransient<IRepository<Attendee>, Repository<Attendee>>();
             services.AddTransient<IRepository<Event>, Repository<Event>>();
             services.AddTransient<IRepository<EventAttendee>, Repository<EventAttendee>>();
+            services.AddTransient<IRepository<TimeSlot>, Repository<TimeSlot>>();
+            services.AddTransient<IRepository<Room>, Repository<Room>>();
+            services.AddTransient<IRepository<Lecturer>, Repository<Lecturer>>();
+            services.AddTransient<IRepository<CourseUnit>, Repository<CourseUnit>>();
+        
             services.AddTransient<IAttendanceUnitOfWork, AttendanceUnitOfWork>();
+            services.AddTransient<IEventUnitOfWork, EventUnitOfWork>();
+
+            services.AddTransient<IEventsService, EventService>();
             services.AddTransient<IAttendaceService, AttendanceService>();
         }
     }
