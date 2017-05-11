@@ -3,14 +3,14 @@
   <div fxFlex="60">
     <div fxLayout="row">
       <div fxFlex="10">
-        <button md-raised-button>Save</button>
+        <button md-raised-button [disabled]="true" class="save-button">Save</button>
       </div>
       <div fxFlex="10">
-        <button md-raised-button>Cancel</button>
+        <button md-raised-button [disabled]="true" class="cancel-button">Cancel</button>
       </div>
       <div fxFlex="70"></div>
       <div fxFlex="10">
-        <button md-raised-button>Edit</button>
+        <button md-raised-button [disabled]="true" class="edit-button">Edit</button>
       </div>
     </div>
   </div>
@@ -19,8 +19,8 @@
 <div fxLayout="row" class="event-details-accordion-container">
   <div fxFlex="20"></div>
   <div fxFlex="60">
-  <ngb-accordion>
-    <ngb-panel>
+  <ngb-accordion activeIds="basicInfoPanel">
+    <ngb-panel id="basicInfoPanel">
     <ng-template ngbPanelTitle>
       <p class="event-details-accordion-title">Basic informations</p>
     </ng-template>
@@ -38,11 +38,6 @@
       </div>
       <div fxLayout="row" class="event-details-panel-row">
         <div fxFlex="50">
-          <a class="event-details-panel-element-title">Cyclical: </a> 
-          <a *ngIf="event.isCyclical">Yes</a>
-          <a *ngIf="!event.isCyclical">No</a>
-        </div>
-        <div fxFlex="50">
           <a class="event-details-panel-element-title">Restricted: </a>
           <a *ngIf="event.isRestricted">Yes</a>
           <a *ngIf="!event.isRestricted">No</a>
@@ -57,11 +52,6 @@
         <div fxFlex="50">
           <a class="event-details-panel-element-title">Time:</a>
           {{event.timeSlot.beginTime | amUtc | amDateFormat: 'HH:mm'}} - {{event.timeSlot.endTime | amUtc | amDateFormat: 'HH:mm'}}
-        </div>
-      </div>
-      <div fxLayout="row" class="event-details-panel-row" *ngIf="event.isCyclical && event.eventStatus !== 2">
-        <div fxFlex="50">
-          <a class="event-details-panel-element-title">Every: </a>{{event.cycleIntervalWeekNumber}} week.
         </div>
       </div>
     </ng-template>

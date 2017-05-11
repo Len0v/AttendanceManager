@@ -31,7 +31,11 @@ export class EventsListComponent implements OnInit {
   }
 
   showDetails(event) {
-    this.Router.navigate(['events/details', event.id]);
+    if(!event.isCyclical){
+      this.Router.navigate(['events/details/noncyclical', event.id]);
+    }else{
+      this.Router.navigate(['events/details/cyclical', event.id]);
+    }
   }
 
   removeEvent(event){

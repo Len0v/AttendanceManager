@@ -10,12 +10,26 @@
     width: 100%;
 }
 
+.save-button {
+    background-color: dodgerblue;
+}
+
+.cancel-button {
+    background-color: deepskyblue;
+}
+
+.edit-button {
+    background-color: chartreuse;
+}
+
 .event-details-accordion-title {
     width: 100%;
     height: 100%;
 
     font-size: 24px;
     font-weight: bold;
+
+    color: black;
 }
 
 .event-details-panel-template {

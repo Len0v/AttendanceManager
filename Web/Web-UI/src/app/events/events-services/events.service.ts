@@ -3,6 +3,7 @@ import {Http, Response} from '@angular/http';
 import {EventsList} from '../events.model/events-list.enum';
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/map';
+import {StorageService} from '../../storage.service';
 
 @Injectable()
 export class EventsService {
@@ -17,7 +18,7 @@ export class EventsService {
 
   selectedEvent: EventsList;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private storage: StorageService) {
   }
 
   loadIncomingEvents(): Observable<EventsList[]> {
@@ -41,17 +42,37 @@ export class EventsService {
 
   setIncomingEvents(events) {
     this.IncomingEvents = events;
+    this.storage.set('IncomingEvents', this.IncomingEvents);
   }
 
   setActiveEvents(events) {
     this.ActiveEvents = events;
+    this.storage.set('ActiveEvents', this.ActiveEvents);
   }
 
   setExpiredEvents(events) {
     this.ExpiredEvents = events;
+    this.storage.set('ExpiredEvents', this.ExpiredEvents);
+  }
+
+  getActiveEvents(){
+    return this.ActiveEvents;
+  }
+
+  getExpiredEvents(){
+    return this.ExpiredEvents;
   }
 
   findEventById(id): EventsList {
+    if(!this.IncomingEvents){
+      this.IncomingEvents = this.storage.get('IncomingEvents');
+    }
+    if(!this.ActiveEvents){
+      this.ActiveEvents = this.storage.get('ActiveEvents');
+    }
+    if(!this.ExpiredEvents){
+      this.ExpiredEvents = this.storage.get('ExpiredEvents');
+    }
     return this.IncomingEvents.concat(this.ActiveEvents, this.ExpiredEvents).filter(x => x['id'] === id)[0];
   }
 
