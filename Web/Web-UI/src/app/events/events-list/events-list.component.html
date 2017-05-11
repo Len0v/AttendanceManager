@@ -17,7 +17,7 @@
   <tr *ngFor="let event of events; let i = index" class="custom-table-row">
     <th scope="row">{{i+1}}</th>
     <th>{{event.name}}</th>
-    <th>{{event.courseUnit.course.courseName}}</th>
+    <th><a *ngIf="event.courseUnit">{{event.courseUnit.course.courseName}}</a></th>
     <th>
       <i *ngIf="event.eventStatus === 0" class="status"><i class="fa fa-spinner" aria-hidden="true"></i> Incoming</i>
       <i *ngIf="event.eventStatus === 1" class="status"><i class="fa fa-bell-o" aria-hidden="true"></i> Active</i>

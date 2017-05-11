@@ -74,15 +74,15 @@
       <ng-template ngbPanelContent class="event-details-panel-template">
         <div fxLayout="row">
           <div fxFlex="50">
-            <a class="event-details-panel-element-title">Name: </a>{{event.courseUnit.course.courseName}}
+            <a class="event-details-panel-element-title">Name: </a><a *ngIf="event.courseUnit">{{event.courseUnit.course.courseName}}</a>
           </div>
           <div fxFlex="50">
-            <a class="event-details-panel-element-title">ECTS: </a>{{event.courseUnit.course.ects}}
+            <a class="event-details-panel-element-title">ECTS: </a><a *ngIf="event.courseUnit">{{event.courseUnit.course.ects}}</a>
           </div>
         </div>
         <div fxLayout="row" class="event-details-panel-row">
           <div fxFlex="50">
-            <a class="event-details-panel-element-title">Course total hours: </a>{{event.courseUnit.courseType.hoursNumber}}
+            <a class="event-details-panel-element-title">Course total hours: </a><a *ngIf="event.courseUnit">{{event.courseUnit.courseType.hoursNumber}}</a>
           </div>
         </div>
       </ng-template>
