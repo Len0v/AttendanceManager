@@ -1,3 +1,107 @@
-<p>
-  event-details works!
-</p>
+<div fxLayout="row" class="event-details-buttons-panel-container" *ngIf="event.eventStatus === 0 || event.eventStatus === 2">
+  <div fxFlex="20"></div>
+  <div fxFlex="60">
+    <div fxLayout="row">
+      <div fxFlex="10">
+        <button md-raised-button>Save</button>
+      </div>
+      <div fxFlex="10">
+        <button md-raised-button>Cancel</button>
+      </div>
+      <div fxFlex="70"></div>
+      <div fxFlex="10">
+        <button md-raised-button>Edit</button>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="20"></div>
+</div>
+<div fxLayout="row" class="event-details-accordion-container">
+  <div fxFlex="20"></div>
+  <div fxFlex="60">
+  <ngb-accordion>
+    <ngb-panel>
+    <ng-template ngbPanelTitle>
+      <p class="event-details-accordion-title">Basic informations</p>
+    </ng-template>
+    <ng-template ngbPanelContent class="event-details-panel-template">
+      <div fxLayout="row">
+        <div fxFlex="50">
+          <a class="event-details-panel-element-title">Name: </a> {{event.name}}
+        </div>
+        <div>
+          <a class="event-details-panel-element-title">Status:</a> 
+          <a *ngIf="event.eventStatus === 0">Incoming</a>
+          <a *ngIf="event.eventStatus === 1">Active</a>
+          <a *ngIf="event.eventStatus === 2">Expired</a>
+        </div>
+      </div>
+      <div fxLayout="row" class="event-details-panel-row">
+        <div fxFlex="50">
+          <a class="event-details-panel-element-title">Cyclical: </a> 
+          <a *ngIf="event.isCyclical">Yes</a>
+          <a *ngIf="!event.isCyclical">No</a>
+        </div>
+        <div fxFlex="50">
+          <a class="event-details-panel-element-title">Restricted: </a>
+          <a *ngIf="event.isRestricted">Yes</a>
+          <a *ngIf="!event.isRestricted">No</a>
+        </div>
+      </div>
+      <div fxLayout="row" class="event-details-panel-row" *ngIf="event.eventStatus === 0 || event.eventStatus === 2">
+        <div fxFlex="50">
+          <a *ngIf="event.isCyclical && event.eventStatus === 0" class="event-details-panel-element-title">Next event date: </a> 
+          <a *ngIf="event.isCyclical && event.eventStatus === 2" class="event-details-panel-element-title">Event date: </a> 
+          {{event.date | date: 'dd/MM/yyyy'}}
+        </div>
+        <div fxFlex="50">
+          <a class="event-details-panel-element-title">Time:</a>
+          {{event.timeSlot.beginTime | amUtc | amDateFormat: 'HH:mm'}} - {{event.timeSlot.endTime | amUtc | amDateFormat: 'HH:mm'}}
+        </div>
+      </div>
+      <div fxLayout="row" class="event-details-panel-row" *ngIf="event.isCyclical && event.eventStatus !== 2">
+        <div fxFlex="50">
+          <a class="event-details-panel-element-title">Every: </a>{{event.cycleIntervalWeekNumber}} week.
+        </div>
+      </div>
+    </ng-template>
+    </ngb-panel>
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <p class="event-details-accordion-title">Course informations</p>
+      </ng-template>
+      <ng-template ngbPanelContent class="event-details-panel-template">
+        <div fxLayout="row">
+          <div fxFlex="50">
+            <a class="event-details-panel-element-title">Name: </a>{{event.courseUnit.course.courseName}}
+          </div>
+          <div fxFlex="50">
+            <a class="event-details-panel-element-title">ECTS: </a>{{event.courseUnit.course.ects}}
+          </div>
+        </div>
+        <div fxLayout="row" class="event-details-panel-row">
+          <div fxFlex="50">
+            <a class="event-details-panel-element-title">Course total hours: </a>{{event.courseUnit.courseType.hoursNumber}}
+          </div>
+        </div>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <p class="event-details-accordion-title">Lecturer informations</p>
+      </ng-template>
+      <ng-template ngbPanelContent class="event-details-panel-template">
+        <div fxLayout="row">
+          <div fxFlex="50">
+            <a class="event-details-panel-element-title">Name: </a>{{event.lecturer.name}}
+          </div>
+          <div fxFlex="50">
+            <a class="event-details-panel-element-title">Surname: </a>{{event.lecturer.surname}}
+          </div>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+  </div>
+  <div fxFlex="20"></div>
+</div>

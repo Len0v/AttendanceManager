@@ -1,3 +1,19 @@
 .custom-table-row th {
   vertical-align: middle;
 }
+
+.expired-events-list-buttons-container {
+  text-align: center;
+}
+
+.expired-events-list-buttons-container button {
+  font-weight: bold;
+}
+
+.expired-events-list-buttons-container button:first-child {
+  background-color: aquamarine;
+}
+
+.expired-events-list-buttons-container button:last-child {
+  background-color: rgb(255, 153, 153);
+}

@@ -13,6 +13,9 @@ export class EventsService {
   private incomingEventsApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/events/incoming';
   private activeEventsApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/events/active';
   private expiredEventsApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/events/expired';
+  private deleteEventbyIdApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/events/';
+
+  selectedEvent: EventsList;
 
   constructor(private http: Http) {
   }
@@ -30,6 +33,10 @@ export class EventsService {
   loadExpiredEvents(): Observable<EventsList[]> {
     return this.http.get(this.expiredEventsApiUrl)
       .map(this.extractData);
+  }
+
+  deleteEventById(id): Observable<Response> {
+    return this.http.delete(this.deleteEventbyIdApiUrl + id);
   }
 
   setIncomingEvents(events) {

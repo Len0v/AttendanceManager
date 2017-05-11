@@ -36,7 +36,7 @@
       {{event.timeSlot.beginTime | amUtc | amDateFormat: 'HH:mm'}} - {{event.timeSlot.endTime | amUtc | amDateFormat:
       'HH:mm'}}
     </th>
-    <th>
+    <th class="events-list-buttons-container">
       <button md-raised-button (click)="showDetails(event)" style="background-color: aquamarine;">Show details</button>
       <button md-raised-button (click)="removeEvent(event)" style="background-color: rgb(255, 153, 153);">Remove</button>
     </th>

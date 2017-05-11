@@ -13,6 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MomentModule} from 'angular2-moment';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {SidenavMenuComponent} from './sidenav-menu/sidenav-menu.component';
@@ -26,6 +27,7 @@ import {EventsComponent} from './events/events.component';
 import {EventsListComponent} from './events/events-list/events-list.component';
 import {EventsExpiredListComponent} from './events/events-expired-list/events-expired-list.component';
 import {EventDetailsComponent} from './events/event-details/event-details.component';
+import {EventRemoveDialog} from './events/remove-event-dialog/event-remove-dialog.component';
 
 import {EventsService} from './events/events-services/events.service';
 
@@ -40,7 +42,8 @@ import {EventsService} from './events/events-services/events.service';
     EventsComponent,
     EventsListComponent,
     EventsExpiredListComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    EventRemoveDialog
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,9 @@ import {EventsService} from './events/events-services/events.service';
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     MomentModule
+  ],
+  entryComponents: [
+    EventRemoveDialog
   ],
   providers: [EventsService],
   bootstrap: [AppComponent]

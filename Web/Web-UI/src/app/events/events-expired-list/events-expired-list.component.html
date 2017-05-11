@@ -21,8 +21,9 @@
       <i *ngIf="event.isRestricted">Yes</i>
       <i *ngIf="!event.isRestricted">No</i>
     </th>
-    <th>
-      <button md-raised-button (click)="showDetails(event)" style="background-color: aquamarine;">Show details</button>
+    <th class="expired-events-list-buttons-container">
+      <button md-raised-button (click)="showDetails(event)">Show details</button>
+      <button md-raised-button (click)="removeEvent(event)">Remove</button>
     </th>
   </tr>
   </tbody>
