@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventsService} from '../events-services/events.service';
 import {EventsList} from "../events.model/events-list.enum";
 import {Router} from '@angular/router';
-import {MdDialog, MdDialogRef, MdDialogConfig} from '@angular/material';
+import {MdDialog, MdDialogConfig} from '@angular/material';
 import {EventRemoveDialog} from '.././remove-event-dialog/event-remove-dialog.component';
 import {DialogConfig} from '.././remove-event-dialog/remove-event-dialog-config';
 
@@ -26,14 +26,10 @@ export class EventsExpiredListComponent implements OnInit {
   }
 
   showDetails(event) {
-    if(!event.isCyclical){
-      this.Router.navigate(['events/details/noncyclical', event.id]);
-    }else{
-      this.Router.navigate(['events/details/cyclical', event.id]);
-    }
+    this.Router.navigate(['events/details/cyclical', event.id]);
   }
 
-  removeEvent(event){
+  removeEvent(event) {
     this.EventsService.selectedEvent = event;
     this.openDialog();
   }

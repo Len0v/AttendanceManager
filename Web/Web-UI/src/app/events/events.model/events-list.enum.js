@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var EventsList;
+(function (EventsList) {
+    EventsList[EventsList["courseUnitId"] = 0] = "courseUnitId";
+    EventsList[EventsList["cycleIntervalWeekNumber"] = 1] = "cycleIntervalWeekNumber";
+    EventsList[EventsList["date"] = 2] = "date";
+    EventsList[EventsList["eventStatus"] = 3] = "eventStatus";
+    EventsList[EventsList["id"] = 4] = "id";
+    EventsList[EventsList["isCyclical"] = 5] = "isCyclical";
+    EventsList[EventsList["isRestricted"] = 6] = "isRestricted";
+    EventsList[EventsList["lecturer"] = 7] = "lecturer";
+    EventsList[EventsList["lecturerId"] = 8] = "lecturerId";
+    EventsList[EventsList["name"] = 9] = "name";
+    EventsList[EventsList["roomId"] = 10] = "roomId";
+    EventsList[EventsList["timeSlotId"] = 11] = "timeSlotId";
+    EventsList[EventsList["CourseUnit"] = 12] = "CourseUnit";
+    EventsList[EventsList["Lecturer"] = 13] = "Lecturer";
+    EventsList[EventsList["Room"] = 14] = "Room";
+    EventsList[EventsList["TimeSlot"] = 15] = "TimeSlot";
+})(EventsList = exports.EventsList || (exports.EventsList = {}));

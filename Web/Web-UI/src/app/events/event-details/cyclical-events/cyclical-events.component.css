@@ -1,45 +1,75 @@
 .event-details-accordion-container {
-    padding-top: 50px;
+  padding-top: 50px;
 }
 
 .event-details-buttons-panel-container {
-    padding-top: 50px;
+  padding-top: 50px;
 }
 
 .event-details-buttons-panel-container button {
-    width: 100%;
+  width: 100%;
 }
 
 .save-button {
-    background-color: dodgerblue;
+  background-color: dodgerblue;
 }
 
 .cancel-button {
-    background-color: deepskyblue;
+  background-color: deepskyblue;
 }
 
 .edit-button {
-    background-color: chartreuse;
+  background-color: chartreuse;
+  float: right;
 }
 
 .event-details-accordion-title {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    font-size: 24px;
-    font-weight: bold;
+  font-size: 24px;
+  font-weight: bold;
 
-    color: black;
+  color: black;
 }
 
 .event-details-panel-template {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .event-details-panel-element-title {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .event-details-panel-row {
-    padding-top: 20px;
+  padding-top: 20px;
+}
+
+.calendar-icon {
+  width: 1.2rem;
+  height: 1rem;
+  cursor: pointer;
+  margin-left: -0.5em;
+  margin-top: -0.3em;
+  font-size: 22px;
+}
+
+.next-date-label {
+  font-size: 16px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  padding-bottom: 0.5em;
+}
+
+.label-text {
+  font-size: 16px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.label-text-from {
+  padding-right: 0.5em;
+}
+
+.label-text-to {
+  padding-left: 1em;
+  padding-right: 0.5em;
 }

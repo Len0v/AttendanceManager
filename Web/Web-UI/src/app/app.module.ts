@@ -8,12 +8,14 @@ import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
+import {MdInputModule, MdCheckboxModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NguiDatetimePickerModule} from '@ngui/datetime-picker';
+import {FormsModule} from '@angular/forms';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MomentModule} from 'angular2-moment';
-import {MdDialog, MdDialogRef} from '@angular/material';
 import {CoolStorageModule} from 'angular2-cool-storage';
 
 import {AppComponent} from './app.component';
@@ -32,8 +34,8 @@ import {EventRemoveDialog} from './events/remove-event-dialog/event-remove-dialo
 import {EventsService} from './events/events-services/events.service';
 import {StorageService} from './storage.service';
 
-import {NonCyclicalEventsComponent} from './events/event-details/non-cyclical-events/non-cyclical-events.component';
 import {CyclicalEventsComponent} from './events/event-details/cyclical-events/cyclical-events.component';
+import {EventDetailsEditDialogComponent} from './events/event-details/cyclical-events/event-details-edit-dialog/event-details-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +49,8 @@ import {CyclicalEventsComponent} from './events/event-details/cyclical-events/cy
     EventsListComponent,
     EventsExpiredListComponent,
     EventRemoveDialog,
-    NonCyclicalEventsComponent,
-    CyclicalEventsComponent
+    CyclicalEventsComponent,
+    EventDetailsEditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,10 +62,15 @@ import {CyclicalEventsComponent} from './events/event-details/cyclical-events/cy
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     MomentModule,
-    CoolStorageModule
+    CoolStorageModule,
+    MdInputModule,
+    MdCheckboxModule,
+    NguiDatetimePickerModule,
+    FormsModule
   ],
   entryComponents: [
-    EventRemoveDialog
+    EventRemoveDialog,
+    EventDetailsEditDialogComponent
   ],
   providers: [EventsService, StorageService],
   bootstrap: [AppComponent]

@@ -29,3 +29,11 @@
 .events-list-buttons-container button:last-child {
   background-color: rgb(255, 153, 153);
 }
+
+.table-container {
+  height: 80vh;
+}
+
+.table tbody {
+  overflow-y: auto;
+}
