@@ -56,9 +56,10 @@ namespace AttendanceManager.BusinessLogic.Services
             return true;
         }
 
-        public bool DeleteEvent(Event deletedEvent)
+        public bool DeleteEvent(int id)
         {
-            _attendanceUnitOfWork.EventsRepository.Delete(deletedEvent);
+            var eventToDelete = _attendanceUnitOfWork.EventsRepository.GetById(id);
+            _attendanceUnitOfWork.EventsRepository.Delete(eventToDelete);
             _attendanceUnitOfWork.SaveChanges();
             return true;
         }
@@ -135,6 +136,26 @@ namespace AttendanceManager.BusinessLogic.Services
                 Include(e => e.CourseUnit).
                 ThenInclude(e => e.Course).
                 ToList();
+        }
+
+        public IEnumerable<Attendee> GetAuthorizedAttendeesForEvent(int eventId)
+        {
+            return _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Query(a => a.EventId == eventId)
+                .Select(e => e.Attendee);
+        }
+
+        public bool AddEventAuthorizedAttendee(EventAuthorizedAttendee attendee)
+        {
+            _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Add(attendee);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteEventAuthorizedAttendee(EventAuthorizedAttendee attendee)
+        {
+            _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Delete(attendee);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
         }
     }
 }

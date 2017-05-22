@@ -69,8 +69,8 @@ namespace AttendanceManager.Controllers
             _attendanceService.AddEvent(newEvent);
         }
 
-        [HttpPut("{id}")]
-        public void Edit(int id, [FromBody]Event editedEvent)
+        [HttpPut]
+        public void Edit([FromBody]Event editedEvent)
         {
             _attendanceService.ModifyEvent(editedEvent);
         }
@@ -78,8 +78,7 @@ namespace AttendanceManager.Controllers
         [HttpDelete("{id:int}")]
         public void Delete(int id)
         {
-            var eventToDelete = _attendanceService.GetEvent(id);
-            _attendanceService.DeleteEvent(eventToDelete);
+            _attendanceService.DeleteEvent(id);
         }
     }
 }

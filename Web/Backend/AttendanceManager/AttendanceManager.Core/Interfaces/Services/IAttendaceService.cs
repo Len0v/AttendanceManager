@@ -14,7 +14,7 @@ namespace AttendanceManager.Core.Interfaces.Services
         Event GetEvent(int eventId);
         bool AddEvent(Event newEvent);
         bool ModifyEvent(Event modifiedEvent);
-        bool DeleteEvent(Event deletedEvent);
+        bool DeleteEvent(int id);
 
         IEnumerable<Attendee> GetAllAttendees();
         IEnumerable<Attendee> GetAttendeesForEvent(int eventId);
@@ -26,5 +26,9 @@ namespace AttendanceManager.Core.Interfaces.Services
 
         bool RegisterAttendance(EventAttendee eventAttendee);
         bool DeleteAttendance(EventAttendee eventAttendee);
+
+        IEnumerable<Attendee> GetAuthorizedAttendeesForEvent(int eventId);
+        bool AddEventAuthorizedAttendee(EventAuthorizedAttendee attendee);
+        bool DeleteEventAuthorizedAttendee(EventAuthorizedAttendee attendee);
     }
 }
