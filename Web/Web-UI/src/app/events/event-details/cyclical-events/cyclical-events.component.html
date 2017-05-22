@@ -147,7 +147,7 @@
             <p class="event-details-accordion-title">Course informations</p>
           </ng-template>
           <ng-template ngbPanelContent class="event-details-panel-template">
-            <div fxLayout="row">
+            <div fxLayout="row" *ngIf="!editEnabled">
               <div fxFlex="50">
                 <a class="event-details-panel-element-title">Name: </a><a *ngIf="event.courseUnit">{{event.courseUnit.course.courseName}}</a>
               </div>
@@ -155,14 +155,33 @@
                 <a class="event-details-panel-element-title">ECTS: </a><a *ngIf="event.courseUnit">{{event.courseUnit.course.ects}}</a>
               </div>
             </div>
-            <div fxLayout="row" class="event-details-panel-row">
+            <div fxLayout="row" *ngIf="editEnabled">
+              <div fxFlex="50">
+                <md-input-container style="width: 100%;">
+                  <input mdInput placeholder="Name" disabled value="{{event.courseUnit.course.courseName}}">
+                </md-input-container>
+              </div>
+              <div fxFlex="50">
+                <md-input-container style="width: 100%;">
+                  <input mdInput placeholder="ECTS" disabled value="{{event.courseUnit.course.ects}}">
+                </md-input-container>
+              </div>
+            </div>
+            <div fxLayout="row" class="event-details-panel-row" *ngIf="!editEnabled">
               <div fxFlex="50">
                 <a class="event-details-panel-element-title">Course total hours: </a><a *ngIf="event.courseUnit">{{event.courseUnit.courseType.hoursNumber}}</a>
               </div>
             </div>
+            <div fxLayout="row" class="event-detail-panel-row" *ngIf="editEnabled">
+              <div fxFlex="50">
+                <md-input-container style="width: 100%;">
+                  <input mdInput placeholder="Course total hours" disabled value="{{event.courseUnit.courseType.hoursNumber}}">
+                </md-input-container>
+              </div>
+            </div>
           </ng-template>
         </ngb-panel>
-        <ngb-panel>
+        <ngb-panel *ngIf="event.lecturer">
           <ng-template ngbPanelTitle>
             <p class="event-details-accordion-title">Lecturer informations</p>
           </ng-template>

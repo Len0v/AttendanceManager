@@ -73,3 +73,8 @@
   padding-left: 1em;
   padding-right: 0.5em;
 }
+
+.event-details-accordion-container form {
+  height: 700px;
+  overflow-y: auto;
+}
