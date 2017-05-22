@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {EventsService} from '../events-services/events.service';
-import {EventsList} from "../events.model/events-list.enum";
 import {Router} from '@angular/router';
 import {MdDialog, MdDialogConfig} from '@angular/material';
 import {EventRemoveDialog} from '.././remove-event-dialog/event-remove-dialog.component';
 import {DialogConfig} from '.././remove-event-dialog/remove-event-dialog-config';
+import {EventObject} from "../events.model/event-interface";
 
 @Component({
   selector: 'app-events-expired-list',
@@ -12,7 +12,7 @@ import {DialogConfig} from '.././remove-event-dialog/remove-event-dialog-config'
   styleUrls: ['./events-expired-list.component.css']
 })
 export class EventsExpiredListComponent implements OnInit {
-  events: EventsList[];
+  events: EventObject[];
   config: MdDialogConfig = DialogConfig;
 
   constructor(private EventsService: EventsService, private Router: Router, private MdDialog: MdDialog) {
@@ -35,6 +35,6 @@ export class EventsExpiredListComponent implements OnInit {
   }
 
   private openDialog() {
-    let dialogRef = this.MdDialog.open(EventRemoveDialog, this.config);
+    this.MdDialog.open(EventRemoveDialog, this.config);
   }
 }

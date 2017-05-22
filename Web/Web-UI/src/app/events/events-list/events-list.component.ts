@@ -1,21 +1,26 @@
 import {Component, OnInit} from '@angular/core';
 import {EventsService} from '../events-services/events.service';
-import {EventsList} from '../events.model/events-list.enum';
 import {Router} from '@angular/router';
 import {MdDialog, MdDialogConfig} from '@angular/material';
-import {EventRemoveDialog} from '.././remove-event-dialog/event-remove-dialog.component';
-import {DialogConfig} from '.././remove-event-dialog/remove-event-dialog-config';
+import {EventObject} from "../events.model/event-interface";
+import {EventDetailsEditDialogService} from "../event-details-edit-dialog/event-details-edit-dialog.service";
+import {StorageService} from "../../storage.service";
+import {DialogConfig} from "../remove-event-dialog/remove-event-dialog-config";
+import {EventRemoveDialog} from "../remove-event-dialog/event-remove-dialog.component";
 
 @Component({
   selector: 'app-events-list',
   templateUrl: './events-list.component.html',
-  styleUrls: ['./events-list.component.css']
+  styleUrls: ['./events-list.component.css'],
+  providers: [EventDetailsEditDialogService]
 })
 export class EventsListComponent implements OnInit {
-  events: EventsList[];
+  events: EventObject[];
   config: MdDialogConfig = DialogConfig;
 
-  constructor(private EventsService: EventsService, private Router: Router, private MdDialog: MdDialog) {
+  constructor(private EventsService: EventsService, private Router: Router, private MdDialog: MdDialog,
+              private EventDetailsEditDialogService: EventDetailsEditDialogService,
+              private storage: StorageService) {
     this.events = [];
     this.EventsService.loadIncomingEvents().subscribe(incomingEvents => {
       this.events = this.events.concat(incomingEvents);
@@ -31,7 +36,18 @@ export class EventsListComponent implements OnInit {
   }
 
   showDetails(event) {
-    this.Router.navigate(['events/details/cyclical', event.id]);
+    console.log(event);
+    if (event.isCyclical) {
+      this.EventDetailsEditDialogService.open(this.config).subscribe(() => {
+        if (this.storage.get('editAllFutureEvents')) {
+          this.Router.navigate(['events/details/template', event.id]);
+        }else{
+          this.Router.navigate(['events/details/cyclical', event.id]);
+        }
+      });
+    } else {
+      this.Router.navigate(['events/details/cyclical', event.id]);
+    }
   }
 
   removeEvent(event) {

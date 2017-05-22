@@ -1,18 +1,18 @@
-<form [formGroup]="eventDetailsForm" novalidate (ngSubmit)="save(eventDetailsForm.value, eventDetailsForm.valid)">
-  <div fxLayout="row" *ngIf="editEnabled && editAllFutureEvents">
-    <div fxFlex="20"></div>
-    <div fxFlex="60">
-      <div class="alert alert-warning" role="alert">
-        <strong>Warning!</strong> Editing this event will be apply to all incoming events of this type.
-      </div>
+<div fxLayout="row" *ngIf="editEnabled">
+  <div fxFlex="20"></div>
+  <div fxFlex="60">
+    <div class="alert alert-warning" role="alert">
+      <strong>Warning!</strong> Editing this event will be apply to all incoming events of this type.
     </div>
-    <div fxFlex="20"></div>
   </div>
+  <div fxFlex="20"></div>
+</div>
 
-  <div fxLayout="row" *ngIf="(!editEnabled && !editAllFutureEvents) || (editEnabled && !editAllFutureEvents)">
-    <br/>
-  </div>
+<div fxLayout="row" *ngIf="!editEnabled">
+  <br/>
+</div>
 
+<form [formGroup]="eventDetailsForm" novalidate (ngSubmit)="save(eventDetailsForm.value, eventDetailsForm.valid)">
   <div fxLayout="row">
     <div fxFlex="20"></div>
     <div fxFlex="60">
@@ -38,6 +38,7 @@
     </div>
     <div fxFlex="20"></div>
   </div>
+
 
   <div fxLayout="row" class="event-details-accordion-container">
     <div fxFlex="20"></div>
@@ -144,11 +145,27 @@
               </div>
             </ng-template>
           </ngb-panel>
-          <ngb-panel *ngIf="event.courseUnit">
+          <ngb-panel *ngIf="event ? (event.courseUnit ? event.courseUnit : false) : false" formGroupName="courseUnit">
             <ng-template ngbPanelTitle>
               <p class="event-details-accordion-title">Course informations</p>
             </ng-template>
             <ng-template ngbPanelContent class="event-details-panel-template">
+              <div fxLayout="row" *ngIf="editEnabled">
+                <div fxFlex="50">
+                  <div fxLayout="row">
+                    <div fxFlex="25">
+                      <a>Change course: </a>
+                    </div>
+                    <div fxFlex="75">
+                      <md-select placeholder="Course" style="width: 100%;" [(ngModel)]="newCourseUnit"
+                                 [ngModelOptions]="{standalone: true}" (change)="courseUnitChanged()">
+                        <md-option *ngFor="let course of courses" [value]="course">{{course.course.courseName}}
+                        </md-option>
+                      </md-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div fxLayout="row" *ngIf="!editEnabled">
                 <div fxFlex="50">
                   <a class="event-details-panel-element-title">Name: </a><a *ngIf="event.courseUnit">{{event.courseUnit.course.courseName}}</a>
@@ -157,15 +174,15 @@
                   <a class="event-details-panel-element-title">ECTS: </a><a *ngIf="event.courseUnit">{{event.courseUnit.course.ects}}</a>
                 </div>
               </div>
-              <div fxLayout="row" *ngIf="editEnabled">
+              <div fxLayout="row" *ngIf="editEnabled" class="event-details-panel-row" formGroupName="course">
                 <div fxFlex="50">
                   <md-input-container style="width: 100%;">
-                    <input mdInput placeholder="Name" disabled value="{{event.courseUnit.course.courseName}}">
+                    <input mdInput placeholder="Name" formControlName="courseName">
                   </md-input-container>
                 </div>
                 <div fxFlex="50">
                   <md-input-container style="width: 100%;">
-                    <input mdInput placeholder="ECTS" disabled value="{{event.courseUnit.course.ects}}">
+                    <input mdInput placeholder="ECTS" formControlName="ects">
                   </md-input-container>
                 </div>
               </div>
@@ -174,21 +191,36 @@
                   <a class="event-details-panel-element-title">Course total hours: </a><a *ngIf="event.courseUnit">{{event.courseUnit.courseType.hoursNumber}}</a>
                 </div>
               </div>
-              <div fxLayout="row" class="event-detail-panel-row" *ngIf="editEnabled">
+              <div fxLayout="row" class="event-detail-panel-row" *ngIf="editEnabled" formGroupName="courseType">
                 <div fxFlex="50">
                   <md-input-container style="width: 100%;">
-                    <input mdInput placeholder="Course total hours" disabled
-                           value="{{event.courseUnit.courseType.hoursNumber}}">
+                    <input mdInput placeholder="Course total hours" formControlName="hoursNumber">
                   </md-input-container>
                 </div>
               </div>
             </ng-template>
           </ngb-panel>
-          <ngb-panel *ngIf="event.lecturer">
+          <ngb-panel *ngIf="event ? (event.lecturer ? event.lecturer : false) : false">
             <ng-template ngbPanelTitle>
               <p class="event-details-accordion-title">Lecturer informations</p>
             </ng-template>
             <ng-template ngbPanelContent class="event-details-panel-template">
+              <div fxLayout="row" *ngIf="editEnabled">
+                <div fxFlex="50">
+                  <div fxLayout="row">
+                    <div fxFlex="25">
+                      <a>Change lecturer: </a>
+                    </div>
+                    <div fxFlex="75">
+                      <md-select placeholder="Course" style="width: 100%;" [(ngModel)]="newLecturerUnit"
+                                 [ngModelOptions]="{standalone: true}" (change)="lecturerChanged()">
+                        <md-option *ngFor="let lecturer of lecturers" [value]="lecturer">{{lecturer.name}} {{lecturer.surname}}
+                        </md-option>
+                      </md-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div fxLayout="row" *ngIf="!editEnabled">
                 <div fxFlex="50">
                   <a class="event-details-panel-element-title">Name: </a>{{event.lecturer.name}}
@@ -197,15 +229,15 @@
                   <a class="event-details-panel-element-title">Surname: </a>{{event.lecturer.surname}}
                 </div>
               </div>
-              <div fxLayout="row" *ngIf="editEnabled">
+              <div fxLayout="row" *ngIf="editEnabled" class="event-details-panel-row" formGroupName="lecturer">
                 <div fxFlex="50">
                   <md-input-container style="width: 100%;">
-                    <input mdInput placeholder="Name" disabled value="{{event.lecturer.name}}">
+                    <input mdInput placeholder="Name" formControlName="name">
                   </md-input-container>
                 </div>
                 <div fxFlex="50">
                   <md-input-container style="width: 100%;">
-                    <input mdInput placeholder="Surname" disabled value="{{event.lecturer.surname}}">
+                    <input mdInput placeholder="Surname" formControlName="surname">
                   </md-input-container>
                 </div>
               </div>
