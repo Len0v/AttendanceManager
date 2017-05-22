@@ -44,12 +44,16 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public bool AddEvent(Event newEvent)
         {
-            throw new NotImplementedException();
+            _attendanceUnitOfWork.EventsRepository.Add(newEvent);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
         }
 
         public bool ModifyEvent(Event modifiedEvent)
         {
-            throw new NotImplementedException();
+            _attendanceUnitOfWork.EventsRepository.Update(modifiedEvent);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
         }
 
         public bool DeleteEvent(Event deletedEvent)
