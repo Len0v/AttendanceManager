@@ -44,12 +44,16 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public bool AddEvent(Event newEvent)
         {
-            throw new NotImplementedException();
+            _attendanceUnitOfWork.EventsRepository.Add(newEvent);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
         }
 
         public bool ModifyEvent(Event modifiedEvent)
         {
-            throw new NotImplementedException();
+            _attendanceUnitOfWork.EventsRepository.Update(modifiedEvent);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
         }
 
         public bool DeleteEvent(Event deletedEvent)
@@ -102,10 +106,19 @@ namespace AttendanceManager.BusinessLogic.Services
             throw new NotImplementedException();
         }
 
-        public bool RegisterAttendance(int eventId, int attendeeId)
+        public bool RegisterAttendance(EventAttendee eventAttendee)
         {
-            var eventAttendee = new EventAttendee {EventId = eventId, AttendeeId = attendeeId};
             _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteAttendance(EventAttendee eventAttendee)
+        {
+            var retrievedEntity = _attendanceUnitOfWork.EventAttendeesRepository
+                .Query(ea => ea.AttendeeId == eventAttendee.AttendeeId && ea.EventId == eventAttendee.EventId)
+                .FirstOrDefault();
+            _attendanceUnitOfWork.EventAttendeesRepository.Delete(retrievedEntity);
             _attendanceUnitOfWork.SaveChanges();
             return true;
         }
