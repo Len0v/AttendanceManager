@@ -106,10 +106,19 @@ namespace AttendanceManager.BusinessLogic.Services
             throw new NotImplementedException();
         }
 
-        public bool RegisterAttendance(int eventId, int attendeeId)
+        public bool RegisterAttendance(EventAttendee eventAttendee)
         {
-            var eventAttendee = new EventAttendee {EventId = eventId, AttendeeId = attendeeId};
             _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteAttendance(EventAttendee eventAttendee)
+        {
+            var retrievedEntity = _attendanceUnitOfWork.EventAttendeesRepository
+                .Query(ea => ea.AttendeeId == eventAttendee.AttendeeId && ea.EventId == eventAttendee.EventId)
+                .FirstOrDefault();
+            _attendanceUnitOfWork.EventAttendeesRepository.Delete(retrievedEntity);
             _attendanceUnitOfWork.SaveChanges();
             return true;
         }
