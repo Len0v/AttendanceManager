@@ -35,7 +35,8 @@ import {EventsService} from './events/events-services/events.service';
 import {StorageService} from './storage.service';
 
 import {CyclicalEventsComponent} from './events/event-details/cyclical-events/cyclical-events.component';
-import {EventDetailsEditDialogComponent} from './events/event-details/cyclical-events/event-details-edit-dialog/event-details-edit-dialog.component';
+import {EventDetailsEditDialogComponent} from './events/event-details-edit-dialog/event-details-edit-dialog.component';
+import {EventTemplateEditComponent} from "./events/event-details/edit-event-template/edit-event-template.component";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {EventDetailsEditDialogComponent} from './events/event-details/cyclical-e
     EventsExpiredListComponent,
     EventRemoveDialog,
     CyclicalEventsComponent,
-    EventDetailsEditDialogComponent
+    EventDetailsEditDialogComponent,
+    EventTemplateEditComponent
   ],
   imports: [
     BrowserModule,

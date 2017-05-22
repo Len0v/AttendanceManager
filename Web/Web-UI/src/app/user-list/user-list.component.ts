@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  
+
   public users = [
     {"id":1,"name":"Wojciech","surname":"Agacinski","sex":0,"birthDate":"1995-06-06T00:00:00","pesel":"95060605757","isStudent":true,"studentNumber":"121998"}
   ]
