@@ -1,40 +1,47 @@
-<div fxLayout="row" *ngIf="editEnabled && editAllFutureEvents">
-  <div fxFlex="20"></div>
-  <div fxFlex="60">
-    <div class="alert alert-warning" role="alert">
-      <strong>Warning!</strong> Editing this event will be apply to all incoming events of this type.
-    </div>
-  </div>
-  <div fxFlex="20"></div>
-</div>
-
-<div fxLayout="row" *ngIf="(!editEnabled && !editAllFutureEvents) || (editEnabled && !editAllFutureEvents)">
-  <br/>
-</div>
-
-<div fxLayout="row">
-  <div fxFlex="20"></div>
-  <div fxFlex="60">
-    <div fxLayout="row">
-      <div fxFlex="10">
-        <button md-raised-button [disabled]="!editEnabled" class="save-button" (click)="save()">Save</button>
-      </div>
-      <div fxFlex="10">
-        <button md-raised-button [disabled]="!editEnabled" class="cancel-button">Cancel</button>
-      </div>
-      <div fxFlex="70"></div>
-      <div fxFlex="10">
-        <button md-raised-button [disabled]="editEnabled" class="edit-button" (click)="enableEditMode()">Edit</button>
+<form #eventEditForm="ngForm" (ngSubmit)="save()">
+  <div fxLayout="row" *ngIf="editEnabled && editAllFutureEvents">
+    <div fxFlex="20"></div>
+    <div fxFlex="60">
+      <div class="alert alert-warning" role="alert">
+        <strong>Warning!</strong> Editing this event will be apply to all incoming events of this type.
       </div>
     </div>
+    <div fxFlex="20"></div>
   </div>
-  <div fxFlex="20"></div>
-</div>
 
-<div fxLayout="row" class="event-details-accordion-container">
-  <div fxFlex="20"></div>
-  <div fxFlex="60">
-    <form #heroForm="ngForm">
+  <div fxLayout="row" *ngIf="(!editEnabled && !editAllFutureEvents) || (editEnabled && !editAllFutureEvents)">
+    <br/>
+  </div>
+
+  <div fxLayout="row">
+    <div fxFlex="20"></div>
+    <div fxFlex="60">
+      <div fxLayout="row">
+        <div fxFlex="20">
+          <button md-raised-button type="submit" [disabled]="!editEnabled" class="save-button"
+                  [disabled]="!eventEditForm.form.valid">Save
+          </button>
+        </div>
+        <div fxFlex="20">
+          <button md-raised-button type="button" [disabled]="!editEnabled" class="cancel-button" (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+        <div fxFlex="50"></div>
+        <div fxFlex="10">
+          <button md-raised-button type="button" [disabled]="editEnabled" class="edit-button"
+                  (click)="enableEditMode()">
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="20"></div>
+  </div>
+
+  <div fxLayout="row" class="event-details-accordion-container">
+    <div fxFlex="20"></div>
+    <div fxFlex="60">
       <ngb-accordion activeIds="basicInfoPanel">
         <ngb-panel id="basicInfoPanel">
           <ng-template ngbPanelTitle>
@@ -47,7 +54,7 @@
               </div>
               <div fxFlex="100" *ngIf="editEnabled">
                 <md-input-container style="width: 100%;">
-                  <input mdInput placeholder="Name" value="{{event.name}}">
+                  <input mdInput placeholder="Name" value="{{event.name}}" required>
                 </md-input-container>
               </div>
             </div>
@@ -175,7 +182,8 @@
             <div fxLayout="row" class="event-detail-panel-row" *ngIf="editEnabled">
               <div fxFlex="50">
                 <md-input-container style="width: 100%;">
-                  <input mdInput placeholder="Course total hours" disabled value="{{event.courseUnit.courseType.hoursNumber}}">
+                  <input mdInput placeholder="Course total hours" disabled
+                         value="{{event.courseUnit.courseType.hoursNumber}}">
                 </md-input-container>
               </div>
             </div>
@@ -197,7 +205,7 @@
           </ng-template>
         </ngb-panel>
       </ngb-accordion>
-    </form>
+    </div>
+    <div fxFlex="20"></div>
   </div>
-  <div fxFlex="20"></div>
-</div>
+</form>

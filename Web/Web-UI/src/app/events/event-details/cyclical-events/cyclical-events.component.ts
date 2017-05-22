@@ -19,9 +19,14 @@ export class CyclicalEventsComponent implements OnInit {
   private date: String;
   private eventId: number;
   private event: EventsList;
+  private original_data: EventsList;
   editEnabled: boolean = false;
   editAllFutureEvents: boolean = false;
-  minDate: NgbDateStruct = {year: new Date().getFullYear(), month: new Date().getMonth(), day: new Date().getDate()};
+  minDate: NgbDateStruct = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate()
+  };
   modelDate: NgbDateStruct = {year: 0, month: 0, day: 0};
   modelBeginTime: NgbTimeStruct = {hour: 0, minute: 0, second: 0};
   modelEndTime: NgbTimeStruct = {hour: 0, minute: 0, second: 0};
@@ -32,12 +37,10 @@ export class CyclicalEventsComponent implements OnInit {
     this.ActivatedRoute.params.subscribe(param => {
       this.eventId = +param['id'];
       this.event = this.EventsService.findEventById(this.eventId);
-      console.log(this.event);
+      this.original_data = this.event;
       let date = new Date(this.event['date']);
       let beginTime = new Date(this.event['timeSlot']['beginTime']);
       let endTime = new Date(this.event['timeSlot']['endTime']);
-      console.log(beginTime);
-      console.log(beginTime.getHours());
       this.modelDate.year = date.getFullYear();
       this.modelDate.month = date.getMonth() + 1;
       this.modelDate.day = date.getDate();
@@ -64,5 +67,11 @@ export class CyclicalEventsComponent implements OnInit {
 
   save() {
     console.log(this.event);
+  }
+
+  cancel() {
+    this.editEnabled = false;
+    this.event = this.original_data;
+    this.editAllFutureEvents = false;
   }
 }
