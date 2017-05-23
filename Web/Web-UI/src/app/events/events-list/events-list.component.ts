@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {EventsService} from '../events-services/events.service';
-import {Router} from '@angular/router';
-import {MdDialog, MdDialogConfig} from '@angular/material';
-import {EventObject} from "../events.model/event-interface";
-import {EventDetailsEditDialogService} from "../event-details-edit-dialog/event-details-edit-dialog.service";
-import {StorageService} from "../../storage.service";
-import {DialogConfig} from "../remove-event-dialog/remove-event-dialog-config";
-import {EventRemoveDialog} from "../remove-event-dialog/event-remove-dialog.component";
+import { Component, OnInit } from '@angular/core';
+import { EventsService } from '../events-services/events.service';
+import { Router } from '@angular/router';
+import { MdDialog, MdDialogConfig } from '@angular/material';
+import { EventObject } from "../events.model/event-interface";
+import { EventDetailsEditDialogService } from "../event-details-edit-dialog/event-details-edit-dialog.service";
+import { StorageService } from "../../storage.service";
+import { DialogConfig } from "../remove-event-dialog/remove-event-dialog-config";
+import { EventRemoveDialog } from "../remove-event-dialog/event-remove-dialog.component";
 
 @Component({
   selector: 'app-events-list',
@@ -19,8 +19,8 @@ export class EventsListComponent implements OnInit {
   config: MdDialogConfig = DialogConfig;
 
   constructor(private EventsService: EventsService, private Router: Router, private MdDialog: MdDialog,
-              private EventDetailsEditDialogService: EventDetailsEditDialogService,
-              private storage: StorageService) {
+    private EventDetailsEditDialogService: EventDetailsEditDialogService,
+    private storage: StorageService) {
     this.events = [];
     this.EventsService.loadIncomingEvents().subscribe(incomingEvents => {
       this.events = this.events.concat(incomingEvents);
@@ -37,17 +37,7 @@ export class EventsListComponent implements OnInit {
 
   showDetails(event) {
     console.log(event);
-    if (event.isCyclical) {
-      this.EventDetailsEditDialogService.open(this.config).subscribe(() => {
-        if (this.storage.get('editAllFutureEvents')) {
-          this.Router.navigate(['events/details/template', event.id]);
-        }else{
-          this.Router.navigate(['events/details/cyclical', event.id]);
-        }
-      });
-    } else {
-      this.Router.navigate(['events/details/cyclical', event.id]);
-    }
+    this.Router.navigate(['events/details', event.id]);
   }
 
   removeEvent(event) {

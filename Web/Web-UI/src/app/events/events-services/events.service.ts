@@ -68,6 +68,12 @@ export class EventsService {
     return this.IncomingEvents.concat(this.ActiveEvents, this.ExpiredEvents).filter(x => x['id'] === id)[0];
   }
 
+  updateEvents(){
+    this.loadIncomingEvents().subscribe(res => this.setIncomingEvents(res));
+    this.loadActiveEvents().subscribe(res => this.setActiveEvents(res));
+    this.loadExpiredEvents().subscribe(res => this.setExpiredEvents(res));
+  }
+
   private extractData(res: Response) {
     return res.json() || {};
   }

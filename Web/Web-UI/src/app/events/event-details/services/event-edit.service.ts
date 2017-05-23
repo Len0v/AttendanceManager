@@ -1,11 +1,12 @@
-import {Injectable} from "@angular/core";
-import {Response, Http, Headers, RequestOptions} from "@angular/http";
-import {EventObject} from "../../events.model/event-interface";
-import {Observable} from "rxjs";
-import {FormBuilder} from "@angular/forms";
-import {NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
-import {Course} from "../../events.model/course.model";
-import {Lecturer} from "../../events.model/lecturer.model";
+import { Injectable } from "@angular/core";
+import { Response, Http, Headers, RequestOptions } from "@angular/http";
+import { EventObject } from "../../events.model/event-interface";
+import { Observable } from "rxjs";
+import { FormBuilder } from "@angular/forms";
+import { NgbTimeStruct } from "@ng-bootstrap/ng-bootstrap";
+import { Course } from "../../events.model/course.model";
+import { Lecturer } from "../../events.model/lecturer.model";
+import { AttendeesListModel } from "../../events.model/attendees-list.model";
 /**
  * Created by Krzysztof Adamczak on 22.05.2017.
  */
@@ -19,6 +20,13 @@ export class EventEditService {
   private courseUnitsApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/courseunits/';
   private lecturersApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/lecturers/';
   private saveEventApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/events/';
+  private attendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendees/';
+  private deleteUserFromAttendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendee';
+
+  public getEventById(id): Observable<EventObject> {
+    return this.http.get(this.eventApiUrl + id)
+      .map(this.extractData);
+  }
 
   public getCourseUnits(): Observable<Course[]> {
     return this.http.get(this.courseUnitsApiUrl)
@@ -28,6 +36,21 @@ export class EventEditService {
   public getLecturers(): Observable<Lecturer[]> {
     return this.http.get(this.lecturersApiUrl)
       .map(this.extractData);
+  }
+
+  public getAttendanceListById(id): Observable<AttendeesListModel[]> {
+    return this.http.get(this.attendanceListApiUrl + id)
+      .map(this.extractData);
+  }
+
+  public deleteUserFromAttendeeList(data, eventId): Observable<any> {
+    let body = JSON.stringify({
+      eventId: eventId,
+      attendeeId: data.id
+    });
+    return this.http.delete(this.deleteUserFromAttendanceListApiUrl, new RequestOptions({
+      body: body
+    })).map(this.extractData);
   }
 
   public saveChangedEvent(id, data): Observable<any> {
@@ -45,29 +68,29 @@ export class EventEditService {
       date: '',
       eventStatus: '',
       cycleIntervalWeekNumber: '',
-      isCyclical: true,
-      isRestricted: false,
-      courseUnitId: '',
+      isCyclical: '',
+      isRestricted: '',
+      courseUnitId: null,
       courseUnit: this._fb.group({
-        id: '',
-        courseId: '',
+        id: null,
+        courseId: null,
         course: this._fb.group({
-          id: '',
-          courseName: {value: '', disabled: true},
-          ects: {value: '', disabled: true}
+          id: null,
+          courseName: { value: null, disabled: true },
+          ects: { value: null, disabled: true }
         }),
-        courseTypeId: '',
+        courseTypeId: null,
         courseType: this._fb.group({
-          id: '',
-          type: '',
-          hoursNumber: {value: '', disabled: true}
+          id: null,
+          type: null,
+          hoursNumber: { value: null, disabled: true }
         })
       }),
       lecturerId: '',
       lecturer: this._fb.group({
         id: '',
-        name: {value: '', disabled: true},
-        surname: {value: '', disabled: true},
+        name: { value: '', disabled: true },
+        surname: { value: '', disabled: true },
         pesel: '',
         sex: '',
         employeeNumber: '',
@@ -90,7 +113,7 @@ export class EventEditService {
   }
 
   public createDate(date) {
-    let modelDate = {year: 0, month: 0, day: 0};
+    let modelDate = { year: 0, month: 0, day: 0 };
     modelDate.year = date.getFullYear();
     modelDate.month = date.getMonth() + 1;
     modelDate.day = date.getDate();
@@ -98,20 +121,26 @@ export class EventEditService {
   }
 
   public createBeginTime(beginTime) {
-    let modelBeginTime: NgbTimeStruct = {hour: 0, minute: 0, second: 0};
+    let modelBeginTime: NgbTimeStruct = { hour: 0, minute: 0, second: 0 };
     modelBeginTime.hour = beginTime.getHours();
     modelBeginTime.minute = beginTime.getMinutes();
     return modelBeginTime;
   }
 
   public createEndTime(endTime) {
-    let modelEndTime: NgbTimeStruct = {hour: 0, minute: 0, second: 0};
+    let modelEndTime: NgbTimeStruct = { hour: 0, minute: 0, second: 0 };
     modelEndTime.hour = endTime.getHours();
     modelEndTime.minute = endTime.getMinutes();
     return modelEndTime;
   }
 
   private extractData(res: Response) {
-    return res.json() || {};
+    let body;
+
+    if (res.text()) {
+      body = res.json();
+    }
+
+    return body || {};
   }
 }

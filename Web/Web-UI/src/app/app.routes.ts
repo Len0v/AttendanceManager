@@ -17,7 +17,7 @@ export const routes: Routes = [
   {path: 'students', component: UserListComponent},
   {path: 'events', component: EventsComponent},
   {path: 'events/details/cyclical/:id', component: CyclicalEventsComponent},
-  {path: 'events/details/template/:id', component: EventTemplateEditComponent}
+  {path: 'events/details/:id', component: EventTemplateEditComponent}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

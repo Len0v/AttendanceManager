@@ -1,6 +1,7 @@
-import {Course} from "./course.model";
-import {Lecturer} from "./lecturer.model";
-export interface EventObject {
+import {UpdatedCourseModel} from './course-update.model';
+import {UpdatedLecturerModel} from './lecturer-update.model';
+
+export interface UpdatedEventModel {
   id: number,
   name: string,
   date: string,
@@ -8,15 +9,13 @@ export interface EventObject {
   cycleIntervalWeekNumber: number,
   isCyclical: boolean,
   isRestricted: boolean,
-  courseUnitId?: number,
-  courseUnit?: Course,
+  courseUnitId: number,
+  courseUnit?: UpdatedCourseModel,
   lecturerId: number,
-  lecturer?: Lecturer,
+  lecturer?: UpdatedLecturerModel,
   roomId: number,
   room?: {
     id: number,
-    name: string,
-    building: string
   },
   timeSlotId: number,
   timeSlot: {
