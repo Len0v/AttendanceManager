@@ -279,7 +279,7 @@
               </div>
             </ng-template>
           </ngb-panel>
-          <ngb-panel *ngIf="event.eventStatus === 1 || event.isRestricted">
+          <ngb-panel *ngIf="event.isRestricted">
             <ng-template ngbPanelTitle>
               <p class="event-details-accordion-title">Attendance list</p>
             </ng-template>
@@ -296,7 +296,7 @@
                           <th>Pesel</th>
                           <th>Student number</th>
                           <th>Is student</th>
-                          <th *ngIf="editEnabled && (event.eventStatus !== 0 || event.isRestricted)"></th>
+                          <th *ngIf="editEnabled && event.isRestricted"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -310,7 +310,7 @@
                             <a *ngIf="user.isStudent">Yes</a>
                             <a *ngIf="!user.isStudent">No</a>
                           </th>
-                          <th *ngIf="editEnabled && (event.eventStatus !== 0 || event.isRestricted)" class="events-list-buttons-container">
+                          <th *ngIf="editEnabled && event.isRestricted" class="events-list-buttons-container">
                             <button md-raised-button type="button" (click)="removeUserFromAttendeesList(user)" style="background-color: rgb(255, 153, 153);">
                               Remove
                             </button>

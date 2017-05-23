@@ -21,7 +21,7 @@ export class EventEditService {
   private lecturersApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/lecturers/';
   private saveEventApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/events/';
   private attendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendees/';
-  private deleteUserFromAttendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendee';
+  private deleteUserFromAttendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendees';
 
   public getEventById(id): Observable<EventObject> {
     return this.http.get(this.eventApiUrl + id)
@@ -48,9 +48,14 @@ export class EventEditService {
       eventId: eventId,
       attendeeId: data.id
     });
-    return this.http.delete(this.deleteUserFromAttendanceListApiUrl, new RequestOptions({
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({
+      headers: headers,
       body: body
-    })).map(this.extractData);
+    });
+    return this.http.delete(this.deleteUserFromAttendanceListApiUrl, options)
+      .map(this.extractData);
   }
 
   public saveChangedEvent(id, data): Observable<any> {
