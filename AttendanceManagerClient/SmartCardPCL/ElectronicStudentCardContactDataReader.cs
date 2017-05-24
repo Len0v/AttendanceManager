@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Core.Smartcard;
-using Readers;
+using SmartCardPCL.Readers;
 
 namespace SmartCardPCL
 {
