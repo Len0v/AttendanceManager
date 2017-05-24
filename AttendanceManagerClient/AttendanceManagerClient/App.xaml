@@ -4,5 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AttendanceManagerClient"
     RequestedTheme="Light">
+    <Application.Resources>
+        <x:String x:Key="AppName">Attendance Manager Client</x:String>
 
+        <DataTemplate x:Key="ElsFacebookDataTemplate190x190">
+            <Grid HorizontalAlignment="Left" Width="190" Height="190">
+                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
+                    <Image Source="{Binding User.FbUser.picture.url}" Stretch="UniformToFill" AutomationProperties.Name="{Binding User.Name}"/>
+                </Border>
+                <StackPanel VerticalAlignment="Bottom" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
+                    <TextBlock Text="{Binding User.Name}" Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource BaseTextBlockStyle}" Height="30" Margin="15,0,15,0" FontWeight="SemiBold"/>
+                    <TextBlock Text="Obecny" Foreground="{ThemeResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource BaseTextBlockStyle}" TextWrapping="NoWrap" Margin="15,0,15,10" FontSize="12"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Application.Resources>
 </Application>
