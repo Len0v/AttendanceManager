@@ -37,5 +37,13 @@ namespace AttendanceManager.Controllers
         {
             _attendaceService.DeleteAttendance(eventAttendee);
         }
+
+        [HttpPost]
+        [Route("Register")]
+        public void Register([FromBody]Attendee attendee, int roomId)
+        {
+            _attendaceService.RegisterAttendance(attendee,roomId);
+        }
+
     }
 }

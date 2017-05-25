@@ -157,5 +157,17 @@ namespace AttendanceManager.BusinessLogic.Services
             _attendanceUnitOfWork.SaveChanges();
             return true;
         }
+
+        public bool RegisterAttendance(Attendee attendee, int roomId)
+        {
+            //For develop only
+            var activeEvent = _attendanceUnitOfWork.EventsRepository.Query(e => e.RoomId == roomId).ToList().FirstOrDefault();
+            var user = _attendanceUnitOfWork.AttendeesRepository.Query(u => u. CardNumber == attendee.CardNumber).ToList().FirstOrDefault();
+
+            var eventAttendee = new EventAttendee {AttendeeId = user.Id, EventId = activeEvent.Id};
+            _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
+        }
     }
 }

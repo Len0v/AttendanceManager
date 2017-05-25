@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using AttendanceManager.Core.Interfaces.Entities;
 

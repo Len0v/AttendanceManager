@@ -25,6 +25,7 @@ namespace AttendanceManager.Core.Interfaces.Services
         bool DeleteAttendee(int attendeeId);
 
         bool RegisterAttendance(EventAttendee eventAttendee);
+        bool RegisterAttendance(Attendee attendee, int roomId);
         bool DeleteAttendance(EventAttendee eventAttendee);
 
         IEnumerable<Attendee> GetAuthorizedAttendeesForEvent(int eventId);
