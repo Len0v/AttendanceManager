@@ -27,7 +27,7 @@ namespace AttendanceManagerClient.Models
     {
         public string id { get; set; }
         public ElectronicStudentCardData ElectronicStudentCard { get; set; }
-        public FbUser FbUser { get; set; }
+        public User FbUser { get; set; }
         public ListUser ListUser { get; set; }
 
         public bool HasName(string name)

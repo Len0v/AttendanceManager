@@ -100,17 +100,15 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Helpers\ConnectorParticipantTemplateSelector.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\NullToVisibilityConverter.cs" />
-    <Compile Include="Helpers\ParticipantTemplateSelector.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ElectronicStudentCardData.cs" />
-    <Compile Include="Models\EventUserPresence.cs" />
-    <Compile Include="Models\FacebookEvent.cs" />
-    <Compile Include="Models\FbUser.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
