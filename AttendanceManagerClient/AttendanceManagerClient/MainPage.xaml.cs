@@ -150,18 +150,18 @@ namespace AttendanceManagerClient
                     await new MessageDialog("Błąd! Zawołaj o pomoc! Informacja dla pomocy technicznej: No Event Id").ShowAsync();
                     return;
                 }
-                var user = await
-                    App.MobileService.InvokeApiAsync<Models.ElectronicStudentCardData, FbUser>("Presence", data,
-                        HttpMethod.Post, new Dictionary<string, string>() { { "eventId", Settings.EventId } });
-                if (user?.picture?.url != null)
-                {
-                    PersonImage.Visibility = Visibility.Visible;
-                    PersonImage.Source = new BitmapImage(new Uri(user.picture.url, UriKind.Absolute));
-                }
-                else
-                {
-                    PersonImage.Visibility = Visibility.Collapsed;
-                }
+            //    var user = await
+            //        App.MobileService.InvokeApiAsync<Models.ElectronicStudentCardData, FbUser>("Presence", data,
+            //            HttpMethod.Post, new Dictionary<string, string>() { { "eventId", Settings.EventId } });
+            //    if (user?.picture?.url != null)
+            //    {
+            //        PersonImage.Visibility = Visibility.Visible;
+            //        PersonImage.Source = new BitmapImage(new Uri(user.picture.url, UriKind.Absolute));
+            //    }
+            //    else
+            //    {
+            //        PersonImage.Visibility = Visibility.Collapsed;
+            //    }
             }
             catch (Exception ex)
             {
@@ -205,7 +205,7 @@ namespace AttendanceManagerClient
             if (counter >= 5)
             {
                 counter = 0;
-                Frame.Navigate(typeof(SettingsPage));
+                //Frame.Navigate(typeof(SettingsPage));
             }
 
         }

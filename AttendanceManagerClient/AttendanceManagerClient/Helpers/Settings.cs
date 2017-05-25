@@ -5,7 +5,7 @@ namespace AttendanceManagerClient.Helpers
 {
     public class Settings
     {
-        private const bool SoundDefault = true;
+        private const bool SoundDefault = false;
         
         public static bool Sound
         {
