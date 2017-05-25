@@ -164,6 +164,13 @@ namespace AttendanceManager.BusinessLogic.Services
             var activeEvent = _attendanceUnitOfWork.EventsRepository.Query(e => e.RoomId == roomId).ToList().FirstOrDefault();
             var user = _attendanceUnitOfWork.AttendeesRepository.Query(u => u. CardNumber == attendee.CardNumber).ToList().FirstOrDefault();
 
+            if (user == null)
+            {
+                _attendanceUnitOfWork.AttendeesRepository.Add(attendee);
+                _attendanceUnitOfWork.SaveChanges();
+                user = _attendanceUnitOfWork.AttendeesRepository.Query(u => u.CardNumber == attendee.CardNumber).ToList().FirstOrDefault();
+            }
+        
             var eventAttendee = new EventAttendee {AttendeeId = user.Id, EventId = activeEvent.Id};
             _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
             _attendanceUnitOfWork.SaveChanges();
