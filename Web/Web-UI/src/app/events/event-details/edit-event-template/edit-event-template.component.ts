@@ -1,20 +1,20 @@
-import { EventEditService } from "../services/event-edit.service";
-import { Component, OnInit } from "@angular/core";
-import { EventObject } from "../../events.model/event-interface";
-import { ActivatedRoute } from "@angular/router";
-import { FormGroup, FormControl } from "@angular/forms";
-import { EventsService } from "../../events-services/events.service";
-import { NgbDateStruct, NgbTimeStruct } from "@ng-bootstrap/ng-bootstrap";
-import { Course } from "../../events.model/course.model";
-import { Lecturer } from "../../events.model/lecturer.model";
-import { AttendeesListModel } from "../../events.model/attendees-list.model";
-import { UpdatedEventModel } from "../../events.model/update.models/event-update.model";
-import { EventDetailsEditDialogService } from "../../event-details-edit-dialog/event-details-edit-dialog.service";
-import { StorageService } from "../../../storage.service";
-import { MdDialog, MdDialogConfig } from '@angular/material';
-import { DialogConfig } from "../../event-details-edit-dialog/event-details-edit-dialog-config";
-import { AddUserModalWindowComponent } from "./add-user-modal/add-user-modal-window.component";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {EventEditService} from "../services/event-edit.service";
+import {Component, OnInit} from "@angular/core";
+import {EventObject} from "../../events.model/event-interface";
+import {ActivatedRoute} from "@angular/router";
+import {FormGroup, FormControl} from "@angular/forms";
+import {EventsService} from "../../events-services/events.service";
+import {NgbDateStruct, NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
+import {Course} from "../../events.model/course.model";
+import {Lecturer} from "../../events.model/lecturer.model";
+import {AttendeesListModel} from "../../events.model/attendees-list.model";
+import {UpdatedEventModel} from "../../events.model/update.models/event-update.model";
+import {EventDetailsEditDialogService} from "../../event-details-edit-dialog/event-details-edit-dialog.service";
+import {StorageService} from "../../../storage.service";
+import {MdDialog, MdDialogConfig} from '@angular/material';
+import {DialogConfig} from "../../event-details-edit-dialog/event-details-edit-dialog-config";
+import {AddUserModalWindowComponent} from "./add-user-modal/add-user-modal-window.component";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 /**
  * Created by Krzysztof Adamczak on 22.05.2017.
  */
@@ -26,8 +26,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class EventTemplateEditComponent implements OnInit {
   constructor(private EventEditService: EventEditService, private ActivatedRoute: ActivatedRoute,
-    private EventsService: EventsService, private EventDetailsEditDialogService: EventDetailsEditDialogService,
-    private StorageService: StorageService, private modalService: NgbModal) {
+              private EventsService: EventsService, private EventDetailsEditDialogService: EventDetailsEditDialogService,
+              private StorageService: StorageService, private modalService: NgbModal) {
     this.ActivatedRoute.params.subscribe(param => {
       this.eventId = +param['id'];
     });
@@ -36,7 +36,10 @@ export class EventTemplateEditComponent implements OnInit {
     this.EventEditService.getLecturers().subscribe(lecturers => this.lecturers = lecturers);
     this.event = this.EventsService.findEventById(this.eventId);
 
-    if (this.event.eventStatus === 1 || this.event.isRestricted) {
+    if (this.event.isRestricted) {
+      this.EventEditService.getEligibleParticipants(this.eventId, this.event.isCyclical).subscribe(res => this.eligibleParticipantsList = res);
+    }
+    if (this.event.eventStatus === 1) {
       this.EventEditService.getAttendanceListById(this.eventId).subscribe(res => this.attendeesList = res);
     }
 
@@ -54,14 +57,16 @@ export class EventTemplateEditComponent implements OnInit {
   public lecturers: Lecturer[];
   public attendees: AttendeesListModel[];
   public attendeesList: AttendeesListModel[];
+  public eligibleParticipantsList: AttendeesListModel[];
   public newCourseUnit: Course;
   public newLecturerUnit: Lecturer;
   public editAllFutureEvents: boolean = false;
   public selectedAttendee: AttendeesListModel;
+  public selectedParticipant: AttendeesListModel;
 
-  public modelDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
-  public modelBeginTime: NgbTimeStruct = { hour: 0, minute: 0, second: 0 };
-  public modelEndTime: NgbTimeStruct = { hour: 0, minute: 0, second: 0 };
+  public modelDate: NgbDateStruct = {year: 0, month: 0, day: 0};
+  public modelBeginTime: NgbTimeStruct = {hour: 0, minute: 0, second: 0};
+  public modelEndTime: NgbTimeStruct = {hour: 0, minute: 0, second: 0};
 
   public minDate: NgbDateStruct = {
     year: new Date().getFullYear(),
@@ -96,11 +101,11 @@ export class EventTemplateEditComponent implements OnInit {
   }
 
   courseUnitChanged() {
-    this.eventDetailsForm.patchValue({ courseUnit: this.newCourseUnit });
+    this.eventDetailsForm.patchValue({courseUnit: this.newCourseUnit});
   }
 
   lecturerChanged() {
-    this.eventDetailsForm.patchValue({ lecturer: this.newLecturerUnit });
+    this.eventDetailsForm.patchValue({lecturer: this.newLecturerUnit});
   }
 
   private updateDateAndTime() {
@@ -120,6 +125,7 @@ export class EventTemplateEditComponent implements OnInit {
     this.EventEditService.saveChangedEvent(this.eventId, requestObject).subscribe(res => {
       this.EventEditService.getEventById(this.eventId).subscribe(res => this.handleResponseAfterSave(res));
       this.EventsService.updateEvents();
+      this.editEnabled = false;
     });
   }
 
@@ -157,10 +163,18 @@ export class EventTemplateEditComponent implements OnInit {
     }
   }
 
-  addUser() {
-    this.EventEditService.addUserToAttendeeList(this.selectedAttendee, this.eventId).subscribe(res => console.log(res));
-    this.attendeesList.push(this.selectedAttendee);
-    this.selectedAttendee = null;
+  addUserToAttendeesList() {
+    this.EventEditService.addUserToAttendeeList(this.selectedAttendee, this.eventId).subscribe(res => {
+      this.attendeesList.push(this.selectedAttendee);
+      this.selectedAttendee = null;
+    });
+  }
+
+  addNewEligibleParticipant(){
+    this.EventEditService.addUserToEligibleParticipantsList(this.selectedParticipant, this.eventId).subscribe(res => {
+      this.eligibleParticipantsList.push(this.selectedParticipant);
+      this.selectedParticipant = null;
+    });
   }
 
   private updateForm() {

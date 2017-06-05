@@ -23,6 +23,10 @@ export class EventEditService {
   private attendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendees/';
   private attendeesListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/attendees/';
   private deleteUserFromAttendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendees';
+  private eligibleParticipantsForCourseApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/courseauthorized/';
+  private eligibleParticipantsForEventApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventauthorized/';
+  private addEligibleParticipantsForEventApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventauthorized/';
+  private addEligibleParticipantsForCourseApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/courseauthorized/';
 
   public getEventById(id): Observable<EventObject> {
     return this.http.get(this.eventApiUrl + id)
@@ -46,6 +50,29 @@ export class EventEditService {
 
   public getAttendeesList(): Observable<AttendeesListModel[]> {
     return this.http.get(this.attendeesListApiUrl).map(this.extractData);
+  }
+
+  public getEligibleParticipants(eventId, isCyclical): Observable<AttendeesListModel[]> {
+    if(isCyclical){
+      return this.http.get(this.eligibleParticipantsForCourseApiUrl + eventId).map(this.extractData);
+    }else{
+      return this.http.get(this.eligibleParticipantsForEventApiUrl + eventId).map(this.extractData);
+    }
+  }
+
+  public addUserToEligibleParticipantsList(user, eventId){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({
+      headers: headers
+    });
+    if(user.IsCyclical){
+      return this.http.post(this.addEligibleParticipantsForCourseApiUrl, { eventId: eventId, attendeeId: user.id }, options)
+        .map(this.extractData);
+    }else{
+      return this.http.post(this.addEligibleParticipantsForEventApiUrl, { eventId: eventId, attendeeId: user.id }, options)
+        .map(this.extractData);
+    }
   }
 
   public deleteUserFromAttendeeList(data, eventId): Observable<any> {
