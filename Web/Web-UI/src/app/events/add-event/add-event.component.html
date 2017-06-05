@@ -1,0 +1,141 @@
+<br />
+<form [formGroup]="eventDetailsForm" novalidate (ngSubmit)="saveEvent(eventDetailsForm.value, eventDetailsForm.valid)">
+  <div fxLayout="row">
+    <div fxFlex="20"></div>
+    <div fxFlex="60">
+      <div fxLayout="row">
+        <div fxFlex="20">
+          <button md-raised-button type="submit" class="save-button">
+            Save
+          </button>
+        </div>
+        <div fxFlex="20">
+          <button md-raised-button type="button" class="cancel-button" (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+        <div fxFlex="60"></div>
+      </div>
+    </div>
+    <div fxFlex="20"></div>
+  </div>
+
+  <div fxLayout="row" class="form-container">
+    <div fxFlex="20"></div>
+    <div fxFlex="60">
+      <div fxLayout="row">
+        <div fxFlex="100">
+          <md-input-container style="width: 100%;">
+            <input mdInput placeholder="Name" formControlName="name">
+          </md-input-container>
+        </div>
+        <hr>
+      </div>
+      <div fxLayout="row" class="form-row">
+        <div fxFlex="50">
+          <md-checkbox color="primary" formControlName="isCyclical"> Cyclical
+          </md-checkbox>
+        </div>
+        <div fxFlex="50" *ngIf="eventDetailsForm.get('isCyclical').value">
+          <md-input-container style="width: 100%;">
+            <input type="number" mdInput placeholder="Every ... week" min="1" formControlName="cycleIntervalWeekNumber">
+          </md-input-container>
+        </div>
+      </div>
+      <div fxLayout="row" class="form-row">
+        <div fxFlex="50">
+          <md-checkbox color="primary" formControlName="isRestricted"> Restricted
+          </md-checkbox>
+        </div>
+      </div>
+      <div fxLayout="row" class="form-row">
+        <div fxFlex="20">
+          <label class="next-date-label">Next event date: </label>
+          <div class="input-group">
+            <input class="form-control" name="data" [(ngModel)]="modelDate" ngbDatepicker #datePicker="ngbDatepicker" [minDate]="minDate"
+              [ngModelOptions]="{standalone: true}">
+            <div class="input-group-addon" (click)="datePicker.toggle()">
+              <i class="material-icons calendar-icon">perm_contact_calendar</i>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="10"></div>
+        <div fxFlex="70" class="form-inline" formGroupName="timeSlot" style="float: right;">
+          <label class="label-text label-text-from">From: </label>
+          <ngb-timepicker [(ngModel)]="modelBeginTime" formControlName="beginTime"></ngb-timepicker>
+          <label class="label-text label-text-to">To: </label>
+          <ngb-timepicker [(ngModel)]="modelEndTime" formControlName="endTime"></ngb-timepicker>
+        </div>
+      </div>
+      <div fxLayout="row" class="form-row">
+        <div fxFlex="50">
+          <div fxLayout="row">
+            <div fxFlex="25">
+              <a>Change course: </a>
+            </div>
+            <div fxFlex="75">
+              <md-select placeholder="Course" style="width: 100%;" [(ngModel)]="newCourseUnit" [ngModelOptions]="{standalone: true}" (change)="courseUnitChanged()">
+                <md-option *ngFor="let course of courses" [value]="course">{{course.course.courseName}}
+                </md-option>
+              </md-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" class="form-row">
+        <div fxFlex="50">
+          <div fxLayout="row">
+            <div fxFlex="25">
+              <a>Change lecturer: </a>
+            </div>
+            <div fxFlex="75">
+              <md-select placeholder="Lecturer" style="width: 100%;" [(ngModel)]="newLecturerUnit" [ngModelOptions]="{standalone: true}"
+                (change)="lecturerChanged()">
+                <md-option *ngFor="let lecturer of lecturers" [value]="lecturer">{{lecturer.name}} {{lecturer.surname}}
+                </md-option>
+              </md-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" class="form-row" *ngIf="eventDetailsForm.get('isRestricted').value">
+        <div fxFlex="100">
+          <div class="custom-table-container">
+            <table class="table table-striped table-hover custom-table">
+              <thead class="thead-inverse">
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>Pesel</th>
+                  <th>Student number</th>
+                  <th>Is student</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of attendeesList; let i = index" class="custom-table-row">
+                  <th scope="row">{{i+1}}</th>
+                  <th>{{user.name}}</th>
+                  <th>{{user.surname}}</th>
+                  <th>{{user.pesel}}</th>
+                  <th>{{user.studentNumber}}</th>
+                  <th>
+                    <a *ngIf="user.isStudent">Yes</a>
+                    <a *ngIf="!user.isStudent">No</a>
+                  </th>
+                  <th class="events-list-buttons-container">
+                    <button md-raised-button type="button" (click)="removeUserFromAttendeesList(user)" style="background-color: rgb(255, 153, 153);">
+                              Remove
+                            </button>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="20"></div>
+  </div>
+</form>

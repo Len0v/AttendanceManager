@@ -1,6 +1,6 @@
 .event-details-accordion-container {
-  padding-top: 50px;
-  font-family: Roboto,"Helvetica Neue",sans-serif;
+    padding-top: 1em;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
 .event-details-buttons-panel-container {
@@ -82,7 +82,7 @@
 }
 
 .event-details-accordion {
-  height: 700px;
+  height: 800px;
   overflow-y: auto;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .custom-table-container {
-  height: 50vh;
+  height: 60vh;
 }
 
 .table tbody {

@@ -37,6 +37,9 @@ import {StorageService} from './storage.service';
 import {CyclicalEventsComponent} from './events/event-details/cyclical-events/cyclical-events.component';
 import {EventDetailsEditDialogComponent} from './events/event-details-edit-dialog/event-details-edit-dialog.component';
 import {EventTemplateEditComponent} from "./events/event-details/edit-event-template/edit-event-template.component";
+import {AddUserModalWindowComponent} from "./events/event-details/edit-event-template/add-user-modal/add-user-modal-window.component";
+import { ExpiredEventDetailsComponent } from './events/event-details/expired-event-details/expired-event-details.component';
+import { AddEventComponent } from './events/add-event/add-event.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import {EventTemplateEditComponent} from "./events/event-details/edit-event-temp
     EventRemoveDialog,
     CyclicalEventsComponent,
     EventDetailsEditDialogComponent,
-    EventTemplateEditComponent
+    EventTemplateEditComponent,
+    AddUserModalWindowComponent,
+    ExpiredEventDetailsComponent,
+    AddEventComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +78,8 @@ import {EventTemplateEditComponent} from "./events/event-details/edit-event-temp
   ],
   entryComponents: [
     EventRemoveDialog,
-    EventDetailsEditDialogComponent
+    EventDetailsEditDialogComponent,
+    AddUserModalWindowComponent
   ],
   providers: [EventsService, StorageService],
   bootstrap: [AppComponent]
