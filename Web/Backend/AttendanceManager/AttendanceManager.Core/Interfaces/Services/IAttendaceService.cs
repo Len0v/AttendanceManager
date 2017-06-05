@@ -31,5 +31,9 @@ namespace AttendanceManager.Core.Interfaces.Services
         IEnumerable<Attendee> GetAuthorizedAttendeesForEvent(int eventId);
         bool AddEventAuthorizedAttendee(EventAuthorizedAttendee attendee);
         bool DeleteEventAuthorizedAttendee(EventAuthorizedAttendee attendee);
+
+        IEnumerable<Attendee> GetAuthorizedAttendeesForCourse(int eventId);
+        bool AddCourseAuthorizedAttendee(CourseAuthorizedAttendee attendee);
+        bool DeleteCourseAuthorizedAttendee(CourseAuthorizedAttendee attendee);
     }
 }

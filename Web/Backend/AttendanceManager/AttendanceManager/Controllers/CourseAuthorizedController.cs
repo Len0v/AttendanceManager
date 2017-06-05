@@ -11,10 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace AttendanceManager.Controllers
 {
     [Route("api/[controller]")]
-    public class EventAuthorizedController : Controller
+    public class CourseAuthorizedController : Controller
     {
         private IAttendaceService _attendaceService;
-        public EventAuthorizedController(IAttendaceService attendaceService)
+        public CourseAuthorizedController(IAttendaceService attendaceService)
         {
             _attendaceService = attendaceService;
         }
@@ -22,19 +22,19 @@ namespace AttendanceManager.Controllers
         [HttpGet("{id:int}")]
         public IEnumerable<Attendee> Get(int id)
         {
-            return _attendaceService.GetAuthorizedAttendeesForEvent(id);
+            return _attendaceService.GetAuthorizedAttendeesForCourse(id);
         }
 
         [HttpPost]
-        public void Post([FromBody]EventAuthorizedAttendee attendee)
+        public void Post([FromBody]CourseAuthorizedAttendee attendee)
         {
-            _attendaceService.AddEventAuthorizedAttendee(attendee);
+            _attendaceService.AddCourseAuthorizedAttendee(attendee);
         }
 
         [HttpDelete]
-        public void Delete([FromBody]EventAuthorizedAttendee attendee)
+        public void Delete([FromBody]CourseAuthorizedAttendee attendee)
         {
-            _attendaceService.DeleteEventAuthorizedAttendee(attendee);
+            _attendaceService.DeleteCourseAuthorizedAttendee(attendee);
         }
     }
 }

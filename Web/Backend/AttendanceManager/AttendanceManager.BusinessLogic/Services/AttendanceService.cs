@@ -153,7 +153,31 @@ namespace AttendanceManager.BusinessLogic.Services
 
         public bool DeleteEventAuthorizedAttendee(EventAuthorizedAttendee attendee)
         {
-            _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Delete(attendee);
+            var attendeeToDelete = _attendanceUnitOfWork.EventAuthorizedAttendeesRepository
+                .Query(a => a.AttendeeId == attendee.AttendeeId && a.EventId == attendee.EventId).FirstOrDefault();
+            _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Delete(attendeeToDelete);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
+        }
+
+        public IEnumerable<Attendee> GetAuthorizedAttendeesForCourse(int courseId)
+        {
+            return _attendanceUnitOfWork.CourseAuthorizedAttendeesRepository.Query(a => a.CourseUnitId == courseId)
+                .Select(e => e.Attendee);
+        }
+
+        public bool AddCourseAuthorizedAttendee(CourseAuthorizedAttendee attendee)
+        {
+            _attendanceUnitOfWork.CourseAuthorizedAttendeesRepository.Add(attendee);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteCourseAuthorizedAttendee(CourseAuthorizedAttendee attendee)
+        {
+            var attendeeToDelete = _attendanceUnitOfWork.CourseAuthorizedAttendeesRepository
+                .Query(a => a.AttendeeId == attendee.AttendeeId && a.CourseUnitId == attendee.CourseUnitId).FirstOrDefault();
+            _attendanceUnitOfWork.CourseAuthorizedAttendeesRepository.Delete(attendeeToDelete);
             _attendanceUnitOfWork.SaveChanges();
             return true;
         }

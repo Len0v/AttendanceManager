@@ -28,6 +28,7 @@ namespace AttendanceManager.DI
             services.AddTransient<IRepository<Lecturer>, Repository<Lecturer>>();
             services.AddTransient<IRepository<CourseUnit>, Repository<CourseUnit>>();
             services.AddTransient<IRepository<EventAuthorizedAttendee>, Repository<EventAuthorizedAttendee>>();
+            services.AddTransient<IRepository<CourseAuthorizedAttendee>, Repository<CourseAuthorizedAttendee>>();
 
             services.AddTransient<IAttendanceUnitOfWork, AttendanceUnitOfWork>();
             services.AddTransient<IEventUnitOfWork, EventUnitOfWork>();

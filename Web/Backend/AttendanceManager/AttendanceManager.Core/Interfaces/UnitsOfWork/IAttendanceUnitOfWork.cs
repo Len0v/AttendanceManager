@@ -9,6 +9,7 @@ namespace AttendanceManager.Core.Interfaces.UnitsOfWork
         IRepository<EventAttendee> EventAttendeesRepository { get; set; }
         IRepository<Event> EventsRepository { get; set; }
         IRepository<EventAuthorizedAttendee> EventAuthorizedAttendeesRepository { get; set; }
+        IRepository<CourseAuthorizedAttendee> CourseAuthorizedAttendeesRepository { get; set; }
         void SaveChanges();
     }
 }

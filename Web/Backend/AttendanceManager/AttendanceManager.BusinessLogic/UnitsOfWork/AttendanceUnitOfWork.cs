@@ -15,16 +15,20 @@ namespace AttendanceManager.BusinessLogic.UnitsOfWork
         public IRepository<EventAttendee> EventAttendeesRepository { get; set; }
         public IRepository<Event> EventsRepository { get; set; }
         public IRepository<EventAuthorizedAttendee> EventAuthorizedAttendeesRepository { get; set; }
+        public IRepository<CourseAuthorizedAttendee> CourseAuthorizedAttendeesRepository { get; set; }
 
         public AttendanceUnitOfWork(IRepository<Attendee> attendeesRepository, 
                IRepository<EventAttendee> eventAtendeesRepository,
                IRepository<Event> eventsRepository,
-               IRepository<EventAuthorizedAttendee> eventAuthorizedAttendees, IAttendanceManagerContext dbContext)
+               IRepository<EventAuthorizedAttendee> eventAuthorizedAttendees,
+               IRepository<CourseAuthorizedAttendee> courseAuthorizedAttendees,
+               IAttendanceManagerContext dbContext)
         {
             AttendeesRepository = attendeesRepository;
             EventsRepository = eventsRepository;
             EventAttendeesRepository = eventAtendeesRepository;
-            EventAuthorizedAttendeesRepository = eventAuthorizedAttendees; 
+            EventAuthorizedAttendeesRepository = eventAuthorizedAttendees;
+            CourseAuthorizedAttendeesRepository = courseAuthorizedAttendees;
             _contextScope = new ContextScope(dbContext);
         }
     
