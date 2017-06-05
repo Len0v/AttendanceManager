@@ -21,6 +21,7 @@ export class EventEditService {
   private lecturersApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/lecturers/';
   private saveEventApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/events/';
   private attendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendees/';
+  private attendeesListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/attendees/';
   private deleteUserFromAttendanceListApiUrl = 'http://attendancemanagerapi.azurewebsites.net/api/eventattendees';
 
   public getEventById(id): Observable<EventObject> {
@@ -43,6 +44,10 @@ export class EventEditService {
       .map(this.extractData);
   }
 
+  public getAttendeesList(): Observable<AttendeesListModel[]> {
+    return this.http.get(this.attendeesListApiUrl).map(this.extractData);
+  }
+
   public deleteUserFromAttendeeList(data, eventId): Observable<any> {
     let body = JSON.stringify({
       eventId: eventId,
@@ -55,6 +60,16 @@ export class EventEditService {
       body: body
     });
     return this.http.delete(this.deleteUserFromAttendanceListApiUrl, options)
+      .map(this.extractData);
+  }
+
+  public addUserToAttendeeList(data, eventId): Observable<any> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post(this.deleteUserFromAttendanceListApiUrl, { eventId: eventId, attendeeId: data.id }, options)
       .map(this.extractData);
   }
 
@@ -73,8 +88,8 @@ export class EventEditService {
       date: '',
       eventStatus: '',
       cycleIntervalWeekNumber: '',
-      isCyclical: '',
-      isRestricted: '',
+      isCyclical: false,
+      isRestricted: false,
       courseUnitId: null,
       courseUnit: this._fb.group({
         id: null,

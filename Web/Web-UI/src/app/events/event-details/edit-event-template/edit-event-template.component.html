@@ -92,6 +92,11 @@
                 </div>
               </div>
               <div fxLayout="row" class="event-details-panel-row" *ngIf="!editEnabled && eventDetailsForm.get('isCyclical').value">
+                <div fxFlex="50">
+                  <a class="event-details-panel-element-title">Cyclical: </a>
+                  <a *ngIf="event.isCyclical">Yes</a>
+                  <a *ngIf="!event.isCyclical">No</a>
+                </div>
                 <div fxFlex="50" *ngIf="!editEnabled">
                   <a class="event-details-panel-element-title">Every: </a>{{event.cycleIntervalWeekNumber}} week.
                 </div>
@@ -284,6 +289,29 @@
               <p class="event-details-accordion-title">Attendance list</p>
             </ng-template>
             <ng-template ngbPanelContent class="event-details-panel-template">
+              <div fxLayout="row" *ngIf="editEnabled" class="add-user-button-container">
+                <div fxFlex="30">
+                  <md-select placeholder="Select by name and surname" [(ngModel)]="selectedAttendee" [ngModelOptions]="{standalone: true}">
+                    <md-option *ngFor="let attendee of attendees" [value]="attendee">
+                      {{ attendee.name }} {{ attendee.surname }}
+                    </md-option>
+                  </md-select>
+                </div>
+                <div fxFlex="30">
+                  <md-select placeholder="Select by student number" [(ngModel)]="selectedAttendee" [ngModelOptions]="{standalone: true}">
+                    <md-option *ngFor="let attendee of attendees" [value]="attendee">
+                      {{ attendee.studentNumber }}
+                    </md-option>
+                  </md-select>
+                </div>
+                <div fxFlex="60"></div>
+                <div fxFlex="10">
+                  <button md-raised-button type="button" [disabled]="!selectedAttendee" (click)="addUser()" class="add-user-button">
+                    Add
+                  </button> 
+                </div>
+                <br/>
+              </div>
               <div fxLayout="row">
                 <div fxFlex="100">
                   <div class="custom-table-container">

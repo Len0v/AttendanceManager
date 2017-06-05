@@ -26,7 +26,7 @@ export class EventsExpiredListComponent implements OnInit {
   }
 
   showDetails(event) {
-    this.Router.navigate(['events/details/cyclical', event.id]);
+    this.Router.navigate(['events/details/expired', event.id]);
   }
 
   removeEvent(event) {

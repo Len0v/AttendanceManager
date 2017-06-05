@@ -13,6 +13,8 @@ import { EventDetailsEditDialogService } from "../../event-details-edit-dialog/e
 import { StorageService } from "../../../storage.service";
 import { MdDialog, MdDialogConfig } from '@angular/material';
 import { DialogConfig } from "../../event-details-edit-dialog/event-details-edit-dialog-config";
+import { AddUserModalWindowComponent } from "./add-user-modal/add-user-modal-window.component";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 /**
  * Created by Krzysztof Adamczak on 22.05.2017.
  */
@@ -25,7 +27,7 @@ import { DialogConfig } from "../../event-details-edit-dialog/event-details-edit
 export class EventTemplateEditComponent implements OnInit {
   constructor(private EventEditService: EventEditService, private ActivatedRoute: ActivatedRoute,
     private EventsService: EventsService, private EventDetailsEditDialogService: EventDetailsEditDialogService,
-    private StorageService: StorageService) {
+    private StorageService: StorageService, private modalService: NgbModal) {
     this.ActivatedRoute.params.subscribe(param => {
       this.eventId = +param['id'];
     });
@@ -38,6 +40,8 @@ export class EventTemplateEditComponent implements OnInit {
       this.EventEditService.getAttendanceListById(this.eventId).subscribe(res => this.attendeesList = res);
     }
 
+    this.EventEditService.getAttendeesList().subscribe(res => this.attendees = res);
+
     this.original_data = this.event;
     this.eventDetailsForm = this.EventEditService.createFormGroup();
     this.updateForm();
@@ -48,14 +52,22 @@ export class EventTemplateEditComponent implements OnInit {
   public eventDetailsForm: FormGroup;
   public courses: Course[];
   public lecturers: Lecturer[];
+  public attendees: AttendeesListModel[];
   public attendeesList: AttendeesListModel[];
   public newCourseUnit: Course;
   public newLecturerUnit: Lecturer;
   public editAllFutureEvents: boolean = false;
+  public selectedAttendee: AttendeesListModel;
 
   public modelDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
   public modelBeginTime: NgbTimeStruct = { hour: 0, minute: 0, second: 0 };
   public modelEndTime: NgbTimeStruct = { hour: 0, minute: 0, second: 0 };
+
+  public minDate: NgbDateStruct = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate()
+  };
 
   private eventId: number;
   private original_data: EventObject;
@@ -143,6 +155,12 @@ export class EventTemplateEditComponent implements OnInit {
       endTime: endTime,
       id: data.id
     }
+  }
+
+  addUser() {
+    this.EventEditService.addUserToAttendeeList(this.selectedAttendee, this.eventId).subscribe(res => console.log(res));
+    this.attendeesList.push(this.selectedAttendee);
+    this.selectedAttendee = null;
   }
 
   private updateForm() {

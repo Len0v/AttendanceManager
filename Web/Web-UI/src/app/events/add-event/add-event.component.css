@@ -1,0 +1,51 @@
+.form-container {
+    padding-top: 3em;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.form-row {
+    padding-top: 3em;
+}
+
+.next-date-label {
+  font-size: 16px;
+  padding-bottom: 0.5em;
+}
+
+.calendar-icon {
+  width: 1.2rem;
+  height: 1rem;
+  cursor: pointer;
+  margin-left: -0.5em;
+  margin-top: -0.3em;
+  font-size: 22px;
+}
+
+.calendar-icon-disabled {
+  width: 1.2rem;
+  height: 1rem;
+  margin-left: -0.5em;
+  margin-top: -0.3em;
+  font-size: 22px;
+}
+
+.label-text {
+  font-size: 16px;
+}
+
+.label-text-from {
+  padding-right: 0.5em;
+}
+
+.label-text-to {
+  padding-left: 1em;
+  padding-right: 0.5em;
+}
+
+.save-button {
+  background-color: dodgerblue;
+}
+
+.cancel-button {
+  background-color: deepskyblue;
+}
