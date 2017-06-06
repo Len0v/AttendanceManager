@@ -81,32 +81,70 @@
             </div>
           </ng-template>
         </ngb-panel>
+        <ngb-panel *ngIf="event.IsRestricted">
+          <ng-template ngbPanelTitle>
+            <p class="event-details-accordion-title">List of eligible participants</p>
+          </ng-template>
+          <ng-template ngbPanelContent class="event-details-panel-template">
+            <div fxLayout="row">
+              <div fxFlex="100">
+                <div class="custom-table-container">
+                  <table class="table table-striped table-hover custom-table">
+                    <thead class="thead-inverse">
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Pesel</th>
+                        <th>Student number</th>
+                        <th>Is student</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let user of eligibleParticipantsList; let i = index" class="custom-table-row">
+                        <th scope="row">{{i+1}}</th>
+                        <th>{{user.name}}</th>
+                        <th>{{user.surname}}</th>
+                        <th>{{user.pesel}}</th>
+                        <th>{{user.studentNumber}}</th>
+                        <th>
+                          <a *ngIf="user.isStudent">Yes</a>
+                          <a *ngIf="!user.isStudent">No</a>
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
         <ngb-panel>
           <ng-template ngbPanelTitle>
             <p class="event-details-accordion-title">Attendance list</p>
           </ng-template>
           <ng-template ngbPanelContent class="event-details-panel-template">
             <div fxLayout="row">
-                <div fxFlex="30">
-                  <md-select placeholder="Select by name and surname" [(ngModel)]="selectedAttendee" [ngModelOptions]="{standalone: true}">
-                    <md-option *ngFor="let attendee of attendees" [value]="attendee">
-                      {{ attendee.name }} {{ attendee.surname }}
-                    </md-option>
-                  </md-select>
-                </div>
-                <div fxFlex="30">
-                  <md-select placeholder="Select by student number" [(ngModel)]="selectedAttendee" [ngModelOptions]="{standalone: true}">
-                    <md-option *ngFor="let attendee of attendees" [value]="attendee">
-                      {{ attendee.studentNumber }}
-                    </md-option>
-                  </md-select>
-                </div>
-                <div fxFlex="60"></div>
-                <div fxFlex="10">
-                  <button md-raised-button type="button" [disabled]="!selectedAttendee" (click)="addUser()" class="add-user-button">
+              <div fxFlex="30">
+                <md-select placeholder="Select by name and surname" [(ngModel)]="selectedAttendee" [ngModelOptions]="{standalone: true}">
+                  <md-option *ngFor="let attendee of attendees" [value]="attendee">
+                    {{ attendee.name }} {{ attendee.surname }}
+                  </md-option>
+                </md-select>
+              </div>
+              <div fxFlex="30">
+                <md-select placeholder="Select by student number" [(ngModel)]="selectedAttendee" [ngModelOptions]="{standalone: true}">
+                  <md-option *ngFor="let attendee of attendees" [value]="attendee">
+                    {{ attendee.studentNumber }}
+                  </md-option>
+                </md-select>
+              </div>
+              <div fxFlex="60"></div>
+              <div fxFlex="10">
+                <button md-raised-button type="button" [disabled]="!selectedAttendee" (click)="addUser()" class="add-user-button">
                     Add
-                  </button> 
-                </div>
+                  </button>
+              </div>
             </div>
             <br />
             <div fxLayout="row">

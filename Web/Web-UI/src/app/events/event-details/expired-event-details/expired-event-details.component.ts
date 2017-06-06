@@ -18,6 +18,7 @@ export class ExpiredEventDetailsComponent implements OnInit {
   public attendeesList: AttendeesListModel[];
   public attendees: AttendeesListModel[];
   public selectedAttendee: AttendeesListModel;
+  public eligibleParticipantsList: AttendeesListModel[];
 
   constructor(private ActivatedRoute: ActivatedRoute, private EventsService: EventsService, private EventEditService: EventEditService) {
     this.ActivatedRoute.params.subscribe(param => {
@@ -25,6 +26,10 @@ export class ExpiredEventDetailsComponent implements OnInit {
       this.event = this.EventsService.findEventById(this.eventId);
       this.EventEditService.getAttendanceListById(this.eventId).subscribe(res => this.attendeesList = res);
       this.EventEditService.getAttendeesList().subscribe(res => this.attendees = res);
+
+      if (this.event.isRestricted) {
+        this.EventEditService.getEligibleParticipants(this.eventId, this.event.isCyclical).subscribe(res => this.eligibleParticipantsList = res);
+      }
     });
   }
 
