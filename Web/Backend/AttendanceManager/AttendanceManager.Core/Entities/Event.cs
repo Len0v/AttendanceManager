@@ -1,11 +1,29 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using AttendanceManager.Core.Interfaces.Entities;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace AttendanceManager.Core.Entities
 {
     public class Event : IEntity
     {
+        public Event()
+        {
+        }
+
+        public Event(Event otherEvent): this()
+        {
+            this.IsCyclical = otherEvent.IsCyclical;
+            this.Name = otherEvent.Name;
+            this.RoomId = otherEvent.RoomId;
+            this.TimeSlotId = otherEvent.TimeSlotId;
+            this.CourseUnitId = otherEvent.CourseUnitId;
+            this.LecturerId = otherEvent.LecturerId;
+            this.CycleIntervalWeekNumber = otherEvent.CycleIntervalWeekNumber;
+            this.IsRestricted = otherEvent.IsRestricted;
+        }
+
+
         [Column("EventId")]
         public int Id { get; set; }
         public Enums.Enums.EventStatus EventStatus { get; set; }

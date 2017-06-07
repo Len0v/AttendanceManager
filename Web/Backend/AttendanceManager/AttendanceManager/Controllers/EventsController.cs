@@ -66,10 +66,18 @@ namespace AttendanceManager.Controllers
         [HttpPost]
         public void Add([FromBody]EventWithAttendees newEvent)
         {
-            var eventId = _attendanceService.AddEvent(newEvent.Event);
-            if(newEvent.AuthorizedAttendeesIds != null && newEvent.AuthorizedAttendeesIds.Any())
+            if (newEvent.Event.IsCyclical)
             {
-                _attendanceService.AddEventAuthorizedAttendees(newEvent.AuthorizedAttendeesIds, eventId);
+                _attendanceService.AddCyclicalEvent(newEvent.Event,DateTime.Now.Date,newEvent.EventCycleEnd);
+            }
+
+            else
+            {
+                var eventId = _attendanceService.AddEvent(newEvent.Event);
+                if (newEvent.AuthorizedAttendeesIds != null && newEvent.AuthorizedAttendeesIds.Any())
+                {
+                    _attendanceService.AddEventAuthorizedAttendees(newEvent.AuthorizedAttendeesIds, eventId);
+                }
             }
         }
 

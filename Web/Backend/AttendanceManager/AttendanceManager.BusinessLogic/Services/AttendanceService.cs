@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection.Metadata;
 using System.Text;
 using AttendanceManager.Core.Entities;
 using AttendanceManager.Core.Interfaces.Services;
@@ -236,6 +237,26 @@ namespace AttendanceManager.BusinessLogic.Services
                 _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Add(temp);
             }
            
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
+        }
+
+        public bool AddCyclicalEvent(Event newEvent, DateTime cycleBegin, DateTime cycleEnd)
+        {
+            var currentDate = cycleBegin;
+            var eventList = new List<Event>();
+            var currentEvent = newEvent;
+            while (currentDate <= cycleEnd)
+            {
+                eventList.Add(currentEvent);
+                currentDate = currentDate.AddDays(7*newEvent.CycleIntervalWeekNumber.Value);
+                currentEvent = new Event(currentEvent);
+                currentEvent.Date = currentDate;
+            }
+            foreach (var eventVar in eventList)
+            {
+                _attendanceUnitOfWork.EventsRepository.Add(eventVar);
+            }
             _attendanceUnitOfWork.SaveChanges();
             return true;
         }

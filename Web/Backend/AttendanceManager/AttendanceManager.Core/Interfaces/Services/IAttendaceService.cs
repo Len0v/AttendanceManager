@@ -13,6 +13,7 @@ namespace AttendanceManager.Core.Interfaces.Services
         IEnumerable<Event> GetEventsForQuery(Expression<Func<Event, bool>> predicate);
         Event GetEvent(int eventId);
         int AddEvent(Event newEvent);
+        bool AddCyclicalEvent(Event newEvent,DateTime cycleBegin, DateTime cycleEnd);
         bool ModifyEvent(Event modifiedEvent);
         bool DeleteEvent(int id);
 

@@ -8,5 +8,6 @@ namespace AttendanceManager.Core.Entities
     {
         public Event Event { get; set; }
         public int [] AuthorizedAttendeesIds { get; set; }
+        public DateTime EventCycleEnd { get; set; }
     }
 }
