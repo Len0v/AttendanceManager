@@ -124,10 +124,6 @@ export class AddEventComponent implements OnInit {
     this.students.push(user);
   }
 
-  removeLecturer() {
-    this.newLecturerUnit = null;
-  }
-
   removeCourse() {
     this.newCourseUnit = null;
   }
