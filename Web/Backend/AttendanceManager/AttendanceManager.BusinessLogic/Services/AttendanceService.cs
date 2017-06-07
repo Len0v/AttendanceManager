@@ -201,11 +201,11 @@ namespace AttendanceManager.BusinessLogic.Services
             return true;
         }
 
-        public bool AddEventAuthorizedAttendees(IEnumerable<Attendee> attendees, int eventId)
+        public bool AddEventAuthorizedAttendees(IEnumerable<int> attendeesIds, int eventId)
         {
-            foreach (var attendee in attendees)
+            foreach (var attendeeId in attendeesIds)
             {
-                var temp = new EventAuthorizedAttendee {AttendeeId = attendee.Id, EventId = eventId};
+                var temp = new EventAuthorizedAttendee {AttendeeId = attendeeId, EventId = eventId};
                 _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Add(temp);
             }
            

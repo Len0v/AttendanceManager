@@ -67,9 +67,9 @@ namespace AttendanceManager.Controllers
         public void Add([FromBody]EventWithAttendees newEvent)
         {
             var eventId = _attendanceService.AddEvent(newEvent.Event);
-            if(newEvent.AuthorizedAttendees != null && newEvent.AuthorizedAttendees.Any())
+            if(newEvent.AuthorizedAttendeesIds != null && newEvent.AuthorizedAttendeesIds.Any())
             {
-                _attendanceService.AddEventAuthorizedAttendees(newEvent.AuthorizedAttendees, eventId);
+                _attendanceService.AddEventAuthorizedAttendees(newEvent.AuthorizedAttendeesIds, eventId);
             }
         }
 

@@ -7,6 +7,6 @@ namespace AttendanceManager.Core.Entities
     public class EventWithAttendees
     {
         public Event Event { get; set; }
-        public IEnumerable<Attendee> AuthorizedAttendees { get; set; }
+        public int [] AuthorizedAttendeesIds { get; set; }
     }
 }

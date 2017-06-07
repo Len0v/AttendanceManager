@@ -30,7 +30,7 @@ namespace AttendanceManager.Core.Interfaces.Services
 
         IEnumerable<Attendee> GetAuthorizedAttendeesForEvent(int eventId);
         bool AddEventAuthorizedAttendee(EventAuthorizedAttendee attendee);
-        bool AddEventAuthorizedAttendees(IEnumerable<Attendee> attendees, int eventId);
+        bool AddEventAuthorizedAttendees(IEnumerable<int> attendeesIds, int eventId);
         bool DeleteEventAuthorizedAttendee(EventAuthorizedAttendee attendee);
 
         IEnumerable<Attendee> GetAuthorizedAttendeesForCourse(int eventId);
