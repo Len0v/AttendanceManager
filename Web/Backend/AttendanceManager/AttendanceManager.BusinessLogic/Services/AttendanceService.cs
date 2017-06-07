@@ -42,11 +42,11 @@ namespace AttendanceManager.BusinessLogic.Services
             return GetEventsWithAllDependendEntities(_attendanceUnitOfWork.EventsRepository.Query(e => e.Id == eventId)).FirstOrDefault();
         }
 
-        public bool AddEvent(Event newEvent)
+        public int AddEvent(Event newEvent)
         {
-            _attendanceUnitOfWork.EventsRepository.Add(newEvent);
+            var result = _attendanceUnitOfWork.EventsRepository.Add(newEvent);
             _attendanceUnitOfWork.SaveChanges();
-            return true;
+            return result.Id;
         }
 
         public bool ModifyEvent(Event modifiedEvent)
@@ -197,6 +197,18 @@ namespace AttendanceManager.BusinessLogic.Services
         
             var eventAttendee = new EventAttendee {AttendeeId = user.Id, EventId = activeEvent.Id};
             _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
+            _attendanceUnitOfWork.SaveChanges();
+            return true;
+        }
+
+        public bool AddEventAuthorizedAttendees(IEnumerable<Attendee> attendees, int eventId)
+        {
+            foreach (var attendee in attendees)
+            {
+                var temp = new EventAuthorizedAttendee {AttendeeId = attendee.Id, EventId = eventId};
+                _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Add(temp);
+            }
+           
             _attendanceUnitOfWork.SaveChanges();
             return true;
         }

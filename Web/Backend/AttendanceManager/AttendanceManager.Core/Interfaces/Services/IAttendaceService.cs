@@ -12,7 +12,7 @@ namespace AttendanceManager.Core.Interfaces.Services
         IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end);
         IEnumerable<Event> GetEventsForQuery(Expression<Func<Event, bool>> predicate);
         Event GetEvent(int eventId);
-        bool AddEvent(Event newEvent);
+        int AddEvent(Event newEvent);
         bool ModifyEvent(Event modifiedEvent);
         bool DeleteEvent(int id);
 
@@ -30,6 +30,7 @@ namespace AttendanceManager.Core.Interfaces.Services
 
         IEnumerable<Attendee> GetAuthorizedAttendeesForEvent(int eventId);
         bool AddEventAuthorizedAttendee(EventAuthorizedAttendee attendee);
+        bool AddEventAuthorizedAttendees(IEnumerable<Attendee> attendees, int eventId);
         bool DeleteEventAuthorizedAttendee(EventAuthorizedAttendee attendee);
 
         IEnumerable<Attendee> GetAuthorizedAttendeesForCourse(int eventId);

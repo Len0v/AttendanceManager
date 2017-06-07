@@ -64,9 +64,13 @@ namespace AttendanceManager.Controllers
         }
 
         [HttpPost]
-        public void Add([FromBody]Event newEvent)
+        public void Add([FromBody]EventWithAttendees newEvent)
         {
-            _attendanceService.AddEvent(newEvent);
+            var eventId = _attendanceService.AddEvent(newEvent.Event);
+            if(newEvent.AuthorizedAttendees != null && newEvent.AuthorizedAttendees.Any())
+            {
+                _attendanceService.AddEventAuthorizedAttendees(newEvent.AuthorizedAttendees, eventId);
+            }
         }
 
         [HttpPut]
