@@ -133,8 +133,8 @@
                   <a class="event-details-panel-element-title">Next event date: </a>{{event.date | date: 'dd/MM/yyyy'}}
                 </div>
                 <div fxFlex="50">
-                  <a class="event-details-panel-element-title">Time:</a> {{event.timeSlot.beginTime | amUtc | amDateFormat:
-                  'HH:mm'}} - {{event.timeSlot.endTime | amUtc | amDateFormat: 'HH:mm'}}
+                  <a class="event-details-panel-element-title">Time:</a>
+                  {{event.timeSlot.beginTime}} - {{event.timeSlot.endTime}}
                 </div>
               </div>
               <div fxLayout="row" class="event-details-panel-row" *ngIf="editEnabled">
@@ -149,15 +149,25 @@
                   </div>
                 </div>
                 <div fxFlex="30"></div>
-                <div fxFlex="50" class="form-inline" formGroupName="timeSlot" *ngIf="event.eventStatus === 0">
+                <div fxShow.xl fxHide.lg fxHide.md fxHide.sm fxHide.xs  fxFlex="50" class="form-inline"
+                     formGroupName="timeSlot" *ngIf="event.eventStatus === 0">
                   <label class="label-text label-text-from">From: </label>
                   <ngb-timepicker [(ngModel)]="modelBeginTime" formControlName="beginTime"></ngb-timepicker>
                   <label class="label-text label-text-to">To: </label>
                   <ngb-timepicker [(ngModel)]="modelEndTime" formControlName="endTime"></ngb-timepicker>
                 </div>
+                <div fxHide.xl fxFlex="50" formGroupName="timeSlot" *ngIf="event.eventStatus === 0">
+                  <div class="form-inline" style="float: left;">
+                    <label class="label-text label-text-from">From: </label>
+                    <ngb-timepicker [(ngModel)]="modelBeginTime" formControlName="beginTime"></ngb-timepicker>
+                  </div>
+                  <div class="form-inline" style="float: left;">
+                    <label class="label-text label-text-to">To: </label>
+                    <ngb-timepicker [(ngModel)]="modelEndTime" formControlName="endTime"></ngb-timepicker>
+                  </div>
+                </div>
                 <div fxFlex="50" *ngIf="event.eventStatus === 1">
-                  <a class="event-details-panel-element-title">Time:</a> {{event.timeSlot.beginTime | amUtc | amDateFormat:
-                  'HH:mm'}} - {{event.timeSlot.endTime | amUtc | amDateFormat: 'HH:mm'}}
+                  <a class="event-details-panel-element-title">Time:</a> {{event.timeSlot.beginTime}} - {{event.timeSlot.endTime}}
                 </div>
               </div>
             </ng-template>
@@ -326,7 +336,7 @@
               <div fxLayout="row">
                 <div fxFlex="100">
                   <div class="custom-table-container">
-                    <table class="table table-striped table-hover custom-table">
+                    <table class="table table-striped table-hover table-fixed">
                       <thead class="thead-inverse">
                         <tr>
                           <th>#</th>

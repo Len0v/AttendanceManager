@@ -1,10 +1,11 @@
 .form-container {
-    padding-top: 3em;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
+  padding-top: 3em;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 700px;
 }
 
 .form-row {
-    padding-top: 3em;
+  padding-top: 3em;
 }
 
 .next-date-label {
@@ -48,4 +49,21 @@
 
 .cancel-button {
   background-color: deepskyblue;
+}
+
+.add-user-button-container {
+  padding-bottom: 1em;
+}
+
+.custom-table-container {
+  height: 1500px;
+}
+
+.add-user-button {
+  background-color: rgb(255, 153, 153);
+  width: 100%;
+}
+
+.custom-table-row th {
+  vertical-align: middle;
 }

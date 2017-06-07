@@ -1,5 +1,8 @@
 import {Course} from "./course.model";
 import {Lecturer} from "./lecturer.model";
+import {TimeSlot} from "./time-slot.model";
+import {Room} from "./room.model";
+
 export interface EventObject {
   id: number,
   name: string,
@@ -13,16 +16,7 @@ export interface EventObject {
   lecturerId: number,
   lecturer?: Lecturer,
   roomId: number,
-  room?: {
-    id: number,
-    name: string,
-    building: string
-  },
+  room?: Room,
   timeSlotId: number,
-  timeSlot: {
-    id: number,
-    dayOfWeek: string,
-    beginTime: string,
-    endTime: string
-  }
+  timeSlot: TimeSlot
 }

@@ -38,8 +38,7 @@
       <th>{{event.timeSlot.dayOfWeek}}</th>
       <th>{{event.date | date: 'dd/MM/yyyy'}}</th>
       <th>
-        {{event.timeSlot.beginTime | amUtc | amDateFormat: 'HH:mm'}} - {{event.timeSlot.endTime | amUtc | amDateFormat:
-        'HH:mm'}}
+        {{event.timeSlot.beginTime}} - {{event.timeSlot.endTime}}
       </th>
       <th class="events-list-buttons-container">
         <button md-raised-button (click)="showDetails(event)" style="background-color: aquamarine;">Show details

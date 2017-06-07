@@ -121,6 +121,9 @@ export class EventTemplateEditComponent implements OnInit {
   }
 
   saveEvent(model, valid) {
+    if(!valid){
+      return;
+    }
     const requestObject = this.createRequestModel(model);
     this.EventEditService.saveChangedEvent(this.eventId, requestObject).subscribe(res => {
       this.EventEditService.getEventById(this.eventId).subscribe(res => this.handleResponseAfterSave(res));

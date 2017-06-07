@@ -40,8 +40,8 @@
                 <a class="event-details-panel-element-title">Next event date: </a>{{event.date | date: 'dd/MM/yyyy'}}
               </div>
               <div fxFlex="50">
-                <a class="event-details-panel-element-title">Time:</a> {{event.timeSlot.beginTime | amUtc | amDateFormat:
-                'HH:mm'}} - {{event.timeSlot.endTime | amUtc | amDateFormat: 'HH:mm'}}
+                <a class="event-details-panel-element-title">Time:</a>
+                {{event.timeSlot.beginTime}} - {{event.timeSlot.endTime}}
               </div>
             </div>
           </ng-template>

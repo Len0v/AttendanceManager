@@ -18,9 +18,7 @@ export class EventsListComponent implements OnInit {
   events: EventObject[];
   config: MdDialogConfig = DialogConfig;
 
-  constructor(private EventsService: EventsService, private Router: Router, private MdDialog: MdDialog,
-    private EventDetailsEditDialogService: EventDetailsEditDialogService,
-    private storage: StorageService) {
+  constructor(private EventsService: EventsService, private Router: Router, private MdDialog: MdDialog) {
     this.events = [];
     this.EventsService.loadIncomingEvents().subscribe(incomingEvents => {
       this.events = this.events.concat(incomingEvents);
@@ -36,7 +34,6 @@ export class EventsListComponent implements OnInit {
   }
 
   showDetails(event) {
-    console.log(event);
     this.Router.navigate(['events/details', event.id]);
   }
 

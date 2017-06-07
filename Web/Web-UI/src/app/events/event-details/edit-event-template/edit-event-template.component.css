@@ -90,18 +90,12 @@
   vertical-align: middle;
 }
 
-.custom-table thead,
-.custom-table tbody {
-  width: 100% !important;
-  min-width: 100% !important;
-}
-
 .custom-table-container {
-  height: 50vh;
+  height: 1500px !important;
 }
 
 .table tbody {
-  overflow-y: auto;
+  overflow-y: scroll !important;
 }
 
 .events-list-buttons-container {

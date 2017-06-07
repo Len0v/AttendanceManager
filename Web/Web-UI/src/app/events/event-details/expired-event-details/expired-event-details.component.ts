@@ -14,7 +14,6 @@ import { EventEditService } from "../services/event-edit.service";
 export class ExpiredEventDetailsComponent implements OnInit {
   private eventId: number;
   public event: EventObject;
-  public editEnabled: Boolean = false;
   public attendeesList: AttendeesListModel[];
   public attendees: AttendeesListModel[];
   public selectedAttendee: AttendeesListModel;
@@ -36,10 +35,6 @@ export class ExpiredEventDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
-  enableEditMode() {
-    this.editEnabled = true;
-  }
-
   removeUserFromAttendeesList(data) {
     this.EventEditService.deleteUserFromAttendeeList(data, this.eventId).subscribe(() => {
       this.EventEditService.getAttendanceListById(this.eventId).subscribe(res => this.attendeesList = res);
@@ -47,9 +42,14 @@ export class ExpiredEventDetailsComponent implements OnInit {
   }
 
   addUser() {
-    this.EventEditService.addUserToAttendeeList(this.selectedAttendee, this.eventId).subscribe(res => console.log(res));
-    this.attendeesList.push(this.selectedAttendee);
-    this.selectedAttendee = null;
+    this.EventEditService.addUserToAttendeeList(this.selectedAttendee, this.eventId).subscribe(() =>
+    {
+      let index: number = this.attendees.indexOf(this.selectedAttendee);
+      if (index !== -1) {
+        this.attendees.splice(index, 1);
+      }
+      this.attendeesList.push(this.selectedAttendee);
+      this.selectedAttendee = null;
+    });
   }
-
 }
