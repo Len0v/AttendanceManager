@@ -9,7 +9,7 @@ namespace AttendanceManager.Core.Interfaces.Services
     public interface IAttendaceService
     {
         IEnumerable<Event> GetAllEvents();
-        IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end);
+        //IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end);
         IEnumerable<Event> GetEventsForQuery(Expression<Func<Event, bool>> predicate);
         Event GetEvent(int eventId);
         int AddEvent(Event newEvent);

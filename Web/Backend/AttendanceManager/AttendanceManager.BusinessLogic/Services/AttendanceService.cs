@@ -24,13 +24,13 @@ namespace AttendanceManager.BusinessLogic.Services
             return GetEventsWithAllDependendEntities(_attendanceUnitOfWork.EventsRepository.GetAll());
         }
         
-        public IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end)
-        {
-            //StrictMode - only events in which entire time slot is in given period
-            return GetEventsWithAllDependendEntities(
-                _attendanceUnitOfWork.EventsRepository.Query(
-                    e => e.TimeSlot.BeginTime >= begin && e.TimeSlot.EndTime <= end));
-        }
+        //public IEnumerable<Event> GetEventsForTimeRange(DateTime begin, DateTime end)
+        //{
+        //    //StrictMode - only events in which entire time slot is in given period
+        //    return GetEventsWithAllDependendEntities(
+        //        _attendanceUnitOfWork.EventsRepository.Query(
+        //            e => e.TimeSlot.BeginTime >= begin && e.TimeSlot.EndTime <= end));
+        //}
 
         public IEnumerable<Event> GetEventsForQuery(Expression<Func<Event, bool>> predicate)
         {

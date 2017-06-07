@@ -9,9 +9,10 @@ using AttendanceManager.Core.Enums;
 namespace AttendanceManager.DataAccessLayer.Migrations
 {
     [DbContext(typeof(AttendanceManagerContext))]
-    partial class AttendanceManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20170607183456_ChangeTimeSlot")]
+    partial class ChangeTimeSlot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

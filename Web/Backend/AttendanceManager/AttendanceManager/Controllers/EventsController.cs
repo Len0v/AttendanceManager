@@ -27,11 +27,11 @@ namespace AttendanceManager.Controllers
             return _attendanceService.GetAllEvents();
         }
 
-        [Route("TimeRange")]
-        public IEnumerable<Event> TimeRange(DateTime begin, DateTime end)
-        {
-            return _attendanceService.GetEventsForTimeRange(begin, end);
-        }
+        //[Route("TimeRange")]
+        //public IEnumerable<Event> TimeRange(DateTime begin, DateTime end)
+        //{
+        //    return _attendanceService.GetEventsForTimeRange(begin, end);
+        //}
 
         [Route("Incoming")]
         public IEnumerable<Event> Incoming()

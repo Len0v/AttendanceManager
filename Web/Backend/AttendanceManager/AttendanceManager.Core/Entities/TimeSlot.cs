@@ -8,8 +8,8 @@ namespace AttendanceManager.Core.Entities
     {
         [Column("TimeSlotId")]
         public int Id { get; set; }
-        public DateTime BeginTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public TimeSpan BeginTime { get; set; }
+        public TimeSpan EndTime { get; set; }
         public string DayOfWeek { get; set; }
     }
 }
