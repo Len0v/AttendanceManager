@@ -24,7 +24,7 @@ namespace AttendanceManager.Controllers
         [HttpGet]
         public IEnumerable<Event> Get()
         {
-            return _attendanceService.GetAllEvents();
+            return _attendanceService.GetAllEvents().OrderBy(e => e.Date);
         }
 
         //[Route("TimeRange")]
@@ -36,25 +36,25 @@ namespace AttendanceManager.Controllers
         [Route("Incoming")]
         public IEnumerable<Event> Incoming()
         {
-            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Incoming);
+            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Incoming).OrderBy(e => e.Date);
         }
 
         [Route("Active")]
         public IEnumerable<Event> Active()
         {
-            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Active);
+            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Active).OrderBy(e => e.Date);
         }
 
         [Route("Expired")]
         public IEnumerable<Event> Expired()
         {
-            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Expired);
+            return _attendanceService.GetEventsForQuery(e => e.EventStatus == Enums.EventStatus.Expired).OrderBy(e => e.Date);
         }
 
         [Route("Filter")]
         public IEnumerable<Event> Filter(string filter)
         {
-            return _attendanceService.GetEventsForQuery(e => e.Name.Contains(filter));
+            return _attendanceService.GetEventsForQuery(e => e.Name.Contains(filter)).OrderBy(e => e.Date);
         }
 
         [HttpGet("{id:int}")]

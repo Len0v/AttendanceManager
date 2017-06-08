@@ -22,7 +22,7 @@ namespace AttendanceManager.Controllers
         [HttpGet("{id:int}")]
         public IEnumerable<Attendee> Get(int id)
         {
-            return _attendaceService.GetAuthorizedAttendeesForEvent(id);
+            return _attendaceService.GetAuthorizedAttendeesForEvent(id).OrderBy(a => a.Surname);
         }
 
         [HttpPost]

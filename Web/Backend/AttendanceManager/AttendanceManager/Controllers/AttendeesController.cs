@@ -24,7 +24,7 @@ namespace AttendanceManager.Controllers
         [HttpGet]
         public IEnumerable<Attendee> Get()
         {
-            return _attendanceService.GetAllAttendees();
+            return _attendanceService.GetAllAttendees().OrderBy(a => a.Surname);
         }
 
         // GET api/values/5

@@ -23,7 +23,7 @@ namespace AttendanceManager.Controllers
         [HttpGet]
         public IEnumerable<Room> Get()
         {
-            return _eventsService.GetRooms();
+            return _eventsService.GetRooms().OrderBy(r => r.Building);
         }
 
         [HttpGet("{id}")]

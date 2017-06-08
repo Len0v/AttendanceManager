@@ -1,0 +1,35 @@
+\def\TytulPolski    {Attendance Manager}
+\def\NazwaSys {Attendance Manager}
+
+\def\Student     {Jakub Piotr\\ Wojciech Agaciński\\ Krzysztof Adamczak}
+
+%Kierunek:
+\def\Kierunek {Informatyka}
+ 
+%Specjalnosc:
+\def\Specjalnosc {Technologie informatyczne}
+% \def\Specjalnosc {Bezpieczeństwo systemów informatycznych} 
+
+%Poziom studiów: 
+\def\PoziomStudiow {I stopnia}
+%\def\PoziomStudiow {II stopnia}
+
+%Forma studiów:
+\def\FormaStudiow {stacjonarne}
+\AtBeginDocument{
+    \renewcommand*{\tablename}{Tabela}
+    \renewcommand*{\figurename}{Rys.} 
+}
+
+% Jeżeli kody programów zawierają polskie litery należy dodać odpowiedni znak poniżej
+\lstset{literate=%
+    {ż}{{\.z}}1
+    {ą}{{\c{a}}}1
+    {ę}{{\c{e}}}1
+		{ó}{{\'o}}1
+		{ć}{{\'c}}1
+		{ś}{{\'s}}1
+}
+        
+
+
