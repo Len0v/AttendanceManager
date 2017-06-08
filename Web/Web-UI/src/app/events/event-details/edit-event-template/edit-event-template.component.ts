@@ -15,8 +15,8 @@ import { MdDialog, MdDialogConfig } from '@angular/material';
 import { DialogConfig } from "../../event-details-edit-dialog/event-details-edit-dialog-config";
 import { AddUserModalWindowComponent } from "./add-user-modal/add-user-modal-window.component";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {TimeSlot} from "../../events.model/time-slot.model";
-import {Room} from "../../events.model/room.model";
+import { TimeSlot } from "../../events.model/time-slot.model";
+import { Room } from "../../events.model/room.model";
 /**
  * Created by Krzysztof Adamczak on 22.05.2017.
  */
@@ -34,11 +34,18 @@ export class EventTemplateEditComponent implements OnInit {
       this.eventId = +param['id'];
     });
 
+    this.event = this.EventsService.findEventById(this.eventId);
     this.EventEditService.getCourseUnits().subscribe(courses => this.courses = courses);
     this.EventEditService.getLecturers().subscribe(lecturers => this.lecturers = lecturers);
-    this.EventEditService.getTimeSlots().subscribe(res => this.timeSlots = res);
-    this.EventEditService.getRooms().subscribe(res => this.rooms = res);
-    this.event = this.EventsService.findEventById(this.eventId);
+    this.EventEditService.getTimeSlots().subscribe(res => {
+      this.timeSlots = res
+      this.selectedTimeSlot = this.event.timeSlotId;
+    });
+    this.EventEditService.getRooms().subscribe(res => {
+      this.rooms = res
+      this.selectedRoom = this.event.roomId;
+    });
+    this.modelDate = this.event.date.slice(0, 10);
 
     if (this.event.isRestricted) {
       this.EventEditService.getEligibleParticipants(this.eventId, this.event.isCyclical).subscribe(res => this.eligibleParticipantsList = res);
@@ -69,25 +76,14 @@ export class EventTemplateEditComponent implements OnInit {
   public selectedParticipant: AttendeesListModel;
   public timeSlots: TimeSlot[] = [];
   public rooms: Room[] = [];
-  public selectedTimeSlot: TimeSlot = null;
-  public selectedRoom: Room = null;
-
-  public modelDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
-  public modelBeginTime: NgbTimeStruct = { hour: 0, minute: 0, second: 0 };
-  public modelEndTime: NgbTimeStruct = { hour: 0, minute: 0, second: 0 };
-
-  public minDate: NgbDateStruct = {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    day: new Date().getDate()
-  };
-
+  public selectedTimeSlot = null;
+  public selectedRoom = null;
+  public modelDate: String;
   private eventId: number;
   private original_data: EventObject;
   private config: MdDialogConfig = DialogConfig;
 
   ngOnInit() {
-    this.updateDateAndTime();
   }
 
   enableEditMode() {
@@ -105,9 +101,9 @@ export class EventTemplateEditComponent implements OnInit {
     this.event = this.original_data;
     this.updateForm();
     this.editEnabled = false;
-    this.updateDateAndTime();
-    this.selectedRoom = null;
-    this.selectedTimeSlot = null;
+    this.modelDate = this.original_data.date.slice(0, 10);;
+    this.selectedRoom = this.original_data.room;
+    this.selectedTimeSlot = this.original_data.timeSlot;
   }
 
   courseUnitChanged() {
@@ -118,12 +114,6 @@ export class EventTemplateEditComponent implements OnInit {
     this.eventDetailsForm.patchValue({ lecturer: this.newLecturerUnit });
   }
 
-  private updateDateAndTime() {
-    this.modelDate = this.EventEditService.createDate(new Date(this.event.date));
-    this.modelBeginTime = this.EventEditService.createBeginTime(new Date(this.event.timeSlot.beginTime));
-    this.modelEndTime = this.EventEditService.createEndTime(new Date(this.event.timeSlot.endTime));
-  }
-
   removeUserFromAttendeesList(data) {
     this.EventEditService.deleteUserFromAttendeeList(data, this.eventId).subscribe(() => {
       this.EventEditService.getAttendanceListById(this.eventId).subscribe(res => this.attendeesList = res);
@@ -131,9 +121,7 @@ export class EventTemplateEditComponent implements OnInit {
   }
 
   saveEvent(model, valid) {
-    console.log(this.selectedRoom);
-    console.log(this.selectedTimeSlot);
-    if(!valid || !this.selectedRoom || !this.selectedTimeSlot){
+    if (!valid || !this.selectedRoom || !this.selectedTimeSlot) {
       return;
     }
 
@@ -149,12 +137,11 @@ export class EventTemplateEditComponent implements OnInit {
     this.event = response;
     this.original_data = response;
     this.updateForm();
-    this.updateDateAndTime();
     this.editEnabled = false;
   }
 
   createRequestModel(model) {
-    model.date = this.modelDate.year + "-" + this.modelDate.month + "-" + this.modelDate.day + "T00:00:00";
+    model.date = this.modelDate + "T00:00:00";
 
     model.courseUnitId = model.courseUnit.id;
     delete model.courseUnit;
@@ -164,10 +151,9 @@ export class EventTemplateEditComponent implements OnInit {
     delete model.room;
     delete model.timeSlot;
 
-    model.timeSlotId = this.selectedTimeSlot.id;
-    model.roomId = this.selectedRoom.id;
+    model.timeSlotId = this.selectedTimeSlot;
+    model.roomId = this.selectedRoom;
 
-    console.log(model);
     return model;
   }
 

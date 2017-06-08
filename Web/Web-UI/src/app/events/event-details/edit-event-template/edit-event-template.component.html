@@ -18,8 +18,7 @@
     <div fxFlex="60">
       <div fxLayout="row">
         <div fxFlex="20">
-          <button md-raised-button type="submit" [disabled]="!eventDetailsForm.dirty && !editEnabled"
-                  class="save-button">
+          <button md-raised-button type="submit" [disabled]="!editEnabled" class="save-button">
             Save
           </button>
         </div>
@@ -30,8 +29,7 @@
         </div>
         <div fxFlex="50"></div>
         <div fxFlex="10">
-          <button md-raised-button type="button" [disabled]="editEnabled" class="edit-button"
-                  (click)="enableEditMode()">
+          <button md-raised-button type="button" [disabled]="editEnabled" class="edit-button" (click)="enableEditMode()">
             Edit
           </button>
         </div>
@@ -93,8 +91,7 @@
                   </md-checkbox>
                 </div>
               </div>
-              <div fxLayout="row" class="event-details-panel-row"
-                   *ngIf="!editEnabled && eventDetailsForm.get('isCyclical').value">
+              <div fxLayout="row" class="event-details-panel-row" *ngIf="!editEnabled && eventDetailsForm.get('isCyclical').value">
                 <div fxFlex="50">
                   <a class="event-details-panel-element-title">Cyclical: </a>
                   <a *ngIf="event.isCyclical">Yes</a>
@@ -105,32 +102,25 @@
                 </div>
                 <div fxFlex="50" *ngIf="editEnabled && event.eventStatus === 0">
                   <md-input-container style="width: 160px;">
-                    <input type="number" mdInput placeholder="Every ... week" min="1"
-                           formControlName="cycleIntervalWeekNumber">
+                    <input type="number" mdInput placeholder="Every ... week" min="1" formControlName="cycleIntervalWeekNumber">
                   </md-input-container>
                 </div>
               </div>
               <div fxLayout="row" class="event-details-panel-row" *ngIf="editEnabled">
-                <div fxFlex="50" *ngIf="event.eventStatus === 0">
-                  <md-checkbox color="primary" formControlName="isCyclical">
+                <div fxFlex="50">
+                  <md-checkbox color="primary" [disabled]="event.eventStatus === 1" formControlName="isCyclical" [checked]="isCyclical">
                     Cyclical
                   </md-checkbox>
                 </div>
-                <div fxFlex="50" *ngIf="event.eventStatus === 1">
-                  <md-checkbox color="primary" disabled [checked]="isCyclical">
-                    Cyclical
-                  </md-checkbox>
-                </div>
-                <div fxFlex="50" *ngIf="eventDetailsForm.get('isCyclical').value && event.eventStatus === 0">
+                <div fxFlex="50" *ngIf="eventDetailsForm.get('isCyclical').value && eventDetailsForm.get('eventStatus').value === 0">
                   <md-input-container style="width: 100%;">
-                    <input type="number" mdInput placeholder="Every ... week" value="{{event.cycleIntervalWeekNumber}}"
-                           min="1" formControlName="cycleIntervalWeekNumber">
+                    <input type="number" mdInput placeholder="Every ... week" [value]="eventDetailsForm.get('cycleIntervalWeekNumber').value"
+                      min="1" formControlName="cycleIntervalWeekNumber">
                   </md-input-container>
                 </div>
-                <div fxFlex="50" *ngIf="eventDetailsForm.get('isCyclical').value && event.eventStatus === 1">
+                <div fxFlex="50" *ngIf="eventDetailsForm.get('isCyclical').value && eventDetailsForm.get('eventStatus').value === 1">
                   <md-input-container style="width: 100%;">
-                    <input type="number" mdInput placeholder="Every ... week" value="{{event.cycleIntervalWeekNumber}}"
-                           disabled value="{{cycleIntervalWeekNumber}}">
+                    <input type="number" mdInput placeholder="Every ... week" [value]="event.cycleIntervalWeekNumber" min="1" disabled>
                   </md-input-container>
                 </div>
               </div>
@@ -139,34 +129,24 @@
                   <a class="event-details-panel-element-title">Next event date: </a>{{event.date | date: 'dd/MM/yyyy'}}
                 </div>
                 <div fxFlex="50">
-                  <a class="event-details-panel-element-title">Time:</a>
-                  {{event.timeSlot.beginTime}} - {{event.timeSlot.endTime}}
+                  <a class="event-details-panel-element-title">Time:</a> {{event.timeSlot.beginTime}} - {{event.timeSlot.endTime}}
                 </div>
               </div>
               <div fxLayout="row" class="event-details-panel-row" *ngIf="editEnabled">
-                <div fxFlex="20" *ngIf="event.eventStatus === 0 || event.eventStatus === 1">
-                  <label class="next-date-label">Next event date: </label>
-                  <div class="input-group">
-                    <input class="form-control" name="data" [(ngModel)]="modelDate" ngbDatepicker
-                           #datePicker="ngbDatepicker" [minDate]="minDate"
-                           [ngModelOptions]="{standalone: true}">
-                    <div class="input-group-addon" (click)="datePicker.toggle()">
-                      <i class="material-icons calendar-icon">perm_contact_calendar</i>
-                    </div>
-                  </div>
+                <div fxFlex="100">
+                  <md-input-container style="width: 100%;">
+                    <input type="date" mdInput placeholder="Next event date" [(ngModel)]="modelDate" [ngModelOptions]="{standalone: true}"
+                    [disabled]="eventDetailsForm.get('eventStatus').value === 1">
+                  </md-input-container>
                 </div>
-                <div fxFlex="30"></div>
-                <div fxFlex="50" formGroupName="timeSlot" *ngIf="event.eventStatus === 0">
-                  <md-select placeholder="Time slot" style="width: 100%;" [(ngModel)]="selectedTimeSlot"
-                             [ngModelOptions]="{standalone: true}" required>
-                    <md-option *ngFor="let timeSlot of timeSlots" [value]="timeSlot">{{timeSlot.beginTime}} -
-                      {{timeSlot.endTime}}
+              </div>
+              <div fxLayout="row" class="event-details-panel-row" *ngIf="editEnabled">
+                <div fxFlex="100" formGroupName="timeSlot">
+                  <md-select placeholder="Time slot" style="width: 100%;" [(ngModel)]="selectedTimeSlot" [ngModelOptions]="{standalone: true}"
+                    required [disabled]="event.eventStatus === 1">
+                    <md-option *ngFor="let timeSlot of timeSlots" [value]="timeSlot.id">{{timeSlot.beginTime}} - {{timeSlot.endTime}}
                     </md-option>
                   </md-select>
-                </div>
-                <div fxFlex="50" *ngIf="event.eventStatus === 1">
-                  <a class="event-details-panel-element-title">Time:</a> {{event.timeSlot.beginTime}} -
-                  {{event.timeSlot.endTime}}
                 </div>
               </div>
               <div fxLayout="row" class="event-details-panel-row" *ngIf="!editEnabled">
@@ -174,12 +154,11 @@
                   <a class="event-details-panel-element-title">Room: </a>{{event.room.name}} in {{event.room.building}}
                 </div>
               </div>
-              <div fxLayout="row" class="event-details-panel-row" *ngIf="editEnabled"
-                   style="padding-top: 2em;" formGroupName="room">
+              <div fxLayout="row" class="event-details-panel-row" *ngIf="editEnabled" style="padding-top: 2em;" formGroupName="room">
                 <div fxFlex="100">
-                  <md-select placeholder="Room" style="width: 100%;" [(ngModel)]="selectedRoom"
-                             [ngModelOptions]="{standalone: true}" required>
-                    <md-option *ngFor="let room of rooms" [value]="room">{{room.name}} in {{room.building}}</md-option>
+                  <md-select placeholder="Room" style="width: 100%;" [disabled]="event.eventStatus === 1" [(ngModel)]="selectedRoom" [ngModelOptions]="{standalone: true}"
+                    required>
+                    <md-option *ngFor="let room of rooms" [value]="room.id">{{room.name}} in {{room.building}}</md-option>
                   </md-select>
                 </div>
               </div>
@@ -207,8 +186,7 @@
             <ng-template ngbPanelContent class="event-details-panel-template">
               <div fxLayout="row" *ngIf="editEnabled && event.eventStatus === 0">
                 <div fxFlex="50">
-                  <md-select placeholder="Course" style="width: 100%;" [(ngModel)]="newCourseUnit"
-                             [ngModelOptions]="{standalone: true}" (change)="courseUnitChanged()">
+                  <md-select placeholder="Course" style="width: 100%;" [(ngModel)]="newCourseUnit" [ngModelOptions]="{standalone: true}" (change)="courseUnitChanged()">
                     <md-option *ngFor="let course of courses" [value]="course">{{course.course.courseName}}
                     </md-option>
                   </md-select>
@@ -217,17 +195,15 @@
                   <div fxLayout="row">
                     <div fxFlex="50"></div>
                     <div fxFlex="50">
-                      <button md-raised-button type="button" [disabled]="!eventDetailsForm.get('courseUnit.id').value"
-                              (click)="removeCourse()"
-                              class="add-user-button">
+                      <button md-raised-button type="button" [disabled]="!eventDetailsForm.get('courseUnit.id').value" (click)="removeCourse()"
+                        class="add-user-button">
                         Remove
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div fxLayout="row" *ngIf="editEnabled && eventDetailsForm.get('courseUnit.id').value"
-                   class="event-details-panel-row" formGroupName="course">
+              <div fxLayout="row" *ngIf="editEnabled && eventDetailsForm.get('courseUnit.id').value" class="event-details-panel-row" formGroupName="course">
                 <div fxFlex="50">
                   <md-input-container style="width: 100%;">
                     <input mdInput placeholder="Name" formControlName="courseName">
@@ -244,8 +220,7 @@
                   <a class="event-details-panel-element-title">Course total hours: </a><a *ngIf="event.courseUnit">{{event.courseUnit.courseType.hoursNumber}}</a>
                 </div>
               </div>
-              <div fxLayout="row" class="event-detail-panel-row"
-                   *ngIf="editEnabled && eventDetailsForm.get('courseUnit.id').value" formGroupName="courseType">
+              <div fxLayout="row" class="event-detail-panel-row" *ngIf="editEnabled && eventDetailsForm.get('courseUnit.id').value" formGroupName="courseType">
                 <div fxFlex="50">
                   <md-input-container style="width: 100%;">
                     <input mdInput placeholder="Course total hours" formControlName="hoursNumber">
@@ -276,17 +251,14 @@
             <ng-template ngbPanelContent class="event-details-panel-template">
               <div fxLayout="row">
                 <div fxFlex="100">
-                  <md-select placeholder="Lecturer" style="width: 100%;" [(ngModel)]="newLecturerUnit"
-                             [ngModelOptions]="{standalone: true}"
-                             (change)="lecturerChanged()">
-                    <md-option *ngFor="let lecturer of lecturers" [value]="lecturer">{{lecturer.name}}
-                      {{lecturer.surname}}
+                  <md-select placeholder="Lecturer" style="width: 100%;" [(ngModel)]="newLecturerUnit" [ngModelOptions]="{standalone: true}"
+                    (change)="lecturerChanged()">
+                    <md-option *ngFor="let lecturer of lecturers" [value]="lecturer">{{lecturer.name}} {{lecturer.surname}}
                     </md-option>
                   </md-select>
                 </div>
               </div>
-              <div fxLayout="row" *ngIf="eventDetailsForm.get('lecturer.id').value" class="event-details-panel-row"
-                   formGroupName="lecturer">
+              <div fxLayout="row" *ngIf="eventDetailsForm.get('lecturer.id').value" class="event-details-panel-row" formGroupName="lecturer">
                 <div fxFlex="50">
                   <md-input-container style="width: 100%;">
                     <input mdInput placeholder="Name" formControlName="name">
@@ -300,23 +272,21 @@
               </div>
             </ng-template>
           </ngb-panel>
-          <ngb-panel *ngIf="event.isRestricted">
+          <ngb-panel *ngIf="eventDetailsForm.get('isRestricted').value">
             <ng-template ngbPanelTitle>
               <p class="event-details-accordion-title">List of eligible participants</p>
             </ng-template>
             <ng-template ngbPanelContent class="event-details-panel-template">
               <div fxLayout="row" *ngIf="event.isRestricted && editEnabled" class="add-user-button-container">
                 <div fxFlex="30">
-                  <md-select placeholder="Select by name and surname" [(ngModel)]="selectedParticipant"
-                             [ngModelOptions]="{standalone: true}">
+                  <md-select placeholder="Select by name and surname" [(ngModel)]="selectedParticipant" [ngModelOptions]="{standalone: true}">
                     <md-option *ngFor="let attendee of attendees" [value]="attendee">
                       {{ attendee.name }} {{ attendee.surname }}
                     </md-option>
                   </md-select>
                 </div>
                 <div fxFlex="30">
-                  <md-select placeholder="Select by student number" [(ngModel)]="selectedParticipant"
-                             [ngModelOptions]="{standalone: true}">
+                  <md-select placeholder="Select by student number" [(ngModel)]="selectedParticipant" [ngModelOptions]="{standalone: true}">
                     <md-option *ngFor="let attendee of attendees" [value]="attendee">
                       {{ attendee.studentNumber }}
                     </md-option>
@@ -324,8 +294,7 @@
                 </div>
                 <div fxFlex="60"></div>
                 <div fxFlex="10">
-                  <button md-raised-button type="button" [disabled]="!selectedParticipant"
-                          (click)="addNewEligibleParticipant()" class="add-user-button">
+                  <button md-raised-button type="button" [disabled]="!selectedParticipant" (click)="addNewEligibleParticipant()" class="add-user-button">
                     Add
                   </button>
                 </div>
@@ -336,34 +305,33 @@
                   <div class="custom-table-container">
                     <table class="table table-striped table-hover table-fixed">
                       <thead class="thead-inverse">
-                      <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Pesel</th>
-                        <th>Student number</th>
-                        <th>Is student</th>
-                        <th *ngIf="event.isRestricted && editEnabled"></th>
-                      </tr>
+                        <tr>
+                          <th>#</th>
+                          <th>Name</th>
+                          <th>Surname</th>
+                          <th>Pesel</th>
+                          <th>Student number</th>
+                          <th>Is student</th>
+                          <th *ngIf="event.isRestricted && editEnabled"></th>
+                        </tr>
                       </thead>
                       <tbody>
-                      <tr *ngFor="let user of eligibleParticipantsList; let i = index" class="custom-table-row">
-                        <th scope="row">{{i+1}}</th>
-                        <th>{{user.name}}</th>
-                        <th>{{user.surname}}</th>
-                        <th>{{user.pesel}}</th>
-                        <th>{{user.studentNumber}}</th>
-                        <th>
-                          <a *ngIf="user.isStudent">Yes</a>
-                          <a *ngIf="!user.isStudent">No</a>
-                        </th>
-                        <th *ngIf="event.isRestricted && editEnabled" class="events-list-buttons-container">
-                          <button md-raised-button type="button" (click)="removeUserFromAttendeesList(user)"
-                                  style="background-color: rgb(255, 153, 153);">
+                        <tr *ngFor="let user of eligibleParticipantsList; let i = index" class="custom-table-row">
+                          <th scope="row">{{i+1}}</th>
+                          <th>{{user.name}}</th>
+                          <th>{{user.surname}}</th>
+                          <th>{{user.pesel}}</th>
+                          <th>{{user.studentNumber}}</th>
+                          <th>
+                            <a *ngIf="user.isStudent">Yes</a>
+                            <a *ngIf="!user.isStudent">No</a>
+                          </th>
+                          <th *ngIf="event.isRestricted && editEnabled" class="events-list-buttons-container">
+                            <button md-raised-button type="button" (click)="removeUserFromAttendeesList(user)" style="background-color: rgb(255, 153, 153);">
                             Remove
                           </button>
-                        </th>
-                      </tr>
+                          </th>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -378,16 +346,14 @@
             <ng-template ngbPanelContent class="event-details-panel-template">
               <div fxLayout="row" *ngIf="event.eventStatus === 1" class="add-user-button-container">
                 <div fxFlex="30">
-                  <md-select placeholder="Select by name and surname" [(ngModel)]="selectedAttendee"
-                             [ngModelOptions]="{standalone: true}">
+                  <md-select placeholder="Select by name and surname" [(ngModel)]="selectedAttendee" [ngModelOptions]="{standalone: true}">
                     <md-option *ngFor="let attendee of attendees" [value]="attendee">
                       {{ attendee.name }} {{ attendee.surname }}
                     </md-option>
                   </md-select>
                 </div>
                 <div fxFlex="30">
-                  <md-select placeholder="Select by student number" [(ngModel)]="selectedAttendee"
-                             [ngModelOptions]="{standalone: true}">
+                  <md-select placeholder="Select by student number" [(ngModel)]="selectedAttendee" [ngModelOptions]="{standalone: true}">
                     <md-option *ngFor="let attendee of attendees" [value]="attendee">
                       {{ attendee.studentNumber }}
                     </md-option>
@@ -395,8 +361,7 @@
                 </div>
                 <div fxFlex="60"></div>
                 <div fxFlex="10">
-                  <button md-raised-button type="button" [disabled]="!selectedAttendee"
-                          (click)="addUserToAttendeesList()" class="add-user-button">
+                  <button md-raised-button type="button" [disabled]="!selectedAttendee" (click)="addUserToAttendeesList()" class="add-user-button">
                     Add
                   </button>
                 </div>
@@ -407,34 +372,33 @@
                   <div class="custom-table-container">
                     <table class="table table-striped table-hover custom-table">
                       <thead class="thead-inverse">
-                      <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Pesel</th>
-                        <th>Student number</th>
-                        <th>Is student</th>
-                        <th *ngIf="event.eventStatus === 1"></th>
-                      </tr>
+                        <tr>
+                          <th>#</th>
+                          <th>Name</th>
+                          <th>Surname</th>
+                          <th>Pesel</th>
+                          <th>Student number</th>
+                          <th>Is student</th>
+                          <th *ngIf="event.eventStatus === 1"></th>
+                        </tr>
                       </thead>
                       <tbody>
-                      <tr *ngFor="let user of attendeesList; let i = index" class="custom-table-row">
-                        <th scope="row">{{i+1}}</th>
-                        <th>{{user.name}}</th>
-                        <th>{{user.surname}}</th>
-                        <th>{{user.pesel}}</th>
-                        <th>{{user.studentNumber}}</th>
-                        <th>
-                          <a *ngIf="user.isStudent">Yes</a>
-                          <a *ngIf="!user.isStudent">No</a>
-                        </th>
-                        <th *ngIf="event.eventStatus === 1" class="events-list-buttons-container">
-                          <button md-raised-button type="button" (click)="removeUserFromAttendeesList(user)"
-                                  style="background-color: rgb(255, 153, 153);">
+                        <tr *ngFor="let user of attendeesList; let i = index" class="custom-table-row">
+                          <th scope="row">{{i+1}}</th>
+                          <th>{{user.name}}</th>
+                          <th>{{user.surname}}</th>
+                          <th>{{user.pesel}}</th>
+                          <th>{{user.studentNumber}}</th>
+                          <th>
+                            <a *ngIf="user.isStudent">Yes</a>
+                            <a *ngIf="!user.isStudent">No</a>
+                          </th>
+                          <th *ngIf="event.eventStatus === 1" class="events-list-buttons-container">
+                            <button md-raised-button type="button" (click)="removeUserFromAttendeesList(user)" style="background-color: rgb(255, 153, 153);">
                             Remove
                           </button>
-                        </th>
-                      </tr>
+                          </th>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
