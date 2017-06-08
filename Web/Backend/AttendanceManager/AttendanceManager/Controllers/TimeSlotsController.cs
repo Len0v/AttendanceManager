@@ -23,7 +23,7 @@ namespace AttendanceManager.Controllers
         [HttpGet]
         public IEnumerable<TimeSlot> Get()
         {
-            return _eventsService.GetTimeSlots();
+            return _eventsService.GetTimeSlots().OrderBy(ts => ts.BeginTime);
         }
 
         [HttpGet("{id}")]

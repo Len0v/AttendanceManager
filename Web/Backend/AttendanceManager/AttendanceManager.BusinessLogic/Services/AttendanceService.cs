@@ -186,46 +186,50 @@ namespace AttendanceManager.BusinessLogic.Services
         public bool RegisterAttendance(Attendee attendee, int roomId)
         {
             //For develop only
-            var currentDate = DateTime.Now;
+            var currentDate = DateTime.Now.AddHours(1);
             var activeEvent = _attendanceUnitOfWork.EventsRepository.Query(e => e.RoomId == roomId)
                 .Where(e => e.Date.Date == currentDate.Date)
                 .Where(e => e.TimeSlot.BeginTime <= currentDate.TimeOfDay &&
                             e.TimeSlot.EndTime >= currentDate.TimeOfDay).FirstOrDefault();
-          
-            var user = _attendanceUnitOfWork.AttendeesRepository.Query(u => u. CardNumber == attendee.CardNumber).ToList().FirstOrDefault();
 
-            if (user == null)
+            if (activeEvent != null)
             {
-                _attendanceUnitOfWork.AttendeesRepository.Add(attendee);
-                _attendanceUnitOfWork.SaveChanges();
-                user = _attendanceUnitOfWork.AttendeesRepository.Query(u => u.CardNumber == attendee.CardNumber).ToList().FirstOrDefault();
-            }
+                var user = _attendanceUnitOfWork.AttendeesRepository.Query(u => u.CardNumber == attendee.CardNumber).ToList().FirstOrDefault();
 
-            var isUserAllowed = false;
-            if (!activeEvent.IsRestricted) isUserAllowed = true;
-            else
-            {
-                if (activeEvent.CourseUnitId != null && activeEvent.CourseUnitId != 0)
+                if (user == null)
                 {
-                    var courseAuthorizedAttendees = _attendanceUnitOfWork.CourseAuthorizedAttendeesRepository.Query(
-                        e => e.CourseUnitId == activeEvent.CourseUnitId).ToList();
-                    if (courseAuthorizedAttendees.Any(a => a.AttendeeId == user.Id)) isUserAllowed = true;
+                    _attendanceUnitOfWork.AttendeesRepository.Add(attendee);
+                    _attendanceUnitOfWork.SaveChanges();
+                    user = _attendanceUnitOfWork.AttendeesRepository.Query(u => u.CardNumber == attendee.CardNumber).ToList().FirstOrDefault();
                 }
+
+                var isUserAllowed = false;
+                if (!activeEvent.IsRestricted) isUserAllowed = true;
                 else
                 {
-                    var eventAuthorizedAttendees = _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Query(
-                        e => e.EventId == activeEvent.Id).ToList();
-                    if (eventAuthorizedAttendees.Any(a => a.AttendeeId == user.Id)) isUserAllowed = true;
+                    if (activeEvent.CourseUnitId != null && activeEvent.CourseUnitId != 0)
+                    {
+                        var courseAuthorizedAttendees = _attendanceUnitOfWork.CourseAuthorizedAttendeesRepository.Query(
+                            e => e.CourseUnitId == activeEvent.CourseUnitId).ToList();
+                        if (courseAuthorizedAttendees.Any(a => a.AttendeeId == user.Id)) isUserAllowed = true;
+                    }
+                    else
+                    {
+                        var eventAuthorizedAttendees = _attendanceUnitOfWork.EventAuthorizedAttendeesRepository.Query(
+                            e => e.EventId == activeEvent.Id).ToList();
+                        if (eventAuthorizedAttendees.Any(a => a.AttendeeId == user.Id)) isUserAllowed = true;
+                    }
+                }
+
+                if (activeEvent != null && isUserAllowed)
+                {
+                    var eventAttendee = new EventAttendee { AttendeeId = user.Id, EventId = activeEvent.Id };
+                    _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
+                    _attendanceUnitOfWork.SaveChanges();
+                    return true;
                 }
             }
 
-            if (activeEvent != null && isUserAllowed)
-            {
-                var eventAttendee = new EventAttendee { AttendeeId = user.Id, EventId = activeEvent.Id };
-                _attendanceUnitOfWork.EventAttendeesRepository.Add(eventAttendee);
-                _attendanceUnitOfWork.SaveChanges();
-                return true;
-            }
             return false;
         }
 

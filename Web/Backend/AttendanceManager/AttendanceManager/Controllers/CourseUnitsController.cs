@@ -23,7 +23,7 @@ namespace AttendanceManager.Controllers
         [HttpGet]
         public IEnumerable<CourseUnit> Get()
         {
-            return _eventsService.GetCourseUnits();
+            return _eventsService.GetCourseUnits().OrderBy(cu => cu.Course.CourseName);
         }
 
         [HttpGet("{id}")]
