@@ -48,7 +48,7 @@ export class EventTemplateEditComponent implements OnInit {
     this.modelDate = this.event.date.slice(0, 10);
 
     if (this.event.isRestricted) {
-      this.EventEditService.getEligibleParticipants(this.eventId, this.event.isCyclical).subscribe(res => this.eligibleParticipantsList = res);
+      this.EventEditService.getEligibleParticipants(this.eventId, this.event).subscribe(res => this.eligibleParticipantsList = res);
     }
     if (this.event.eventStatus === 1) {
       this.EventEditService.getAttendanceListById(this.eventId).subscribe(res => this.attendeesList = res);
@@ -165,7 +165,7 @@ export class EventTemplateEditComponent implements OnInit {
   }
 
   addNewEligibleParticipant() {
-    this.EventEditService.addUserToEligibleParticipantsList(this.selectedParticipant, this.eventId).subscribe(res => {
+    this.EventEditService.addUserToEligibleParticipantsList(this.selectedParticipant, this.event).subscribe(res => {
       this.eligibleParticipantsList.push(this.selectedParticipant);
       this.selectedParticipant = null;
     });

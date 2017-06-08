@@ -57,9 +57,9 @@ export class EventEditService {
     return this.http.get(this.attendeesListApiUrl).map(this.extractData);
   }
 
-  public getEligibleParticipants(eventId, isCyclical): Observable<AttendeesListModel[]> {
-    if (isCyclical) {
-      return this.http.get(this.eligibleParticipantsForCourseApiUrl + eventId).map(this.extractData);
+  public getEligibleParticipants(eventId, event): Observable<AttendeesListModel[]> {
+    if (event.courseUnitId) {
+      return this.http.get(this.eligibleParticipantsForCourseApiUrl + event.courseUnitId).map(this.extractData);
     } else {
       return this.http.get(this.eligibleParticipantsForEventApiUrl + eventId).map(this.extractData);
     }
@@ -75,21 +75,21 @@ export class EventEditService {
       .map(this.extractData);
   }
 
-  public addUserToEligibleParticipantsList(user, eventId) {
+  public addUserToEligibleParticipantsList(user, event) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({
       headers: headers
     });
-    if (user.IsCyclical) {
+    if (event.courseUnitId) {
       return this.http.post(this.addEligibleParticipantsForCourseApiUrl, {
-        eventId: eventId,
+        courseUnitId: event.courseUnitId,
         attendeeId: user.id
       }, options)
         .map(this.extractData);
     } else {
       return this.http.post(this.addEligibleParticipantsForEventApiUrl, {
-        eventId: eventId,
+        eventId: event.id,
         attendeeId: user.id
       }, options)
         .map(this.extractData);

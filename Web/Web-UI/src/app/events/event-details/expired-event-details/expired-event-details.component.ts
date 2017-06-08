@@ -27,7 +27,7 @@ export class ExpiredEventDetailsComponent implements OnInit {
       this.EventEditService.getAttendeesList().subscribe(res => this.attendees = res);
 
       if (this.event.isRestricted) {
-        this.EventEditService.getEligibleParticipants(this.eventId, this.event.isCyclical).subscribe(res => this.eligibleParticipantsList = res);
+        this.EventEditService.getEligibleParticipants(this.eventId, this.event).subscribe(res => this.eligibleParticipantsList = res);
       }
     });
   }
