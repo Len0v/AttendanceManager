@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}   
+\usepackage{graphicx}   % rysunki
+\usepackage{listings}   % kody programów
+
+\input{konfiguracja.tex}
+\title{\TytulPolski}
+\author{\Student}
+
+\begin{document}
+\input{strona1.tex}        % strona tytułowa
+\newpage\tableofcontents     % Spis tresci
+\input{wstep.tex}          % wstep
+\input{dziedzina.tex}      % wprowadznie do tematu pracy 
+\input{technologie.tex}    % opis technologii informatycznych wykorzystanych w pracy
+\input{model.tex}          % dokumentacja projektowa
+\input{implementacja.tex}  % dokumentacja programistyczna
+\input{bezpieczenstwo.tex} % analiza aspektów bezpieczeństwa systemu
+\input{testy.tex}          % testy i dokumentacja użytkowa 
+\input{podsumowanie.tex}   % podsumowanie i wnioski
+\input{literatura.tex}     % literatura i źródłowe strony internetowe 
+\input{spisy.tex}          % Spis rysunkow i tabel
+\input{dodatek.tex}        % Dodatek lub dodatki
+\input{zalacznik.tex}      % Załącznik lub załączniki
+\end{document}

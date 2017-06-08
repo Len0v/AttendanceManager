@@ -1,5 +1,0 @@
-C:\Users\Len0v\Desktop\AMCore\AMCore\bin\Debug\netcoreapp1.1\AMCore.deps.json
-C:\Users\Len0v\Desktop\AMCore\AMCore\bin\Debug\netcoreapp1.1\AMCore.runtimeconfig.json
-C:\Users\Len0v\Desktop\AMCore\AMCore\bin\Debug\netcoreapp1.1\AMCore.runtimeconfig.dev.json
-C:\Users\Len0v\Desktop\AMCore\AMCore\obj\Debug\netcoreapp1.1\AMCore.csprojResolveAssemblyReference.cache
-C:\Users\Len0v\Desktop\AMCore\AMCore\obj\Debug\netcoreapp1.1\AMCore.AssemblyInfo.cs
