@@ -87,14 +87,7 @@ export class EventTemplateEditComponent implements OnInit {
   }
 
   enableEditMode() {
-    if (this.event.isCyclical) {
-      this.EventDetailsEditDialogService.open(this.config).subscribe(() => {
-        this.editAllFutureEvents = <boolean>this.StorageService.get('editAllFutureEvents');
-        this.editEnabled = true;
-      });
-    } else {
-      this.editEnabled = true;
-    }
+    this.editEnabled = true;
   }
 
   cancel() {
