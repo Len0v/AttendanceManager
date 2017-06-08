@@ -8,7 +8,6 @@
       <th>Status</th>
       <th>Cyclical</th>
       <th>Restricted</th>
-      <th>Day</th>
       <th>Next date</th>
       <th>Time</th>
       <th></th>
@@ -35,7 +34,6 @@
         <i *ngIf="event.isRestricted">Yes</i>
         <i *ngIf="!event.isRestricted">No</i>
       </th>
-      <th>{{event.timeSlot.dayOfWeek}}</th>
       <th>{{event.date | date: 'dd/MM/yyyy'}}</th>
       <th>
         {{event.timeSlot.beginTime}} - {{event.timeSlot.endTime}}
