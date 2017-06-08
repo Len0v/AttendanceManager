@@ -31,6 +31,7 @@ export class AddEventComponent implements OnInit {
   public selectedTimeSlot: TimeSlot;
   public rooms: Room[] = [];
   public selectedRoom;
+  public eventCycleEnd: String;
 
   constructor(private EventEditService: EventEditService, private Router: Router) {
     this.eventDetailsForm = this.EventEditService.createFormGroup();
@@ -90,7 +91,8 @@ export class AddEventComponent implements OnInit {
 
     let requestObject = {
       event: model,
-      authorizedAttendeesIds: id_array
+      authorizedAttendeesIds: id_array,
+      eventCycleEnd: this.eventCycleEnd
     };
 
     this.EventEditService.addEvent(requestObject).subscribe(res => {

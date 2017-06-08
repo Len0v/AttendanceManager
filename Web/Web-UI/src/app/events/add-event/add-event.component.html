@@ -49,16 +49,15 @@
       <div fxLayout="row" class="form-row">
         <div fxFlex="100">
           <md-input-container style="width: 100%;">
-            <input type="date" mdInput placeholder="Next event date" [(ngModel)]="modelDate" [ngModelOptions]="{standalone: true}">
+            <input type="date" mdInput placeholder="Next event date" [(ngModel)]="modelDate" [ngModelOptions]="{standalone: true}" required>
           </md-input-container>
-          <!--<label class="next-date-label">Next event date: </label>
-          <div class="input-group">
-            <input class="form-control" name="data" [(ngModel)]="modelDate" ngbDatepicker #datePicker="ngbDatepicker" [minDate]="minDate"
-              [ngModelOptions]="{standalone: true}">
-            <div class="input-group-addon" (click)="datePicker.toggle()">
-              <i class="material-icons calendar-icon">perm_contact_calendar</i>
-            </div>
-          </div>-->
+        </div>
+      </div>
+      <div fxLayout="row" class="form-row" *ngIf="eventDetailsForm.get('isCyclical').value">
+        <div fxFlex="100">
+          <md-input-container style="width: 100%;">
+            <input type="date" mdInput placeholder="Event cycle end" [(ngModel)]="eventCycleEnd" [ngModelOptions]="{standalone: true}" required>
+          </md-input-container>
         </div>
       </div>
       <div fxLayout="row" class="form-row">
