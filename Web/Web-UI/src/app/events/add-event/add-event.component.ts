@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from "@angular/forms";
-import {EventEditService} from "../event-details/services/event-edit.service";
-import {NgbDateStruct, NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
-import {Course} from "../events.model/course.model";
-import {Lecturer} from "../events.model/lecturer.model";
-import {AttendeesListModel} from "../events.model/attendees-list.model";
-import {TimeSlot} from "../events.model/time-slot.model";
-import {Room} from "../events.model/room.model";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from "@angular/forms";
+import { EventEditService } from "../event-details/services/event-edit.service";
+import { NgbDateStruct, NgbTimeStruct } from "@ng-bootstrap/ng-bootstrap";
+import { Course } from "../events.model/course.model";
+import { Lecturer } from "../events.model/lecturer.model";
+import { AttendeesListModel } from "../events.model/attendees-list.model";
+import { TimeSlot } from "../events.model/time-slot.model";
+import { Room } from "../events.model/room.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-add-event',
@@ -18,13 +18,7 @@ import {Router} from "@angular/router";
 export class AddEventComponent implements OnInit {
   public eventDetailsForm: FormGroup;
 
-  public modelDate: NgbDateStruct = {year: null, month: null, day: null};
-
-  public minDate: NgbDateStruct = {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    day: new Date().getDate()
-  };
+  public modelDate: String;
 
   public courses: Course[];
   public lecturers: Lecturer[];
@@ -52,16 +46,16 @@ export class AddEventComponent implements OnInit {
   }
 
   courseUnitChanged() {
-    this.eventDetailsForm.patchValue({courseUnit: this.newCourseUnit});
+    this.eventDetailsForm.patchValue({ courseUnit: this.newCourseUnit });
   }
 
   lecturerChanged() {
-    this.eventDetailsForm.patchValue({lecturer: this.newLecturerUnit});
+    this.eventDetailsForm.patchValue({ lecturer: this.newLecturerUnit });
   }
 
   cancel() {
     this.eventDetailsForm.reset();
-    this.modelDate = {year: null, month: null, day: null};
+    this.modelDate = null;
     this.selectedTimeSlot = null;
 
     for (let i = 0, length = this.eligibleParticipantsList.length; i < length; i++) {
@@ -73,7 +67,7 @@ export class AddEventComponent implements OnInit {
 
   saveEvent(model, valid) {
     if (!valid || !this.newLecturerUnit || !this.selectedRoom || !this.selectedTimeSlot ||
-      (!this.modelDate.year || !this.modelDate.month || !this.modelDate.day)) {
+      !this.modelDate) {
       return;
     }
 
@@ -91,7 +85,7 @@ export class AddEventComponent implements OnInit {
     model.courseUnitId = this.newCourseUnit ? this.newCourseUnit.id : null;
     model.lecturerId = this.newLecturerUnit.id;
     model.roomId = this.selectedRoom.id;
-    model.date = this.modelDate.year + "-" + this.modelDate.month + "-" + this.modelDate.day + "T00:00:00";
+    model.date = this.modelDate + "T00:00:00";
     delete model.timeSlot;
 
     let requestObject = {

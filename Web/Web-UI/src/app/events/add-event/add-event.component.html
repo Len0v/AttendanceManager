@@ -5,14 +5,12 @@
     <div fxFlex="60">
       <div fxLayout="row">
         <div fxFlex="20">
-          <button md-raised-button type="submit" class="save-button"
-                  [disabled]="!eventDetailsForm.dirty || !eventDetailsForm.valid">
+          <button md-raised-button type="submit" class="save-button" [disabled]="!eventDetailsForm.dirty || !eventDetailsForm.valid">
             Save
           </button>
         </div>
         <div fxFlex="20">
-          <button md-raised-button type="button" class="cancel-button" [disabled]="!eventDetailsForm.dirty"
-                  (click)="cancel()">
+          <button md-raised-button type="button" class="cancel-button" [disabled]="!eventDetailsForm.dirty" (click)="cancel()">
             Cancel
           </button>
         </div>
@@ -49,37 +47,38 @@
         </div>
       </div>
       <div fxLayout="row" class="form-row">
-        <div fxFlex="20">
-          <label class="next-date-label">Next event date: </label>
+        <div fxFlex="100">
+          <md-input-container style="width: 100%;">
+            <input type="date" mdInput placeholder="Next event date" [(ngModel)]="modelDate" [ngModelOptions]="{standalone: true}">
+          </md-input-container>
+          <!--<label class="next-date-label">Next event date: </label>
           <div class="input-group">
-            <input class="form-control" name="data" [(ngModel)]="modelDate" ngbDatepicker #datePicker="ngbDatepicker"
-                   [minDate]="minDate"
-                   [ngModelOptions]="{standalone: true}">
+            <input class="form-control" name="data" [(ngModel)]="modelDate" ngbDatepicker #datePicker="ngbDatepicker" [minDate]="minDate"
+              [ngModelOptions]="{standalone: true}">
             <div class="input-group-addon" (click)="datePicker.toggle()">
               <i class="material-icons calendar-icon">perm_contact_calendar</i>
             </div>
-          </div>
+          </div>-->
         </div>
-        <div fxFlex="10"></div>
-        <div fxFlex="70" class="form-inline" formGroupName="timeSlot" style="float: right;">
-          <md-select placeholder="Time slot" style="width: 100%;" [(ngModel)]="selectedTimeSlot"
-                     [ngModelOptions]="{standalone: true}" required>
-            <md-option *ngFor="let timeSlot of timeSlots" [value]="timeSlot">{{timeSlot.beginTime}} -
-              {{timeSlot.endTime}}
+      </div>
+      <div fxLayout="row" class="form-row">
+        <div fxFlex="100" class="form-inline" formGroupName="timeSlot" style="float: right;">
+          <md-select placeholder="Time slot" style="width: 100%;" [(ngModel)]="selectedTimeSlot" [ngModelOptions]="{standalone: true}"
+            required>
+            <md-option *ngFor="let timeSlot of timeSlots" [value]="timeSlot">{{timeSlot.beginTime}} - {{timeSlot.endTime}}
             </md-option>
           </md-select>
         </div>
       </div>
       <div fxLayout="row" class="form-row" formGroupName="room">
-        <md-select placeholder="Room" style="width: 100%;" [(ngModel)]="selectedRoom"
-                   [ngModelOptions]="{standalone: true}" required>
+        <md-select placeholder="Room" style="width: 100%;" [(ngModel)]="selectedRoom" [ngModelOptions]="{standalone: true}" required>
           <md-option *ngFor="let room of rooms" [value]="room">{{room.name}} in {{room.building}}</md-option>
         </md-select>
       </div>
       <div fxLayout="row" class="form-row">
         <div fxFlex="100">
-          <md-select placeholder="Lecturer" style="width: 100%;" [(ngModel)]="newLecturerUnit"
-                     [ngModelOptions]="{standalone: true}" required (change)="lecturerChanged()">
+          <md-select placeholder="Lecturer" style="width: 100%;" [(ngModel)]="newLecturerUnit" [ngModelOptions]="{standalone: true}"
+            required (change)="lecturerChanged()">
             <md-option *ngFor="let lecturer of lecturers" [value]="lecturer">{{lecturer.name}} {{lecturer.surname}}
             </md-option>
           </md-select>
@@ -87,16 +86,14 @@
       </div>
       <div fxLayout="row" class="form-row">
         <div fxFlex="65">
-          <md-select placeholder="Course" style="width: 100%;" [(ngModel)]="newCourseUnit"
-                     [ngModelOptions]="{standalone: true}" (change)="courseUnitChanged()">
+          <md-select placeholder="Course" style="width: 100%;" [(ngModel)]="newCourseUnit" [ngModelOptions]="{standalone: true}" (change)="courseUnitChanged()">
             <md-option *ngFor="let course of courses" [value]="course">{{course.course.courseName}}
             </md-option>
           </md-select>
         </div>
         <div fxFlex="10"></div>
         <div fxFlex="25">
-          <button md-raised-button type="button" [disabled]="!newCourseUnit" (click)="removeCourse()"
-                  class="add-user-button">
+          <button md-raised-button type="button" [disabled]="!newCourseUnit" (click)="removeCourse()" class="add-user-button">
             Remove
           </button>
         </div>
@@ -105,16 +102,14 @@
         <div fxFlex="100">
           <div fxLayout="row" class="add-user-button-container">
             <div fxFlex="30">
-              <md-select placeholder="Select by name and surname" [(ngModel)]="selectedParticipant"
-                         [ngModelOptions]="{standalone: true}">
+              <md-select placeholder="Select by name and surname" [(ngModel)]="selectedParticipant" [ngModelOptions]="{standalone: true}">
                 <md-option *ngFor="let student of students" [value]="student">
                   {{ student.surname }} {{ student.name }}
                 </md-option>
               </md-select>
             </div>
             <div fxFlex="30">
-              <md-select placeholder="Select by student number" [(ngModel)]="selectedParticipant"
-                         [ngModelOptions]="{standalone: true}">
+              <md-select placeholder="Select by student number" [(ngModel)]="selectedParticipant" [ngModelOptions]="{standalone: true}">
                 <md-option *ngFor="let student of students" [value]="student">
                   {{ student.studentNumber }}
                 </md-option>
@@ -122,8 +117,7 @@
             </div>
             <div fxFlex="60"></div>
             <div fxFlex="10">
-              <button md-raised-button type="button" [disabled]="!selectedParticipant"
-                      (click)="addNewEligibleParticipant()" class="add-user-button">
+              <button md-raised-button type="button" [disabled]="!selectedParticipant" (click)="addNewEligibleParticipant()" class="add-user-button">
                 Add
               </button>
             </div>
@@ -134,34 +128,33 @@
               <div class="custom-table-container">
                 <table class="table table-striped table-hover custom-table">
                   <thead class="thead-inverse">
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Pesel</th>
-                    <th>Student number</th>
-                    <th>Is student</th>
-                    <th></th>
-                  </tr>
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Surname</th>
+                      <th>Pesel</th>
+                      <th>Student number</th>
+                      <th>Is student</th>
+                      <th></th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let user of eligibleParticipantsList; let i = index" class="custom-table-row">
-                    <th scope="row">{{i+1}}</th>
-                    <th>{{user.name}}</th>
-                    <th>{{user.surname}}</th>
-                    <th>{{user.pesel}}</th>
-                    <th>{{user.studentNumber}}</th>
-                    <th>
-                      <a *ngIf="user.isStudent">Yes</a>
-                      <a *ngIf="!user.isStudent">No</a>
-                    </th>
-                    <th class="events-list-buttons-container">
-                      <button md-raised-button type="button" (click)="removeUserFromAttendeesList(user)"
-                              style="background-color: rgb(255, 153, 153);">
+                    <tr *ngFor="let user of eligibleParticipantsList; let i = index" class="custom-table-row">
+                      <th scope="row">{{i+1}}</th>
+                      <th>{{user.name}}</th>
+                      <th>{{user.surname}}</th>
+                      <th>{{user.pesel}}</th>
+                      <th>{{user.studentNumber}}</th>
+                      <th>
+                        <a *ngIf="user.isStudent">Yes</a>
+                        <a *ngIf="!user.isStudent">No</a>
+                      </th>
+                      <th class="events-list-buttons-container">
+                        <button md-raised-button type="button" (click)="removeUserFromAttendeesList(user)" style="background-color: rgb(255, 153, 153);">
                         Remove
                       </button>
-                    </th>
-                  </tr>
+                      </th>
+                    </tr>
                   </tbody>
                 </table>
               </div>
