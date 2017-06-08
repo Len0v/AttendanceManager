@@ -186,7 +186,7 @@ namespace AttendanceManager.BusinessLogic.Services
         public bool RegisterAttendance(Attendee attendee, int roomId)
         {
             //For develop only
-            var currentDate = DateTime.Now.AddHours(1);
+            var currentDate = DateTime.Now.AddHours(2);
             var activeEvent = _attendanceUnitOfWork.EventsRepository.Query(e => e.RoomId == roomId)
                 .Where(e => e.Date.Date == currentDate.Date)
                 .Where(e => e.TimeSlot.BeginTime <= currentDate.TimeOfDay &&
