@@ -1,14 +1,28 @@
 \newpage\section{Implementacja} \label{sec:implementacja}
-\subsection{Wzorzec projektowy}
-% https://pl.wikipedia.org/wiki/Wzorzec_projektowy_(informatyka)
-%
-Przyład: wzorzec arichtektoniczny MVC (ang. \textit{Model-Viewer-Controller}) \cite{mvc2017}.
+\subsection{Wzorce projektowe i strukturalne}
+\begin{itemize}  
+    \item Model View Controller - wzorzec strukturalny wspierający zasadę Separation of Concerns - podział części serwerowej systemu na częsci odpowiedzialne za widoki, logikę biznesową oraz obsługę zapytań HTTP
+    \item Inversion of Control - wzorzec strukturalny odpowiedzialny za zapewnienie luźnego powiązania pomiędzy klasami i likwidowanie zależności poprzez wykorzystanie Wstrzykiwania Zależności.
+    \item Unit of Work - wzorzec projektowy zapewniający operowanie na jednej jednostce transakcji bazodanowych w obrębie zapytania do serwisu
+    \item Repository Pattern - wzorzec projektowy zapewniający spójny format operacji CRUD na różnych strukturach danych 
+\end{itemize}
 \subsection{Model struktur danych}
-% struktury statyczne: tablice, rekordy 
-% struktury dynamiczne: listy, kolejki, drzewa, grafy,  
-
+Struktury danych odzwierciedlone w strukturach bazodanowych składają się z klas według modelu Plain Old CLR Object
 \subsection{Model klas}
-% pliki wchodzące w skład projektu
-% definicje klas
+Podstawowe klasy występujące w systemie
+\begin{itemize}
+    \item Attendee - uczestnik wydarzenia
+    \item Course - przedmiot dydaktyczny
+    \item CourseType - rodzaj zajęć
+    \item CourseUnit - jednostka dydaktyczna obejmująca przedmiot oraz rodzaj zajęć
+    \item Event - wydarzenie
+    \item Lecturer - wykładowca, prowadzący zajęcia
+    \item Room - pomieszczenie
+    \item TimeSlot - przedział czasowy
+\end{itemize}
 \subsection{Wnioski}
+
+
+
+
  
