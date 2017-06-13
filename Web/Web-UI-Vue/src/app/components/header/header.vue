@@ -1,6 +1,6 @@
 <template id="navbar">
   <v-flex xs12 sm12 md12 xl12>
-    <v-toolbar class="deepblue" light>
+    <v-toolbar class="indigo" light>
       <v-menu bottom right>
         <v-btn icon="icon" slot="activator" light>
           <v-icon>more_vert</v-icon>
@@ -18,7 +18,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-toolbar-title class="hidden-sm-and-down">Toolbar</v-toolbar-title>
+      <v-toolbar-title class="hidden-sm-and-down">Attendance Manager</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon light router to="/home">
         <v-icon>account_circle</v-icon> Login

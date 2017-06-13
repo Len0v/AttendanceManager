@@ -3,25 +3,13 @@
     <v-data-table
       v-bind:headers="headers"
       :items="eventsList"
-      select-all>
+      select-all
+      :hide-actions="hide_actions"
+      :loading='isLoading'
+      class="custom-data-table">
       <template>
       </template>
     </v-data-table>
-
-    <v-snackbar
-      :timeout="timeout"
-      :success="context === 'success'"
-      :info="context === 'info'"
-      :warning="context === 'warning'"
-      :error="context === 'error'"
-      :primary="context === 'primary'"
-      :secondary="context === 'secondary'"
-      :top="true"
-      v-model="snackbar"
-    >
-      {{ text }}
-      <v-btn light flat @click.native="snackbar = false">Close</v-btn>
-    </v-snackbar>
   </v-flex>
 </template>
 
@@ -32,6 +20,8 @@
     template: '#events-list',
     data: function () {
       return {
+        hide_actions: true,
+        isLoading: false,
         search: '',
         selected: [],
         headers: [
@@ -44,14 +34,12 @@
           {text: 'Day'},
           {text: 'Next date'},
           {text: 'Time'},
-          {text: ''},
+          {text: '', sortable: false},
         ],
         eventsList: [],
-        snackbar: false,
-        context: '',
-        mode: '',
-        timeout: 6000,
-        text: ''
+        showNotification: false,
+        context: null,
+        text: null
       }
     },
     created: function () {
@@ -59,15 +47,21 @@
     },
     methods: {
       getEventsList: function () {
-        this.$http.get('api/events').then(response => {
-          this.eventsList = response.body;
+        this.isLoading = true;
+        this.$http.get('api/events/incoming').then(response => {
+          this.isLoading = false;
+          this.hide_actions = false;
         }, fail => {
-          console.log('fail');
-          this.text = 'Failed to load events';
-          this.context = 'error';
-          this.snackbar = true;
+          this.$store.commit('displaySnackbar', {context: 'error', text: 'Failed to load events'});
+          this.isLoading = false;
         });
       }
     }
   })
 </script>
+
+<style>
+  .custom-data-table {
+    height: 100%;
+  }
+</style>

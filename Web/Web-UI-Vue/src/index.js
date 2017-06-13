@@ -5,12 +5,17 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import Vuetify from 'vuetify';
-import routesConfig from './app/config/routes';
+
 import Navbar from './app/components/header/header.vue';
+import EventsList from './app/pages/events/events-list-page/events-list.vue';
+import Notifications from './app/components/notification.vue';
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 Vue.use(VueResource);
+
+import store from './app/config/store';
+import routesConfig from './app/config/routes';
 
 Vue.http.options.root = 'http://attendancemanagerapi.azurewebsites.net/';
 
@@ -24,5 +29,10 @@ const router = new VueRouter({
 const app = new Vue({
   el: '#app',
   router,
-  components: {Navbar}
+  store,
+  components: {
+    Navbar,
+    EventsList,
+    Notifications
+  }
 });

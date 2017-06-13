@@ -67,7 +67,7 @@ module.exports = {
   entry: `./${conf.path.src('index')}`,
   resolve: {
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.esm.js'
     }
   }
 };

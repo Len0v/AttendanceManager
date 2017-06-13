@@ -9,9 +9,18 @@ Do przechowywania danych został wykorzystany serwer bazodanowy Microsoft SQL Se
 Całość rozwiązania po stronie serwera została umieszczona w chmurze hybrydowej Microsoft Azure. Umożliwia to wygodne i efektywne zarządzanie i monitorowanie pracą systemu bez potrzeby tworzenia infrastruktury, np. maszyn wirtualnych na fizycznych komputerach.
 
 \subsection{Front End}
-\subsection{.NET applikacja}
+Aplikacja kliencka napisana została w języku TypeScript z wykorzystaniem framework'a Angular. Jest to niezwykle rozbudowany framework stworzony przede wszystkim z myślą o obsłudze dużej ilości danych. Dzięki wielu wbudowanym funkcjom umożliwia on tworzenie aplikacja bez konieczności instalowania wielu dodatkowych bibliotek. 
+
+Jest to aplikacja typu Single Page Application czyli aplikacja w której cały proces ładowania strony został przeniesiony na stronę użytkownika. Umożliwiło to odciążenie serwera wystawiającego stronę internetową oraz przyspieszenie działania aplikacji. Dla użytkownika sprawia także wrażenie bardziej płynnego działania, bez konieczności długiego czasu oczekiwania na przejście do innej części strony.
+
+Interfejs użytkownika stworzony został w style Google Material Design dzięki wykorzystaniu biblioteki Angular Material. Do utworzenia układu strony wykorzystana została biblioteka angular/flex-layout. Dodatkowo zostały wykorzystane niektóre elementy z biblioteki Bootstrap 4.0.
+
+Środowiskiem uruchomieniowym aplikacji klienckiej jest Node.js czyli środowisko uruchomieniowe zaprojektowane do tworzenia wysoce skalowalnych aplikacji internetowych. Do zarządzania paczkami oraz bibliotekami wykorzystywanymi w aplikacji używany jest Node Package Manager (NPM).
+\subsection{.NET aplikacja}
 \subsection{Latex do dokumentacji}
 \subsection{Format JSON}
 (ang. \textit{JavaScript Object Notation}) \cite{json2017}
 \subsection{Środowisko programistyczne Visual Studio}
 Do prac nad elementami systemu stworzonymi w technologiach Microsoft .NET wykorzystane zostało środowisko programistyczne Microsoft Visual Studio. Jest to kompleksowe rozwiązanie umożliwiające programistom tworzenie i zarządzanie dużymi rozwiązaniami.
+\subsection{Środowisko programistyczne JetBrains WebStorm}
+Do utworzenia aplikacji klienckiej wykorzystano program WebStorm od JetBrains. Jest to wysoce zaawansowane środowisko programistyczne stworzone przede wszystkim do tworzenia aplikacji w języku JavaScript. Posiada on wiele wbudowanych narzędzi takich jak NPM czy Gulp dzięki czemu znacznie ułatwia ono proces tworzenia aplikacji.
