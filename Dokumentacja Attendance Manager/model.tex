@@ -1,9 +1,13 @@
 % Dokumentacja projektowa 
 \newpage\section{Architektura systemu \NazwaSys}\label{sec:model}
 % Odpowiedź na pytanie: Jak system działa?
-\subsection{Schemat bazy danych} \label{subsec:schemat}
-
-\includegraphics[height=8cm]{BD}
+\subsection{Schemat bazy danych} 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=16cm]{BD.png}
+\caption{Schemat bazy danych}
+\label{fig:schemat}
+\end{figure}
 
 \subsection{Moduł importu i eksportu danych}
 Inferfejs administracyjny systemu podczas działania korzysta z interfejsu webowego stworzonego zgodnie z zasadami REST. Interfejs ten wykorzystuje notację JSON do serializacji zwracanych danych oraz protokół HTTP do komunikacji.
